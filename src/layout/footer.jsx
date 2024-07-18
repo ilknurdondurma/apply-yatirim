@@ -5,29 +5,34 @@ import { NavLink } from "react-router-dom";
 import { contactData } from "../dummy-data/contact";
 import { navbarElements } from "../dummy-data/navbarElements";
 import { FaEnvelope, FaMapMarkerAlt, FaPhone } from "react-icons/fa";
+import DynamicForm from "../components/form";
+import * as Yup from "yup";
 
 function Footer() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
+  const formField = [
+    {
+      name: "name",
+      label: "Adınız",
+      type: "text",
+    },
+    {
+      name: "email",
+      label: "Email",
+      type: "text",
+    },
+    { name: "message", label: "Mesajınız", type: "textarea" },
+  ];
+  const validationSchema = Yup.object({
+    name: Yup.string().required("İsim gerekli alan"),
+    email: Yup.string()
+      .email("Geçersiz email adresi")
+      .required("Email gerekli alan"),
+    message: Yup.string().required("Mesaj gerekli alan"),
   });
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // Burada formun gönderimi işlemleri yapılabilir
-    console.log("Form submitted with data:", formData);
-    // Örneğin, form verilerini bir API'ye POST etmek gibi işlemler yapılabilir
-    // Axios, fetch veya diğer HTTP kütüphaneleri kullanılabilir
-    // Örnek axios.post('/api/contact', formData);
-    // veya fetch('/api/contact', { method: 'POST', body: JSON.stringify(formData) });
-    // gibi işlemler gerçekleştirilebilir.
-    // Bu örnekte sadece konsola logladık.
+  const handleSubmit = (values) => {
+    console.log("Form Values:", values);
+    alert("Form submitted successfully!");
   };
 
   const contacts = contactData;
@@ -51,7 +56,7 @@ function Footer() {
                 <span className="text-gray-400">{contacts[0].email}</span>
               </div>
               <div className="flex items-center">
-                <FaMapMarkerAlt className="text-gray-500 mr-2 w-full" />
+                <FaMapMarkerAlt className="text-gray-500 mr-2" />
                 <span className="text-gray-400 w-full">
                   {contacts[0].address}
                 </span>
@@ -106,41 +111,12 @@ function Footer() {
               </div>
             </div>
           </div>
-          <form onSubmit={handleSubmit} className="mt-4 sm:hidden">
-            <div className="flex flex-col">
-              <h1 className="text-xl font-bold text-white p-2"> Bize Ulaşın</h1>
-              <input
-                type="text"
-                name="name"
-                placeholder="Adınız"
-                value={formData.name}
-                onChange={handleInputChange}
-                className="mb-2 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-              />
-              <input
-                type="email"
-                name="email"
-                placeholder="E-posta Adresiniz"
-                value={formData.email}
-                onChange={handleInputChange}
-                className="mb-2 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-              />
-              <textarea
-                name="message"
-                placeholder="Mesajınız"
-                value={formData.message}
-                onChange={handleInputChange}
-                rows={4}
-                className="mb-2 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-              ></textarea>
-              <button
-                type="submit"
-                className="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 transition duration-300"
-              >
-                Gönder
-              </button>
-            </div>
-          </form>
+          <DynamicForm
+            fields={formField}
+            header="Bize Ulaşın"
+            onSubmit={handleSubmit}
+            validationsSchema={validationSchema}
+          />
         </div>
       </div>
     </footer>

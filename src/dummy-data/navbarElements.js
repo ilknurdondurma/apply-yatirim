@@ -2,32 +2,32 @@ export const navbarElements = [
   {
     id: 1,
     name: "Anasayfa",
-    path: "/",
+    path: "",
   },
   {
     id: 2,
     name: "Hakkımızda",
-    path: "/hakkimizda",
+    path: "hakkimizda",
   },
   {
     id: 3,
     name: "Kalite",
-    path: "/kalite",
+    path: "kalite",
   },
 
   {
     id: 4,
     name: "Ürünler",
-    path: "/urunler",
+    path: "urunler",
   },
   {
     id: 5,
     name: "E-Katalog",
-    path: "/katolog",
+    path: "katalog",
   },
   {
     id: 6,
     name: "İletişim",
-    path: "/iletisim",
+    path: "iletisim",
   },
 ];

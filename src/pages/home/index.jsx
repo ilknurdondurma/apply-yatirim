@@ -32,7 +32,7 @@ function Home() {
       </section>
 
       {/* Referanslar veya Müşteri Hikayeleri Bölümü */}
-      <section className="py-5 px-4 ">
+      <section className="py-5 px-4 bg-slate-100 rounded-lg">
         <h2 className="text-2xl font-bold mb-5 text-center">
           Müşteri Hikayeleri
         </h2>

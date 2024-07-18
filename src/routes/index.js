@@ -2,12 +2,15 @@ import { createBrowserRouter } from "react-router-dom";
 import Home from "../pages/home";
 import Login from "../pages/login";
 import SignUp from "../pages/signup";
-import { Layout } from "../layout";
+import { AdminLayout, Layout } from "../layout";
 import About from "../pages/about";
 import Quality from "../pages/quality";
-import Products from "../pages/products";
 import Catalog from "../pages/catalog";
 import Contact from "../pages/contact";
+import Admin from "../pages/admin";
+
+import Products from "../pages/products";
+import ProductsAdmin from "../pages/admin/products";
 
 const routes = createBrowserRouter([
   {
@@ -26,6 +29,7 @@ const routes = createBrowserRouter([
         path: "/signup",
         element: <SignUp />,
       },
+
       {
         path: "/hakkimizda",
         element: <About />,
@@ -45,6 +49,40 @@ const routes = createBrowserRouter([
       {
         path: "/iletisim",
         element: <Contact />,
+      },
+    ],
+  },
+  {
+    path: "/admin",
+    element: <AdminLayout />,
+    children: [
+      {
+        index: true,
+        element: <Admin />,
+      },
+      {
+        path: "dashboard",
+        element: <Admin />,
+      },
+      {
+        path: "urunler",
+        element: <ProductsAdmin />,
+      },
+      {
+        path: "katalog",
+        element: <Admin />,
+      },
+      {
+        path: "iletisim",
+        element: <Admin />,
+      },
+      {
+        path: "hakkimizda",
+        element: <Admin />,
+      },
+      {
+        path: "logout",
+        element: <Admin />,
       },
     ],
   },

@@ -16,7 +16,9 @@ function Navbar() {
 
   return (
     <div
-      className="h-auto flex flex-col justify-center bg-slate-50 md:mt-28 sm:mt-28 mt-20 border-b-2"
+      className={`h-auto flex flex-col justify-center bg-slate-50 md:mt-28 sm:mt-28 mt-20 border-b-2 ${
+        location.pathname !== "/login" ? "block" : " hidden"
+      }  `}
       style={{
         //backgroundImage: `url(${backgroundImage})`,
         backgroundSize: "cover",

@@ -15,13 +15,13 @@ function Story({ story }) {
   };
 
   return (
-    <div className="py-10 px-4 ">
+    <div className="py-10 px-4 bg-white rounded-lg">
       <div className="max-w-5xl mx-auto text-center">
         <Slider {...settings}>
           {story.map((story) => (
             <div
               key={story.id}
-              className="p-4 bg-primary/20 shadow-lg rounded-xl mx-2"
+              className="p-4 border-2 shadow-lg rounded-xl mx-2"
             >
               <h3 className="text-lg font-bold mb-2">{story.customerName}</h3>
               <p className="text-gray-600">{story.story}</p>

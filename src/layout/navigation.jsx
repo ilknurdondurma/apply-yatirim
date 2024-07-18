@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { FaUser } from "react-icons/fa";
 import { NavLink, useLocation } from "react-router-dom";
 import { navbarElements } from "../dummy-data/navbarElements";
 import { AnimateContainer } from "react-animate-container";
@@ -28,9 +29,9 @@ function Navigation() {
   }, [location.pathname, navbarElement]);
 
   return (
-    <div className="flex flex-row justify-center  bg-black fixed top-0 z-10 py-2 w-full text-slate-50">
+    <div className="flex flex-row justify-center items-center bg-black fixed top-0 z-10 py-2 w-full text-slate-50">
       <div className="flex flex-col justify-center  sm:w-full">
-        <div className="flex flex-row justify-around gap-5 sm:hidden">
+        <div className="flex flex-row justify-around items-center gap-5 sm:hidden">
           {navbarElement.map((element, index) => {
             return (
               <NavLink to={`${element.path}`} key={index}>
@@ -98,6 +99,9 @@ function Navigation() {
           </AnimateContainer.fadeInRight>
         </div>
       </div>
+      <NavLink to={"/login"}>
+        <FaUser size={20} className="cursor-pointer m-2" />
+      </NavLink>
     </div>
   );
 }
