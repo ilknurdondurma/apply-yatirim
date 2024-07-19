@@ -1,99 +1,104 @@
 import React, { useState } from "react";
-import { SiD3Dotjs } from "react-icons/si";
 import { FaEnvelope, FaWhatsapp, FaPhone } from "react-icons/fa";
-import { NavLink, useLocation } from "react-router-dom";
-import backgroundImage from "../../assets/backgroundImage.jpg";
-import logo from "../../assets/logo.jpg";
+import { useLocation } from "react-router-dom";
+import logo from "../../assets/logo.png";
+import logoDark from "../../assets/logo-dark.png";
 import { contactData } from "../../dummy-data/contact";
 import { AnimateContainer } from "react-animate-container";
+import { useSelector } from "react-redux";
+import { darkTheme } from "../../redux/reducers/theme/themeReducers";
 
 function Navbar() {
-  const [contacts, setContacts] = useState(contactData);
+  const [contacts] = useState(contactData);
   const mail = `mailto:${contacts[0].email}`;
   const phone = `tel:${contacts[0].phone}`;
   const whatsapp = `https://wa.me/${contacts[0].phone}`;
   const location = useLocation();
 
+  const theme = useSelector((state) => state.theme.theme);
+
   return (
     <div
-      className={`h-auto flex flex-col justify-center bg-slate-50 md:mt-28 sm:mt-28 mt-20 border-b-2 ${
+      className={`h-auto flex flex-col justify-center  md:mt-28 mt-16 border-b-2 rounded-xl p-5${
         location.pathname !== "/login" ? "block" : " hidden"
-      }  `}
+      }`}
       style={{
-        //backgroundImage: `url(${backgroundImage})`,
+        ...theme,
         backgroundSize: "cover",
         backgroundPosition: "center",
-        minHeight: "250px",
-        //200  // 150
-        height: "300px",
+        minHeight: "300px",
+        height: "350px",
       }}
+      
     >
       <div>
-        <div className="flex flex-row ">
-          <div className="h-auto grid grid-cols-4 md:grid-cols-2 sm:grid-cols-1 justify-between sm:flex-col   mx-auto gap-10 md:gap-5 sm:gap-3">
-            <div className="col-span-1 flex items-center justify-center ml-2">
-              <SiD3Dotjs size={75} className="m-5" />
+        <div className="flex flex-row">
+          <div className="h-auto grid grid-cols-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 justify-between sm:flex-col mx-auto md:gap-5 sm:gap-3">
+            <div className="col-span-2 sm:col-span-1 flex items-center justify-center m-1">
+              <img src={theme === darkTheme ?  logo : logoDark} alt="logo" style={{ height: '60px', width: 'auto' }} />
               <div className="flex flex-col">
                 <AnimateContainer.fadeInLeft duration={0.1} active>
-                  <div className="text-2xl sm:text-lg md:text-xl px-5 ">
-                    {contacts[0]["name"]}
+                  <div className="text-2xl sm:text-xl px-5">
+                    {contacts[0].name}
                   </div>
                 </AnimateContainer.fadeInLeft>
                 <AnimateContainer.fadeInLeft duration={0.1} active>
-                  <div className="text-base sm:text-sm md:text-sm px-5 ">
-                    {contacts[0]["subTitle"]}
+                  <div className="px-5">
+                    {contacts[0].subTitle}
                   </div>
                 </AnimateContainer.fadeInLeft>
               </div>
             </div>
 
-            <div className="col-span-1 flex gap-5 justify-start px-5 items-center border-2 rounded-xl shadow-md bg-slate-50">
+            <div className="col-span-1">
+            </div>
+            
+            <div className={`col-span-1 flex gap-5 justify-start px-5 m-1 items-center border-2 rounded-xl shadow-md `} style={theme}>
               <div>
                 <FaPhone size={30} />
               </div>
-              <div className="flex flex-col gap-2 text-base">
+              <div className="flex flex-col gap-2">
                 <a href={phone}>
                   <span className="font-bold">Tel 1: </span>
-                  {contacts[0]["phone"]}
+                  {contacts[0].phone}
                 </a>
                 <a href={phone}>
                   <span className="font-bold">Tel 2: </span>
-                  {contacts[0]["phone"]}
+                  {contacts[0].phone}
                 </a>
               </div>
             </div>
 
-            <div className="col-span-1 flex gap-5 justify-start px-5 items-center border-2 rounded-xl shadow-md bg-slate-50">
+            <div className={`col-span-1 flex gap-5 justify-start px-5 m-1 items-center border-2 rounded-xl shadow-md `}style={theme}>
               <div>
                 <FaEnvelope size={30} />
               </div>
-              <div className="flex flex-col gap-2 text-base">
+              <div className="flex flex-col gap-2">
                 <a href={mail}>
                   <span className="font-bold">Mail 1: </span>
-                  {contacts[0]["email"]}
+                  {contacts[0].email}
                 </a>
                 <a href={mail}>
                   <span className="font-bold">Mail 2: </span>
-                  {contacts[0]["email"]}
+                  {contacts[0].email} 
                 </a>
               </div>
             </div>
 
-            <div className="sm:hidden col-span-1 flex items-center justify-center m-5 sm:m-2 ">
+            <div className={`col-span-1 flex gap-5 justify-start px-5 m-1  items-center border-2 rounded-xl shadow-md  bg-green-400`}>
               <AnimateContainer.fadeInRight duration={1} active>
-                <a
-                  href={whatsapp}
-                  className=" hover:text-gray-100 text-white flex flex-col items-center justify-center gap-1 mx-5 border-2 p-2 px-5 rounded-xl bg-green-400"
-                >
-                  <div className="flex gap-3">
+                <a href={whatsapp} className="flex sm:flex-row items-center justify-center rounded-xl gap-3 ">
+                  <div >
                     <FaWhatsapp size={35} color="white" className="sm:hidden" />
-                    <span className="text-xl md:text-sm sm:text-sm">
-                      WhatsApp
+                  </div>
+                  <div className="flex flex-col gap-2 text-white">
+                    <span className="font-semibold text-xl">
+                        WhatsApp
+                      </span>
+                    <span className="">
+                      ile iletişim kur
                     </span>
                   </div>
-                  <span className="text-xl md:text-sm sm:hidden">
-                    ile iletişim kur
-                  </span>
                 </a>
               </AnimateContainer.fadeInRight>
             </div>
@@ -103,10 +108,5 @@ function Navbar() {
     </div>
   );
 }
-export default Navbar;
-/**
 
- */
-/**
- 
- */
+export default Navbar;

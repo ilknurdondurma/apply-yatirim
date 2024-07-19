@@ -21,7 +21,7 @@ function ProductCard({ product }) {
         </p>
       </div>
       <div
-        className={`flex items-center justify-center bg-primary/90 opacity-0 ${
+        className={`flex items-center justify-center bg-primary/90 sm:opacity-100 opacity-0 ${
           isHovered ? "opacity-100" : ""
         } transition-opacity`}
       >

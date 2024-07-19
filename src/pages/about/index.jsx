@@ -6,7 +6,7 @@ function About() {
 
   return (
     <div>
-      <div className="w-3/5 col-span-3 sm:hidden mx-auto">
+      <div className="w-3/5 sm:w-full md:w-full col-span-3  mx-auto">
         {about.map((item, index) => (
           <div key={item.id} className={`p-5 rounded-lg h-auto `}>
             <h2 className="text-2xl my-5 mx-6 flex gap-2">

@@ -1,13 +1,16 @@
+import {DARK, LIGHT} from '../../actionsType/theme'
+
+
 export const dark = (val) => {
     return {
-      type: 'DARK',
+      type: DARK,
       payload:val
     };
   };
   
   export const light = (val) => {
     return {
-      type: 'LIGHT',
+      type: LIGHT,
       payload:val
     };
   };

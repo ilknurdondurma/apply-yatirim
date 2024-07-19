@@ -1,10 +1,8 @@
-
-
-  export const darkTheme = { backgroundColor: 'black',color:'white' };
+export const darkTheme = { backgroundColor: 'black',color:'white' };
   export const lightTheme = { backgroundColor: 'white',color:'black' };
   
   const initialState = {
-    theme:lightTheme
+    theme:darkTheme
   };
   
   const themeReducer = (state = initialState, action) => {

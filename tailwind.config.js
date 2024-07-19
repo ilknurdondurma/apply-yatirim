@@ -7,6 +7,7 @@ module.exports = {
       colors: {
         primary: "#8b0000", //kırmızı
         secondary: "#9ca3af", // gri
+        renk:'#08082b'
       },
     },
     screens: {

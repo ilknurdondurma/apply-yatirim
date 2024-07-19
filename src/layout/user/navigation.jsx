@@ -5,9 +5,11 @@ import { NavLink, useLocation } from "react-router-dom";
 import { navbarElements } from "../../dummy-data/navbarElements";
 import { AnimateContainer } from "react-animate-container";
 import { FaWhatsapp } from "react-icons/fa";
+import { useSelector } from "react-redux";
+
 
 function Navigation() {
-  const [navbarElement, setNavbarElement] = useState(navbarElements);
+  const [navbarElement] = useState(navbarElements);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -17,84 +19,77 @@ function Navigation() {
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
   };
+  const theme = useSelector((state) => state.theme.theme);
+
 
   return (
-    <div className="flex flex-row justify-center items-center bg-black fixed top-0 z-10 py-2 w-full text-slate-50">
-      <div className="flex flex-col justify-center sm:w-full">
-        <div className="flex flex-row justify-around items-center gap-5 sm:hidden">
-          {navbarElement.map((element, index) => (
-            <NavLink
-              to={`${element.path}`}
-              key={index}
-              className={({ isActive }) =>
-                `${responsiveClass} ${hover} m-2 p-2 text-md italic font-bold ${
-                  element.path === "/propose"
-                    ? "border-2 border-black border-dotted bg-primary/40"
-                    : "border-2 border-transparent"
-                } ${isActive ? " bg-primary/80 rounded-lg p-2" : ""}`
-              }
-            >
-              {element.name}
-            </NavLink>
-          ))}
-          <div className="m-4">
-            <input
-              type="text"
-              placeholder="Sayfada Ara.."
-              value={searchTerm}
-              onChange={handleSearchChange}
-              className="text-black p-2 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-            />
-          </div>
-        </div>
-        <span
-          className="self-center sm:self-start sm:px-5 sm:py-3 hidden sm:flex sm:gap-2 sm:font-bold"
-          onClick={toggleSidebar}
-        >
-          <GiHamburgerMenu color="white" size="30px" /> Menü
-        </span>
-        <div className="hidden sm:block bg-primary z-10 w-full h-auto">
-          {isSidebarOpen &&
-            navbarElement.map((menu, index) => (
+    <div className={`grid grid-cols-3 items-center  fixed top-0 z-10 p-2 w-full rounded-xl`} style={theme}>
+
+
+      <div className="col-span-2 flex flex-col justify-center items-center">
+
+          <div className="flex flex-row justify-between items-center gap-5 sm:hidden">
+            {navbarElement.map((element, index) => (
               <NavLink
+                to={`${element.path}`}
                 key={index}
-                to={`${menu.path}`}
-                onClick={() => setIsSidebarOpen(false)}
+                className={({ isActive }) =>
+                  `hover:text-primary m-2 p-2  ${isActive ? " bg-primary/80 rounded-lg p-2 text-white" : ""}`
+                }
               >
-                <div
-                  key={index}
-                  className="flex m-2 p-2 cursor-pointer text-white hover:font-bold"
-                >
-                  {menu.name}
-                </div>
+                {element.name}
               </NavLink>
             ))}
-        </div>
-        <div className="hidden sm:block">
-          <AnimateContainer.fadeInRight duration={1} active>
-            <a
-              href={""}
-              className="hover:text-gray-100 text-white flex flex-col items-center justify-center gap-1 mx-5 border-2 p-2 px-5 rounded-xl bg-green-400"
-            >
-              <div className="flex gap-3">
-                <FaWhatsapp size={35} color="white" className="sm:hidden" />
-                <span className="text-xl md:text-sm sm:text-sm">WhatsApp</span>
-              </div>
-              <span className="text-xl md:text-sm sm:hidden">
-                ile iletişim kur
-              </span>
-            </a>
-          </AnimateContainer.fadeInRight>
-        </div>
+            
+          </div>
+
+          <span className="self-center sm:self-start sm:px-5 sm:py-3 hidden sm:flex sm:gap-2 items-center sm:justify-between">
+            <GiHamburgerMenu color="black" size={20} onClick={toggleSidebar} /> Menü
+            <NavLink to={"/login"} className="flex justify-center items-center">
+              <FaUser size={15} className="cursor-pointer m-2" /> Giriş Yap
+            </NavLink>
+          </span>
+
+          <div className={`hidden sm:block z-10 w-full h-auto`}>
+            {isSidebarOpen &&
+              navbarElement.map((menu, index) => (
+                <NavLink
+                  key={index}
+                  to={`${menu.path}`}
+                  onClick={() => setIsSidebarOpen(false)}
+                >
+                  <div
+                    key={index}
+                    className="flex m-2 p-2 cursor-pointer"
+                  >
+                    {menu.name}
+                  </div>
+                </NavLink>
+              ))}
+          </div>
+
       </div>
-      <NavLink to={"/login"}>
-        <FaUser size={20} className="cursor-pointer m-2" />
-      </NavLink>
+
+
+      <div className="col-span-1 flex">
+        <div className="m-4">
+                <input
+                  type="text"
+                  placeholder="Sayfada Ara.."
+                  value={searchTerm}
+                  onChange={handleSearchChange}
+                  className="text-black p-2 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                />
+              </div>
+        <NavLink to={"/login"} className="sm:hidden flex items-center">
+          <FaUser size={20} className="cursor-pointer m-2" />
+          <span className="md:hidden">Giriş Yap</span>
+        </NavLink>
+      </div>
+      
     </div>
   );
 }
 
-const responsiveClass = "md:text-xs sm:text-sm lg:text-xl gap-2 ";
-const hover = "hover:text-primary rounded-lg";
 
 export default Navigation;
