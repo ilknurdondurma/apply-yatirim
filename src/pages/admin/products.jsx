@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { AnimateContainer } from "react-animate-container";
 import ProductCard from "../../components/card";
-import products from "../../dummy-data/products";
+import productss from "../../dummy-data/products";
 import DynamicForm from "../../components/form";
 import { IoIosPricetags } from "react-icons/io";
 import { MdOutlineWbIncandescent } from "react-icons/md";
@@ -11,6 +11,7 @@ import { categoriess } from "../../dummy-data/categories";
 
 const ProductsAdmin = () => {
   const [categories, setCategories] = useState(categoriess);
+  const [products, setProducts] = useState(productss);
 
   const formFields = [
     {

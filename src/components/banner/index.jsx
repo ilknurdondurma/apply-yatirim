@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import bannerData from "../../dummy-data/bannerData";
 import image from "../../assets/bg.png";
 
 function Banner() {
-  const { title, subtitle, buttonText, buttonLink, backgroundImage } =
-    bannerData;
+  // const { title, subtitle, buttonText, buttonLink, backgroundImage } =
+  //   bannerData;
+
+  const [banner, setBanner] = useState(bannerData);
 
   return (
     <div
@@ -18,13 +20,13 @@ function Banner() {
     >
       <div className="absolute inset-0 bg-black opacity-30"></div>
       <div className="relative text-center text-white px-4">
-        <h1 className="text-4xl font-bold mb-4">{title}</h1>
-        <p className="text-xl mb-6">{subtitle}</p>
+        <h1 className="text-4xl font-bold mb-4">{banner.title}</h1>
+        <p className="text-xl mb-6">{banner.subtitle}</p>
         <NavLink
-          to={buttonLink}
+          to={banner.buttonLink}
           className="px-4 py-2 bg-primary text-white rounded-lg"
         >
-          {buttonText}
+          {banner.buttonText}
         </NavLink>
       </div>
     </div>

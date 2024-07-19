@@ -1,4 +1,4 @@
-const catalogs = [
+const catalogss = [
   {
     id: 1,
     name: "2023 Kış Koleksiyonu",
@@ -16,4 +16,4 @@ const catalogs = [
   },
 ];
 
-export default catalogs;
+export default catalogss;

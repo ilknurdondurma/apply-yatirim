@@ -3,7 +3,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-function Story({ story }) {
+function CustomSlider({ story }) {
   const settings = {
     dots: true,
     infinite: true,
@@ -33,4 +33,4 @@ function Story({ story }) {
   );
 }
 
-export default Story;
+export default CustomSlider;

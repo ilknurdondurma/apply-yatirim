@@ -1,15 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import qualityData from "../../dummy-data/qualityData";
 
 function Quality() {
+  const [guality, setQuality] = useState(qualityData);
   return (
     <div className="max-w-7xl mx-auto p-4">
       <section className="text-center my-8">
-        <h1 className="text-4xl font-bold mb-4">{qualityData.title}</h1>
-        <p className="text-lg text-gray-700">{qualityData.description}</p>
+        <h1 className="text-4xl font-bold mb-4">{guality.title}</h1>
+        <p className="text-lg text-gray-700">{guality.description}</p>
       </section>
       <section>
-        {qualityData.sections.map((section) => (
+        {guality.sections.map((section) => (
           <div
             key={section.id}
             className="my-8 p-4 bg-white shadow-lg rounded-lg flex flex-col md:flex-row items-center"

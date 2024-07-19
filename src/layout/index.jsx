@@ -1,9 +1,9 @@
 import React, { useMemo } from "react";
 import { Outlet } from "react-router-dom";
-import Navbar from "./navbar";
-import Footer from "./footer";
-import Navigation from "./navigation";
-import Sidebar from "./sidebar";
+import Navbar from "./user/navbar";
+import Footer from "./user/footer";
+import Navigation from "./user/navigation";
+import Sidebar from "./admin/sidebar";
 
 export function Layout({ children }) {
   const bellekteTutulanNavbar = useMemo(() => <Navbar />, []);

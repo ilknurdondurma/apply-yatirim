@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { SiD3Dotjs } from "react-icons/si";
 import { FaEnvelope, FaWhatsapp, FaPhone } from "react-icons/fa";
 import { NavLink, useLocation } from "react-router-dom";
-import backgroundImage from "../assets/backgroundImage.jpg";
-import logo from "../assets/logo.jpg";
-import { contactData } from "../dummy-data/contact";
+import backgroundImage from "../../assets/backgroundImage.jpg";
+import logo from "../../assets/logo.jpg";
+import { contactData } from "../../dummy-data/contact";
 import { AnimateContainer } from "react-animate-container";
 
 function Navbar() {

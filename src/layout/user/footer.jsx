@@ -2,41 +2,23 @@ import React, { useState } from "react";
 import { FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
 import { AiFillYoutube } from "react-icons/ai";
 import { NavLink } from "react-router-dom";
-import { contactData } from "../dummy-data/contact";
-import { navbarElements } from "../dummy-data/navbarElements";
+import { contactData } from "../../dummy-data/contact";
+import { navbarElements } from "../../dummy-data/navbarElements";
 import { FaEnvelope, FaMapMarkerAlt, FaPhone } from "react-icons/fa";
-import DynamicForm from "../components/form";
-import * as Yup from "yup";
+import DynamicForm from "../../components/form";
+import { messageSchema } from "../../validations/messageMe";
+import { fieldsMessage } from "../../formFields/messageMe";
 
 function Footer() {
-  const formField = [
-    {
-      name: "name",
-      label: "Adınız",
-      type: "text",
-    },
-    {
-      name: "email",
-      label: "Email",
-      type: "text",
-    },
-    { name: "message", label: "Mesajınız", type: "textarea" },
-  ];
-  const validationSchema = Yup.object({
-    name: Yup.string().required("İsim gerekli alan"),
-    email: Yup.string()
-      .email("Geçersiz email adresi")
-      .required("Email gerekli alan"),
-    message: Yup.string().required("Mesaj gerekli alan"),
-  });
+  const formField = fieldsMessage;
+  const validationSchema = messageSchema;
+  const [contacts, setContacts] = useState(contactData);
+  const [navbarElement, setNavbarElement] = useState(navbarElements);
 
   const handleSubmit = (values) => {
     console.log("Form Values:", values);
     alert("Form submitted successfully!");
   };
-
-  const contacts = contactData;
-  const navbarElement = navbarElements;
 
   return (
     <footer className="bg-black py-8">

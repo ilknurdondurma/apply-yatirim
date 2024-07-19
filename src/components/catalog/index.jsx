@@ -3,10 +3,7 @@ import book from "../../assets/book.jpg";
 
 function CatalogItem({ catalog }) {
   const handleDownload = () => {
-    // Simüle edilmiş indirme işlemi, gerçek URL veya indirme mekanizması eklenebilir.
     alert(`"${catalog.name}" kataloğu indiriliyor...`);
-    // Örneğin:
-    // window.open(catalog.downloadLink, "_blank");
   };
 
   return (

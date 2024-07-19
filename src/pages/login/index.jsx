@@ -1,72 +1,23 @@
 import React, { useState } from "react";
-import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import { FaLock, FaUser } from "react-icons/fa";
-import { AnimateContainer } from "react-animate-container";
 import { useNavigate } from "react-router-dom";
 import DynamicForm from "../../components/form";
-
-const validationSchemaLogin = Yup.object({
-  email: Yup.string().email("Geçersiz email adresi").required("Email gerekli"),
-  password: Yup.string()
-    .min(6, "Şifre en az 6 karakter olmalıdır")
-    .required("Şifre gerekli"),
-});
-
-const validationSchemaSignup = Yup.object({
-  email: Yup.string().email("Geçersiz email adresi").required("Email gerekli"),
-  password: Yup.string()
-    .min(6, "Şifre en az 6 karakter olmalıdır")
-    .required("Şifre gerekli"),
-  confirmPassword: Yup.string()
-    .oneOf([Yup.ref("password"), null], "Şifreler eşleşmiyor")
-    .required("Şifre onayı gerekli"),
-});
+import { loginSchema } from "../../validations/auth/login";
+import { signupSchema } from "../../validations/auth/signup";
+import { fieldsLogin } from "../../formFields/login";
+import { fieldsSignUp } from "../../formFields/signup";
 
 function Login() {
   const [isLogin, setIsLogin] = useState(true);
   const [animation, setAnimation] = useState(true);
   const navigate = useNavigate();
-  const formFieldsLogin = [
-    {
-      name: "email",
-      label: "Email",
-      type: "text",
-      placeholder: "ayilmaz@gmail.com",
-      icon: <FaUser className="text-gray-400" />,
-    },
-    {
-      name: "password",
-      label: "Şifre",
-      type: "password",
-      placeholder: "****",
-      icon: <FaLock className="text-gray-400" />,
-    },
-  ];
 
-  const formFieldsSignUp = [
-    {
-      name: "email",
-      label: "Email",
-      type: "text",
-      placeholder: "ayilmaz@gmail.com",
-      icon: <FaUser className="text-gray-400" />,
-    },
-    {
-      name: "password",
-      label: "Şifre",
-      type: "password",
-      placeholder: "****",
-      icon: <FaLock className="text-gray-400" />,
-    },
-    {
-      name: "confirmPassword",
-      label: "Şifre Onayı",
-      type: "password",
-      placeholder: "****",
-      icon: <FaLock className="text-gray-400" />,
-    },
-  ];
+  const validationSchemaLogin = loginSchema;
+  const validationSchemaSignup = signupSchema;
+
+  const formFieldsLogin = fieldsLogin;
+  const formFieldsSignUp = fieldsSignUp;
 
   const handleToggle = () => {
     setAnimation(!animation);

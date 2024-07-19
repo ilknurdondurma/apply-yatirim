@@ -1,4 +1,4 @@
-const customerStories = [
+const customerStoriess = [
   {
     id: 1,
     customerName: "John Doe",
@@ -13,4 +13,4 @@ const customerStories = [
   },
 ];
 
-export default customerStories;
+export default customerStoriess;

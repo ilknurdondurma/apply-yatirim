@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { FaUser } from "react-icons/fa";
 import { NavLink, useLocation } from "react-router-dom";
-import { navbarElements } from "../dummy-data/navbarElements";
+import { navbarElements } from "../../dummy-data/navbarElements";
 import { AnimateContainer } from "react-animate-container";
-import { FaEnvelope, FaWhatsapp, FaPhone } from "react-icons/fa";
+import { FaWhatsapp } from "react-icons/fa";
 
 function Navigation() {
   const [navbarElement, setNavbarElement] = useState(navbarElements);

@@ -1,4 +1,4 @@
-const services = [
+const servicess = [
   {
     id: 1,
     title: "Web Development",
@@ -16,4 +16,4 @@ const services = [
   },
 ];
 
-export default services;
+export default servicess;

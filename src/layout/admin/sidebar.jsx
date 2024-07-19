@@ -3,19 +3,18 @@ import { NavLink, useLocation } from "react-router-dom";
 import { SiD3Dotjs } from "react-icons/si";
 import { RxDashboard } from "react-icons/rx";
 import { MdChevronRight } from "react-icons/md";
-import { navbarElements } from "../dummy-data/navbarElements";
+import { navbarElements } from "../../dummy-data/navbarElements";
 
 function Sidebar() {
   const [sidebarElements, setSidebarElements] = useState(navbarElements);
   const location = useLocation();
 
   useEffect(() => {
-    // Eğer `navbarElements` güncellenirse `sidebarElements` de güncellenir
     setSidebarElements(navbarElements);
   }, [navbarElements]);
 
   return (
-    <div className="fixed w-1/6 md:w-1/4 border-gray-400 bg-slate-100 border-2 my-2 p-1 h-full font-thin">
+    <div className="fixed w-1/6 md:w-1/4 border-gray-400 bg-slate-100 border-2 rounded-lg p-1 h-full font-thin">
       <div className="h-full text-xl pt-5 flex flex-col justify-between">
         <div className="self-start items-center justify-center w-full pl-4 lg:pl-2">
           <SiD3Dotjs size={30} />
