@@ -15,8 +15,8 @@ function CustomSlider({ story }) {
   };
 
   return (
-    <div className="py-10 px-4 bg-white rounded-lg">
-      <div className="max-w-5xl mx-auto text-center">
+    <div className="py-10 px-4 rounded-lg ">
+      <div className="max-w-5xl mx-auto text-center bg-slate-100 ">
         <Slider {...settings}>
           {story.map((story) => (
             <div

@@ -6,8 +6,8 @@ module.exports = {
     extend: {
       colors: {
         primary: "#8b0000", //kırmızı
-        secondary: "#9ca3af", // gri
-        renk:'#08082b'
+        secondary: "#0d0e11", // siyah
+        tertiary:'#f8fafc' //slate-50
       },
     },
     screens: {

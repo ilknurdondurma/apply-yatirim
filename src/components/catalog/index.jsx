@@ -8,7 +8,7 @@ function CatalogItem({ catalog }) {
 
   return (
     <div className="grid grid-cols-3 sm:grid-cols-1 justify-between items-center border-2 m-5 p-5 rounded-lg shadow-xl mx-auto">
-      <div className="p-10 flex items-center justify-center mb-4 sm:hidden">
+      <div className="p-10 sm:p-1 flex items-center justify-center mb-4 ">
         <img
           src={book}
           alt={catalog.name}
@@ -16,13 +16,13 @@ function CatalogItem({ catalog }) {
         />
       </div>
       <div className="flex flex-col text-black ">
-        <span className="gap-2">
-          <span className="text-xl font-bold">Katalog Adı:</span>
-          <span className="text-lg italic">{catalog.name}</span>
+        <span className="flex flex-col">
+          <span className="text-lg font-bold">Katalog Adı:</span>
+          <span >{catalog.name}</span>
         </span>
-        <span className="gap-2">
-          <span className="text-xl font-bold">İçerik:</span>
-          <span className="text-lg italic">{catalog.content}</span>
+        <span className="flex flex-col ">
+          <span className="text-lg font-bold">İçerik:</span>
+          <span >{catalog.content}</span>
         </span>
       </div>
       <div className="flex items-center justify-center sm:hidden">

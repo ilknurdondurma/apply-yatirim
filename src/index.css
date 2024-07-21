@@ -1,6 +1,7 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap');
 
 ::-webkit-scrollbar {
   width: 5px; /* Safari ve Chrome */
@@ -16,7 +17,7 @@
 }
 
 body {
-  font-family: system-ui, sans-serif, "Segoe UI", "Roboto",
+  font-family: "Noto Sans","Segoe UI", "Roboto",
     "Noto Sans", "Ubuntu", "Droid Sans", "Helvetica Neue", sans-serif !important;
-  font-size: small !important;
+  font-size: small !important; 
 }

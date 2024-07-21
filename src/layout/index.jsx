@@ -4,6 +4,7 @@ import Navbar from "./user/navbar";
 import Footer from "./user/footer";
 import Navigation from "./user/navigation";
 import Sidebar from "./admin/sidebar";
+import { useSelector } from "react-redux";
 
 export function Layout({ children }) {
   const bellekteTutulanNavbar = useMemo(() => <Navbar />, []);
@@ -23,18 +24,16 @@ export function Layout({ children }) {
 }
 
 export function AdminLayout({ children }) {
-  const bellekteTutulanFooter = useMemo(() => <Footer />, []);
+  const theme = useSelector((state) => state.theme.theme);
 
   return (
-    <div className="flex flex-col">
-      <div className=" w-full  grid grid-cols-5 md:grid-cols-6 sm:grid-cols-1 gap-4">
-        <span className="sm:hidden col-span-1 md:col-span-2 ">
-          <Sidebar />
-        </span>
-        <main className="flex-grow min-h-screen p-5 sm:m-3 col-span-4 md:col-span-4">
-          {children}
-          <Outlet />
-        </main>
+    <div className=" flex">
+      <div className="" >
+        <Sidebar />
+      </div>
+      <div className=" min-h-screen  p-5 w-full" style={theme}>
+        {children}
+        <Outlet />
       </div>
     </div>
   );

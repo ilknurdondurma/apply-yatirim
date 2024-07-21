@@ -6,8 +6,8 @@ import logoDark from "../../assets/logo-dark.png";
 import { contactData } from "../../dummy-data/contact";
 import { AnimateContainer } from "react-animate-container";
 import { useSelector } from "react-redux";
-import { darkTheme } from "../../redux/reducers/theme/themeReducers";
-
+import { darkTheme, lightTheme } from "../../redux/reducers/theme/themeReducers";
+import backgroundImage from '../../assets/backgroundImage.jpg'
 function Navbar() {
   const [contacts] = useState(contactData);
   const mail = `mailto:${contacts[0].email}`;
@@ -15,15 +15,17 @@ function Navbar() {
   const whatsapp = `https://wa.me/${contacts[0].phone}`;
   const location = useLocation();
 
+  
   const theme = useSelector((state) => state.theme.theme);
 
   return (
     <div
-      className={`h-auto flex flex-col justify-center  md:mt-28 mt-16 border-b-2 rounded-xl p-5${
+      className={`h-auto flex flex-col justify-center md:mt-28 mt-16 border-b-2 rounded-xl p-5${
         location.pathname !== "/login" ? "block" : " hidden"
       }`}
       style={{
         ...theme,
+        //backgroundImage: `url(${backgroundImage})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         minHeight: "300px",
@@ -31,11 +33,12 @@ function Navbar() {
       }}
       
     >
+      
       <div>
         <div className="flex flex-row">
           <div className="h-auto grid grid-cols-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 justify-between sm:flex-col mx-auto md:gap-5 sm:gap-3">
             <div className="col-span-2 sm:col-span-1 flex items-center justify-center m-1">
-              <img src={theme === darkTheme ?  logo : logoDark} alt="logo" style={{ height: '60px', width: 'auto' }} />
+              <img src={theme === darkTheme ?  logo : logoDark} alt="logo" style={{ height: '70px', width: 'auto' }} />
               <div className="flex flex-col">
                 <AnimateContainer.fadeInLeft duration={0.1} active>
                   <div className="text-2xl sm:text-xl px-5">
@@ -53,7 +56,7 @@ function Navbar() {
             <div className="col-span-1">
             </div>
             
-            <div className={`col-span-1 flex gap-5 justify-start px-5 m-1 items-center border-2 rounded-xl shadow-md `} style={theme}>
+            <div className={`col-span-1 flex gap-5 justify-start px-5 m-1 items-center border-2 rounded-xl shadow-md h-full `} style={theme === lightTheme ? darkTheme : lightTheme}>
               <div>
                 <FaPhone size={30} />
               </div>
@@ -69,7 +72,7 @@ function Navbar() {
               </div>
             </div>
 
-            <div className={`col-span-1 flex gap-5 justify-start px-5 m-1 items-center border-2 rounded-xl shadow-md `}style={theme}>
+            <div className={`col-span-1 flex gap-5 justify-start px-5 m-1 items-center border-2 rounded-xl shadow-md h-full`}style={theme === lightTheme ? darkTheme : lightTheme}>
               <div>
                 <FaEnvelope size={30} />
               </div>
@@ -85,7 +88,7 @@ function Navbar() {
               </div>
             </div>
 
-            <div className={`col-span-1 flex gap-5 justify-start px-5 m-1  items-center border-2 rounded-xl shadow-md  bg-green-400`}>
+            <div className={`col-span-1 flex gap-5 justify-start px-5 m-1  items-center border-2 rounded-xl shadow-md h-full bg-green-400`}>
               <AnimateContainer.fadeInRight duration={1} active>
                 <a href={whatsapp} className="flex sm:flex-row items-center justify-center rounded-xl gap-3 ">
                   <div >
@@ -105,6 +108,8 @@ function Navbar() {
           </div>
         </div>
       </div>
+
+      
     </div>
   );
 }

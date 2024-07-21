@@ -22,7 +22,7 @@ function Admin() {
     address: contacts[0].address,
   };
   return (
-    <div className="flex flex-col justify-center items-center w-full">
+    <div className="flex flex-col justify-center items-center w-full ">
       <h1 className="text-xl"> Admin Panel'e Hoşgeldiniz </h1>
       <DynamicForm
         fields={formFields}
