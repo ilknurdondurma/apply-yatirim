@@ -71,7 +71,7 @@ function Home() {
           <div className="grid grid-cols-3 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {team.map((member) => (
               <div key={member.id} className="p-4 bg-white shadow-lg rounded-lg">
-                <img src={member.photo} alt={member.name} className="rounded-full mx-auto mb-4" />
+                <img src={require(`../../${member.photo}`)} alt={member.name} className="rounded-full mx-auto mb-4" />
                 <h3 className="text-lg font-bold mb-2">{member.name}</h3>
                 <p className="text-gray-600">{member.position}</p>
               </div>
@@ -101,5 +101,4 @@ function Home() {
 }
 
 export default Home;
-const responsiveGrid = "sm:gap-2 md:grid-cols-1 sm:grid-cols-1";
-const responsiveText = "md:text-sm sm:text-sm lg:text-md";
+

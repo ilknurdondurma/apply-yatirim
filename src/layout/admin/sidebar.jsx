@@ -35,21 +35,22 @@ function Sidebar() {
   }
 
   return (
-    <div className={`flex flex-col h-full  ${isOpen ? "w-64" : "w-20"}`} style={theme}>
+    <div className={`flex flex-col h-full border-r-[1px] border-gray-400 ${isOpen ? "w-64" : "w-20"}`} style={theme}>
       <section>
-        <div className="flex justify-between items-center p-4">
-          <img src={theme === lightTheme ? logoDark : logo} alt="logo" className={`h-10 w-auto ${isOpen ? "block" : "hidden"}`} onClick={handleClick}/>
-          <button onClick={toggleSidebar} className="text-white focus:outline-none">
+        <div className="flex flex-col justify-between items-center p-4">
+        <button onClick={toggleSidebar} className="text-white focus:outline-none self-end">
             {isOpen ? < LuPanelLeftClose size={24} color={theme === lightTheme ? "#8b0000" : "#8b0000"}/> : <LuPanelLeftOpen size={24} color={theme === lightTheme ? "#8b0000" : "#8b0000"} />}
           </button>
+        <img src={theme === lightTheme ? logoDark : logo} alt="logo" className={`h-16 w-auto ${isOpen ? "block" : "hidden"}`} onClick={handleClick}/>
         </div>
       </section>
 
 
       <section>
-        <div className="flex flex-col">
+        <div className="flex flex-col justify-center items-center">
             <img src={user} alt="admin" className="rounded-full w-1/2 h-1/2 self-center"/>
-            <span></span>
+            <span className={`${isOpen?"":"hidden"}`}>AHMET YILMAZ</span>
+            <span className={`text-gray-400 ${isOpen?"":"hidden"}`}>ayilmaz@gmail.com</span>
             <SearchBar placeholder="Search..." />
         </div>
       </section>

@@ -21,7 +21,7 @@ const ToggleSwitch = ({ label = "" }) => {
   return (
     <label className="flex items-center cursor-pointer p-3">
       <span className="flex justify-center items-center">
-        {isChecked ? <FiSun size={24} className="mx-2"/> : <BsFillMoonStarsFill size={24} className="mx-2"/>}
+        {isChecked ? <FiSun size={16} className="mx-2"/> : <BsFillMoonStarsFill size={16} className="mx-2"/>}
       </span>
       <div className="relative">
         <input

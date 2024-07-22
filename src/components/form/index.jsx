@@ -49,9 +49,9 @@ const DynamicForm = ({
   return (
     <form
       onSubmit={formik.handleSubmit}
-      className="space-y-6 border-2  p-5 m-5 rounded-md bg-slate-50 w-full"
+      className="space-y-6 border-2  p-5 m-5 rounded-md bg-slate-200 w-3/4"
     >
-      <h2 className="text-2xl font-bold text-center mb-5">{header}</h2>
+      <h2 className="text-2xl font-bold text-center mb-5 text-gray-400">{header}</h2>
       {fields.map((field) => (
         <div key={field.name} className="space-y-2">
           <label className="block text-gray-700 font-bold">

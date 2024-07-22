@@ -26,9 +26,10 @@ export function Layout({ children }) {
 }
 
 export function AdminLayout({ children }) {
+  const theme = useSelector((state) => state.theme.theme);
 
   return (
-      <div className=" flex">
+      <div className=" flex" style={theme}>
       <div className="" >
         <Sidebar />
       </div>
