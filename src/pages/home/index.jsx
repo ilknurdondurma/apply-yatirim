@@ -23,7 +23,7 @@ function Home() {
       </section>
 
       {/* Hizmetler veya Çözümler Bölümü */}
-      <section className="py-10 px-4 text-center">
+      <section className="py-10 px-4 text-center border-b-2">
         <h2 className="text-2xl font-bold mb-8">Hizmetlerimiz</h2>
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-3 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -51,7 +51,7 @@ function Home() {
       </section>
 
       {/* Ürünler Bölümü */}
-      <section className="flex flex-col text-center my-5 mx-auto">
+      <section className="flex flex-col text-center my-5 mx-auto p-5">
         <h2 className="text-2xl font-bold mb-8">Ürünler</h2>
         <div className="grid grid-cols-4 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 gap-5 justify-center mx-auto">
           {products.map((product, index) => (
@@ -65,7 +65,7 @@ function Home() {
      
 
       {/* Ekibimiz Bölümü */}
-      <section className="py-10 px-4  text-center">
+      <section className="py-10 px-4  text-center border-b-2 ">
         <h2 className="text-2xl font-bold mb-8">Ekibimiz</h2>
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-3 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -81,7 +81,7 @@ function Home() {
       </section>
 
       {/* Blog Yazıları Bölümü */}
-      <section className="py-10 px-4 bg-white text-center">
+      <section className="py-10 px-4 text-center border-b-2 ">
         <h2 className="text-2xl font-bold mb-8">Son Blog Yazıları</h2>
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-3 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

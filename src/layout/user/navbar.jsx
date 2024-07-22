@@ -20,7 +20,7 @@ function Navbar() {
 
   return (
     <div
-      className={`h-auto flex flex-col justify-center md:mt-28 mt-16 border-b-2 rounded-xl p-5${
+      className={`h-auto flex flex-col justify-center md:mt-28 mt-16 rounded-xl p-5${
         location.pathname !== "/login" ? "block" : " hidden"
       }`}
       style={{

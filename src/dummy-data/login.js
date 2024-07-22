@@ -1,0 +1,20 @@
+export const userss=[
+    {
+        id:1,
+        admin:true,
+        name:"ahmet",
+        surname:"yılmaz",
+        email:"ahmet@yılmaz.com",
+        password:'123456',
+        token:"qjkdbksbdksjbdddddsbdksjbdksbdksjbdksbdsk"
+    },
+    {
+        id:2,
+        admin:false,
+        name:"mehmet",
+        surname:"şimşek",
+        email:"mehmet@şimşek.com",
+        password:'789456',
+        token:"dbksbdksjbdksjbdksjbdksjbdksjbdksjbdsk"
+    }
+]

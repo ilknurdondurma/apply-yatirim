@@ -6,17 +6,17 @@ import { navbarElements } from "../../dummy-data/navbarElements";
 import { AnimateContainer } from "react-animate-container";
 import { FaWhatsapp } from "react-icons/fa";
 import { useSelector } from "react-redux";
-import { BsFillMoonStarsFill } from "react-icons/bs";
-import { GiSunflower } from "react-icons/gi";
+
 import { darkTheme, lightTheme } from "../../redux/reducers/theme/themeReducers";
 import { contactData } from "../../dummy-data/contact";
 import { FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
 import { AiFillYoutube } from "react-icons/ai";
+import SearchBar from "../../components/searchBar";
+import ToggleSwitch from "../../components/toggle";
 
 function Navigation() {
   const [navbarElement] = useState(navbarElements);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
   const [contacts] = useState(contactData);
   const facebook = contacts[0].facebook;
   const twitter = contacts[0].twitter;
@@ -26,13 +26,11 @@ function Navigation() {
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
-  const handleSearchChange = (event) => {
-    setSearchTerm(event.target.value);
-  };
+
   const theme = useSelector((state) => state.theme.theme);
  
   return (
-    <div className={`grid grid-cols-3 items-center  fixed top-0 z-10 p-2 w-full rounded-xl`} style={theme === lightTheme ? darkTheme : lightTheme}>
+    <div className={`grid grid-cols-3 items-center  fixed top-0 z-10 p-2 w-full rounded-xl border-2`} style={theme }>
 
 
       <div className="col-span-2 flex flex-col justify-center items-center">
@@ -81,23 +79,17 @@ function Navigation() {
       </div>
 
 
-      <div className="col-span-1 flex justify-between">
+      <div className="col-span-1 flex justify-between items-center">
         <div className="flex">
-            <div className="m-4">
-                    <input
-                      type="text"
-                      placeholder="Sayfada Ara.."
-                      value={searchTerm}
-                      onChange={handleSearchChange}
-                      className="text-black p-2 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                    />
-                  </div>
+            <SearchBar placeholder="Search..." />
             <NavLink to={"/login"} className="sm:hidden md:hidden flex items-center">
               <FaUser size={20} className="cursor-pointer m-2" />
               <span className="md:hidden">Giriş Yap</span>
             </NavLink>
+              <ToggleSwitch />
         </div>
         <div className="flex gap-2 self-center mx-2 sm:hidden">
+             
               <a href={facebook}>
                 <FaFacebook size={15} />
               </a>
