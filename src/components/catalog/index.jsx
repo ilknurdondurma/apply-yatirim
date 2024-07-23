@@ -1,28 +1,34 @@
 import React from "react";
 import book from "../../assets/book.jpg";
+import { useSelector } from "react-redux";
+import { lightTheme, grayLightTheme, grayDarkTheme } from "../../redux/reducers/theme/themeReducers";
 
 function CatalogItem({ catalog }) {
+  const theme = useSelector((state) => state.theme.theme);
+  
   const handleDownload = () => {
     alert(`"${catalog.name}" kataloğu indiriliyor...`);
   };
 
+  const appliedTheme = theme === lightTheme ? grayLightTheme : grayDarkTheme;
+
   return (
-    <div className="grid grid-cols-3 sm:grid-cols-1 justify-between items-center border-2 m-5 p-5 rounded-lg shadow-xl mx-auto">
+    <div className={`grid grid-cols-3 sm:grid-cols-1 justify-between items-center border-[1px] m-5 p-5 rounded-lg shadow-xl mx-auto bg-slate-800`} style={appliedTheme}>
       <div className="p-10 sm:p-1 flex items-center justify-center mb-4 ">
         <img
           src={book}
           alt={catalog.name}
-          className=" object-cover rounded-lg"
+          className="object-cover rounded-lg border-[1px] p-2"
         />
       </div>
-      <div className="flex flex-col text-black ">
+      <div className="flex flex-col p-5 rounded-lg gap-5 justify-center">
         <span className="flex flex-col">
           <span className="text-lg font-bold">Katalog Adı:</span>
-          <span >{catalog.name}</span>
+          <span>{catalog.name}</span>
         </span>
-        <span className="flex flex-col ">
+        <span className="flex flex-col">
           <span className="text-lg font-bold">İçerik:</span>
-          <span >{catalog.content}</span>
+          <span>{catalog.content}</span>
         </span>
       </div>
       <div className="flex items-center justify-center sm:hidden">

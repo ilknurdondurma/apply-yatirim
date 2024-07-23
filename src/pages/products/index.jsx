@@ -18,7 +18,7 @@ function Products() {
   return (
     <div>
       <sections className="flex flex-col text-center my-5 mx-auto">
-        <h2 className="text-2xl font-bold mb-8">Ürünler</h2>
+        <h2 className="text-2xl font-bold mb-8"> Ürünler</h2>
         <div className="grid grid-cols-4 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 gap-5 justify-center mx-auto">
           {products.map((product, index) => (
             <AnimateContainer.bounceIn duration={index}>

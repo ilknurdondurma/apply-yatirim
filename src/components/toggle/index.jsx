@@ -3,11 +3,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { BsFillMoonStarsFill } from "react-icons/bs";
 import { FiSun } from "react-icons/fi";
 import themeActions from '../../redux/actions/theme/themeActions'; // themeActions'ı import et
+import { darkTheme, lightTheme } from '../../redux/reducers/theme/themeReducers';
 
 const ToggleSwitch = ({ label = "" }) => {
   const dispatch = useDispatch();
   const theme = useSelector((state) => state.theme.theme);
-  const [isChecked, setIsChecked] = useState(theme === 'lightTheme'); // 'lightTheme' string olarak kontrol ediliyor
+  const [isChecked, setIsChecked] = useState(theme === lightTheme); // 'lightTheme' string olarak kontrol ediliyor
 
   const handleToggle = () => {
     if (isChecked) {
@@ -31,8 +32,8 @@ const ToggleSwitch = ({ label = "" }) => {
           checked={isChecked}
           onChange={handleToggle}
         />
-        <div className={`block w-14 h-8 rounded-full border-2 ${isChecked ? 'bg-green-400' : 'bg-gray-300'}`}></div>
-        <div className={`dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition-transform transform ${isChecked ? 'translate-x-6' : ''}`}></div>
+        <div className={`block w-14 h-8 sm:w-10 sm:h-5 rounded-full border-2 ${isChecked ? 'bg-green-400' : 'bg-gray-300'}`}></div>
+        <div className={`dot absolute left-1 top-1 bg-white w-6 h-6 sm:w-4 sm:h-4 rounded-full transition-transform transform ${isChecked ? 'translate-x-6' : ''}`}></div>
       </div>
       <div className="ml-3 text-gray-700 font-medium">{label}</div>
     </label>

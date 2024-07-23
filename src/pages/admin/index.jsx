@@ -7,7 +7,7 @@ import blogPosts from "../../dummy-data/blogs";
 import DynamicForm from "../../components/form";
 import Modal from "../../components/modal";
 import { FaEdit, FaTrash, FaPlus } from "react-icons/fa"; // İkonlar için
-import { lightTheme } from "../../redux/reducers/theme/themeReducers";
+import { grayDarkTheme, grayLightTheme, lightTheme } from "../../redux/reducers/theme/themeReducers";
 import { useSelector } from "react-redux";
 
 function Admin() {
@@ -167,7 +167,7 @@ const Section = ({
   const fields = items.length > 0 ? Object.keys(items[0]) : [];
   const theme=useSelector((state)=>state.theme.theme)
   return (
-    <section className={`flex flex-col justify-center items-center w-full border-2 gap-10 p-2 ${theme===lightTheme ?"bg-slate-200":"bg-slate-700 border-black"}`}>
+    <section className={`flex flex-col justify-center items-center w-full border-2 gap-10 p-2 `} style={theme===lightTheme ? grayLightTheme: grayDarkTheme}>
       <h3 className="text-xl font-bold mb-4">{title}</h3>
       <ul>
         {items.slice(0, 3).map((item, index) => (

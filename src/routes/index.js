@@ -7,7 +7,7 @@ import Quality from "../pages/quality";
 import Catalog from "../pages/catalog";
 import Contact from "../pages/contact";
 import Admin from "../pages/admin";
-
+import {PageNotFound , PageNotFoundAdmin} from "../pages/404";
 import Products from "../pages/products";
 import ProductsAdmin from "../pages/admin/products";
 
@@ -45,6 +45,10 @@ const routes = createBrowserRouter([
         path: "/iletisim",
         element: <Contact />,
       },
+      {
+        path:'*',
+        element: <PageNotFound/>
+    },
     ],
   },
   {
@@ -75,6 +79,10 @@ const routes = createBrowserRouter([
         path: "hakkimizda",
         element: <Admin />,
       },
+      {
+        path:'*',
+        element: <PageNotFoundAdmin/>
+    },
     ],
   },
 ]);

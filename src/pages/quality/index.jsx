@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import qualityData from "../../dummy-data/qualityData";
+import { useSelector } from "react-redux";
 
 function Quality() {
   const [guality, setQuality] = useState(qualityData);
+  const theme=useSelector((state)=>state.theme.theme);
   return (
     <div className="max-w-7xl mx-auto p-4">
       <section className="text-center my-8">
@@ -13,7 +15,8 @@ function Quality() {
         {guality.sections.map((section) => (
           <div
             key={section.id}
-            className="my-8 p-4 bg-white shadow-lg rounded-lg flex flex-col md:flex-row items-center"
+            className="my-8 p-4 bg-white shadow-xl shadow-slate-400 rounded-lg flex flex-col md:flex-row items-center border-[1px] "
+            style={theme}
           >
             <img
               src={section.image}

@@ -61,14 +61,14 @@ const ProductsAdmin = () => {
   };
 
   return (
-    <div style={{ padding: "20px" }}>
+    <div style={{ padding: "20px" }} className="flex flex-col justify-center items-center">
       <DynamicForm
         fields={formFields}
         onSubmit={handleSubmit}
         header="Ürün Ekle"
       />
 
-      <sections className="flex flex-col text-center my-5 mx-auto">
+      <sections className="flex flex-col text-center my-5">
         <h2 className="text-2xl font-bold mb-8">Ürünler</h2>
         <div className="grid grid-cols-4 lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-1 gap-5 justify-center mx-auto">
           {products.map((product, index) => (

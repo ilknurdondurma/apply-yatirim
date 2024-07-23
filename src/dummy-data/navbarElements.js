@@ -10,19 +10,30 @@ export const navbarElements = [
     name: "Anasayfa",
     icon: <IoHomeOutline/>,
     path: "",
-    
+    submenus: [
+      { id: 21, name: 'List Users', path: 'hakkimizda' },
+      { id: 22, name: 'Add User', path: 'adasa' },
+    ],
   },
   {
     id: 2,
     name: "Hakkımızda",
     icon: <FaQuestionCircle/>,
     path: "hakkimizda",
+    submenus: [
+      { id: 21, name: 'List Users', path: 'list-users' },
+      { id: 22, name: 'Add User', path: 'kalite' },
+    ],
   },
   {
     id: 3,
     name: "Kalite",
     icon: <Gi3dStairs/>,
     path: "kalite",
+    submenus: [
+      { id: 21, name: 'List Users', path: 'list-users' },
+      { id: 22, name: 'Add User', path: 'add-user' },
+    ],
   },
 
   {
@@ -30,17 +41,29 @@ export const navbarElements = [
     name: "Ürünler",
     icon: <AiOutlineProduct/>,
     path: "urunler",
+    submenus: [
+      { id: 21, name: 'List Users', path: 'list-users' },
+      { id: 22, name: 'Add User', path: 'add-user' },
+    ],
   },
   {
     id: 5,
     name: "E-Katalog",
     icon: <GrCatalog/>,
     path: "katalog",
+    submenus: [
+      { id: 21, name: 'List Users', path: 'list-users' },
+      { id: 22, name: 'Add User', path: 'add-user' },
+    ],
   },
   {
     id: 6,
     name: "İletişim",
     icon: <RiMapPin2Line/>,
     path: "iletisim",
+    submenus: [
+      { id: 21, name: 'List Users', path: 'list-users' },
+      { id: 22, name: 'Add User', path: 'add-user' },
+    ],
   },
 ];

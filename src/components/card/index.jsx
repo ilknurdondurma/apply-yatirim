@@ -1,13 +1,17 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { grayDarkTheme, grayLightTheme, lightTheme } from "../../redux/reducers/theme/themeReducers";
 
 function ProductCard({ product }) {
   const [isHovered, setIsHovered] = useState(false);
+  const theme = useSelector((state) => state.theme.theme);
 
   return (
     <div
-      className="relative p-4 border rounded-lg shadow-md bg-white hover:bg-primary/10 w-80"
+      className="relative p-4  rounded-lg shadow-md  hover:bg-opacity-50 w-80"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      style={theme===lightTheme ? grayLightTheme: grayDarkTheme}
     >
       <img
         src={product.image}
@@ -16,7 +20,7 @@ function ProductCard({ product }) {
       />
       <div className="p-4">
         <h3 className="text-lg font-bold">{product.name}</h3>
-        <p className="text-sm text-gray-600 line-clamp-1">
+        <p className="text-sm text-gray-500 line-clamp-1">
           {product.description}
         </p>
       </div>

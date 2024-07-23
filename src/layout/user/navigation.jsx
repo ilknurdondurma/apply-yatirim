@@ -30,10 +30,10 @@ function Navigation() {
   const theme = useSelector((state) => state.theme.theme);
  
   return (
-    <div className={`grid grid-cols-3 items-center  fixed top-0 z-10 p-2 w-full rounded-xl border-2`} style={theme }>
+    <div className={`grid grid-cols-3 sm:grid-cols-4 items-center  fixed top-0 z-10 p-3 w-full rounded-xl border-b-[1px] border-slate-300`} style={theme }>
 
 
-      <div className="col-span-2 flex flex-col justify-center items-center">
+      <div className="col-span-2 md:col-span-1 sm:col-span-2 flex flex-col justify-center items-center">
 
           <div className="flex flex-row justify-between items-center gap-5 sm:hidden md:hidden">
             {navbarElement.map((element, index) => (
@@ -52,7 +52,7 @@ function Navigation() {
           </div>
 
           <span className="self-start px-5 py-3 hidden sm:flex md:flex gap-2 items-center sm:justify-between md:justify-between">
-            <GiHamburgerMenu color={theme === lightTheme ? "white" : "black"} size={20} onClick={toggleSidebar} /> Menü
+            <GiHamburgerMenu color={theme === lightTheme ? "black" : "white"} size={20} onClick={toggleSidebar} /> Menü
             <NavLink to={"/login"} className="flex justify-center items-center">
               <FaUser size={15} className="cursor-pointer m-2" /> Giriş Yap
             </NavLink>
@@ -79,7 +79,7 @@ function Navigation() {
       </div>
 
 
-      <div className="col-span-1 flex justify-between items-center">
+      <div className="col-span-1 md:col-span-2 sm:col-span-2 flex justify-between sm:justify-end items-center">
         <div className="flex">
             <SearchBar placeholder="Search..." />
             <NavLink to={"/login"} className="sm:hidden md:hidden flex items-center">
