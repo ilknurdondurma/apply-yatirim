@@ -11,8 +11,10 @@ export const navbarElements = [
     icon: <IoHomeOutline/>,
     path: "",
     submenus: [
-      { id: 21, name: 'List Users', path: 'hakkimizda' },
-      { id: 22, name: 'Add User', path: 'adasa' },
+      { id: 12, name: 'Web Sitesi', path: 'bilgiler' },
+      { id: 13, name: 'Hizmetler', path: 'hizmetler' },
+      { id: 14, name: 'Ekibimiz', path: 'ekibimiz' },
+      { id: 15, name: 'Bloglar', path: 'bloglar' },
     ],
   },
   {
@@ -21,8 +23,7 @@ export const navbarElements = [
     icon: <FaQuestionCircle/>,
     path: "hakkimizda",
     submenus: [
-      { id: 21, name: 'List Users', path: 'list-users' },
-      { id: 22, name: 'Add User', path: 'kalite' },
+      { id: 21, name: 'Hakkımızda', path: 'hakkimizda' },
     ],
   },
   {
@@ -31,8 +32,7 @@ export const navbarElements = [
     icon: <Gi3dStairs/>,
     path: "kalite",
     submenus: [
-      { id: 21, name: 'List Users', path: 'list-users' },
-      { id: 22, name: 'Add User', path: 'add-user' },
+      { id: 31, name: 'Kalite', path: 'kalite' },
     ],
   },
 
@@ -42,8 +42,8 @@ export const navbarElements = [
     icon: <AiOutlineProduct/>,
     path: "urunler",
     submenus: [
-      { id: 21, name: 'List Users', path: 'list-users' },
-      { id: 22, name: 'Add User', path: 'add-user' },
+      { id: 41, name: 'Ürün Listesi', path: 'urun-listesi' },
+      { id: 42, name: 'Ürün Ekle', path: 'urun-ekle' },
     ],
   },
   {
@@ -52,8 +52,8 @@ export const navbarElements = [
     icon: <GrCatalog/>,
     path: "katalog",
     submenus: [
-      { id: 21, name: 'List Users', path: 'list-users' },
-      { id: 22, name: 'Add User', path: 'add-user' },
+      { id: 51, name: 'Katalog Listesi', path: 'katalog-listesi' },
+      { id: 52, name: 'Katalog Ekle', path: 'katalog-ekle' },
     ],
   },
   {
@@ -62,8 +62,7 @@ export const navbarElements = [
     icon: <RiMapPin2Line/>,
     path: "iletisim",
     submenus: [
-      { id: 21, name: 'List Users', path: 'list-users' },
-      { id: 22, name: 'Add User', path: 'add-user' },
+      { id: 61, name: 'İletişim Bilgileri', path: 'iletisim' },
     ],
   },
 ];

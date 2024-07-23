@@ -13,8 +13,8 @@ function CatalogItem({ catalog }) {
   const appliedTheme = theme === lightTheme ? grayLightTheme : grayDarkTheme;
 
   return (
-    <div className={`grid grid-cols-3 sm:grid-cols-1 justify-between items-center border-[1px] m-5 p-5 rounded-lg shadow-xl mx-auto bg-slate-800`} style={appliedTheme}>
-      <div className="p-10 sm:p-1 flex items-center justify-center mb-4 ">
+    <div className={`grid grid-cols-2 sm:grid-cols-1 justify-between items-center m-5 p-5 rounded-lg shadow-xl mx-auto `} style={appliedTheme}>
+      <div className="p-10 md:p-2 sm:p-1 flex items-center justify-center mb-4 ">
         <img
           src={book}
           alt={catalog.name}
@@ -31,7 +31,7 @@ function CatalogItem({ catalog }) {
           <span>{catalog.content}</span>
         </span>
       </div>
-      <div className="flex items-center justify-center sm:hidden">
+      <div className=" flex items-center justify-center w-full col-span-2 ">
         <button
           onClick={handleDownload}
           className="px-4 py-2 bg-primary text-white rounded-lg"
@@ -42,5 +42,4 @@ function CatalogItem({ catalog }) {
     </div>
   );
 }
-
 export default CatalogItem;

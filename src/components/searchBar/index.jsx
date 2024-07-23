@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 
-const SearchBar = ({ placeholder }) => {
+const SearchBar = ({ placeholder, onSearch }) => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleSearchChange = (event) => {
-    setSearchTerm(event.target.value);
+    const newSearchTerm = event.target.value;
+    setSearchTerm(newSearchTerm);
+    onSearch(newSearchTerm);
   };
 
   return (
-    <div className=" w-4/5 my-4 self-center ">
+    <div className="w-full my-4 self-center">
       <input
         type="text"
         placeholder={placeholder || "Sayfada Ara..."}

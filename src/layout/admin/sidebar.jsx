@@ -4,12 +4,13 @@ import logo from "../../assets/logo.png";
 import logoDark from "../../assets/logo-dark.png";
 import user from "../../assets/user.jpg";
 import { MdChevronRight, MdMenu, MdClose } from "react-icons/md";
-import { LuPanelLeftClose, LuPanelLeftOpen,LuDot } from "react-icons/lu";
+import { LuPanelLeftClose, LuPanelLeftOpen, LuDot } from "react-icons/lu";
 import { navbarElements } from "../../dummy-data/navbarElements";
 import { useSelector } from "react-redux";
 import { darkTheme, lightTheme } from "../../redux/reducers/theme/themeReducers";
 import SearchBar from "../../components/searchBar";
 import { useAuth } from "../../context/authContext/authContext";
+
 function Sidebar() {
   const [sidebarElements, setSidebarElements] = useState(navbarElements);
   const [isOpen, setIsOpen] = useState(true);
@@ -18,6 +19,26 @@ function Sidebar() {
   const location = useLocation();
   const navigate = useNavigate();
   const theme = useSelector((state) => state.theme.theme);
+  const [filteredElements, setFilteredElements] = useState(sidebarElements);
+
+  const handleSearch = (searchTerm) => {
+    if (searchTerm) {
+      const filtered = sidebarElements
+        .map(menu => ({
+          ...menu,
+          submenus: menu.submenus.filter(submenu =>
+            submenu.name.toLowerCase().includes(searchTerm.toLowerCase())
+          )
+        }))
+        .filter(menu =>
+          menu.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          menu.submenus.length > 0
+        );
+      setFilteredElements(filtered);
+    } else {
+      setFilteredElements(sidebarElements);
+    }
+  };
 
   useEffect(() => {
     if (location.pathname === "/admin") {
@@ -38,7 +59,7 @@ function Sidebar() {
 
   return (
     <div
-      className={`flex flex-col h-full border-r-[1px] border-gray-400 ${
+      className={`flex flex-col h-full border-r-[1px] ${
         isOpen ? "w-64" : "w-20"
       }`}
       style={theme}
@@ -81,13 +102,15 @@ function Sidebar() {
           <span className={`text-gray-400 ${isOpen ? "" : "hidden"}`}>
             ayilmaz@gmail.com
           </span>
-          <SearchBar placeholder="Search..." />
+          <div className="p-3">
+            <SearchBar onSearch={handleSearch} placeholder="Ayarlarda Ara" />
+          </div>
         </div>
       </section>
 
       <section>
         <div className={`flex flex-col transition-all duration-300`}>
-          {sidebarElements.map((menu) => (
+          {filteredElements.map((menu) => (
             <div key={menu.id} className="flex flex-col">
               <div
                 onClick={() => handleMenuClick(menu.id)}
@@ -108,8 +131,8 @@ function Sidebar() {
                   />
                 )}
               </div>
-              {menu.submenus.length > 0 && expandedMenu === menu.id && (
-                <div className={`flex flex-col ${isOpen ? "block" : "hidden"} ml-10 `}>
+              {menu.submenus.length > 0 && (
+                <div className={`flex flex-col ${expandedMenu === menu.id ? "block" : "hidden"} ml-10 `}>
                   {menu.submenus.map((submenu) => (
                     <NavLink
                       key={submenu.id}

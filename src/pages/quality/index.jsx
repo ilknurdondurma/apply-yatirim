@@ -15,7 +15,7 @@ function Quality() {
         {guality.sections.map((section) => (
           <div
             key={section.id}
-            className="my-8 p-4 bg-white shadow-xl shadow-slate-400 rounded-lg flex flex-col md:flex-row items-center border-[1px] "
+            className="my-10 p-4 shadow-xl  rounded-lg flex flex-col md:flex-row items-center border-b-[1px] "
             style={theme}
           >
             <img
