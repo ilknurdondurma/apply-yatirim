@@ -11,7 +11,7 @@ export const navbarElements = [
     icon: <IoHomeOutline/>,
     path: "",
     submenus: [
-      { id: 12, name: 'Web Sitesi', path: 'bilgiler' },
+      { id: 12, name: 'Web Sitesi', path: 'website' },
       { id: 13, name: 'Hizmetler', path: 'hizmetler' },
       { id: 14, name: 'Ekibimiz', path: 'ekibimiz' },
       { id: 15, name: 'Bloglar', path: 'bloglar' },

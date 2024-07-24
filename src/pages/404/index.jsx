@@ -13,7 +13,7 @@ export function PageNotFound() {
   )
 }
 
-export function PageNotFoundAdmin() {
+export function AdminPageNotFound() {
   return (
     <div className="flex items-center justify-center h-screen">
             <div className="text-center">

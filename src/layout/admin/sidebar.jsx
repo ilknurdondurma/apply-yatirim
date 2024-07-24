@@ -6,21 +6,23 @@ import user from "../../assets/user.jpg";
 import { MdChevronRight, MdMenu, MdClose } from "react-icons/md";
 import { LuPanelLeftClose, LuPanelLeftOpen, LuDot } from "react-icons/lu";
 import { navbarElements } from "../../dummy-data/navbarElements";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { darkTheme, lightTheme } from "../../redux/reducers/theme/themeReducers";
 import SearchBar from "../../components/searchBar";
 import { useAuth } from "../../context/authContext/authContext";
+import { toggleSidebar } from "../../redux/actions/sidebar/sidebarActions";
 
 function Sidebar() {
   const [sidebarElements, setSidebarElements] = useState(navbarElements);
-  const [isOpen, setIsOpen] = useState(true);
   const [expandedMenu, setExpandedMenu] = useState(1);
   const { setUser } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
   const theme = useSelector((state) => state.theme.theme);
   const [filteredElements, setFilteredElements] = useState(sidebarElements);
-
+  const isSidebarOpen = useSelector((state) => state.sidebar.isSidebarOpen);
+  const dispatch = useDispatch();
+  
   const handleSearch = (searchTerm) => {
     if (searchTerm) {
       const filtered = sidebarElements
@@ -47,8 +49,8 @@ function Sidebar() {
     setSidebarElements(navbarElements);
   }, [location, navigate]);
 
-  const toggleSidebar = () => {
-    setIsOpen(!isOpen);
+  const handleToggleSidebar = () => {
+    dispatch(toggleSidebar());
   };
 
   const handleMenuClick = (menuId) => {
@@ -60,17 +62,17 @@ function Sidebar() {
   return (
     <div
       className={`flex flex-col h-full border-r-[1px] ${
-        isOpen ? "w-64" : "w-20"
+        isSidebarOpen ? "w-64" : "w-20"
       }`}
       style={theme}
     >
       <section>
         <div className="flex flex-col justify-between items-center p-4">
           <button
-            onClick={toggleSidebar}
+            onClick={handleToggleSidebar}
             className="text-white focus:outline-none self-end"
           >
-            {isOpen ? (
+            {isSidebarOpen ? (
               <LuPanelLeftClose
                 size={24}
                 color={theme === lightTheme ? "#8b0000" : "#8b0000"}
@@ -85,7 +87,7 @@ function Sidebar() {
           <img
             src={theme === lightTheme ? logoDark : logo}
             alt="logo"
-            className={`h-16 w-auto ${isOpen ? "block" : "hidden"}`}
+            className={`h-16 w-auto ${isSidebarOpen ? "block" : "hidden"}`}
             onClick={handleClick}
           />
         </div>
@@ -98,8 +100,8 @@ function Sidebar() {
             alt="admin"
             className="rounded-full w-1/2 h-1/2 self-center"
           />
-          <span className={`${isOpen ? "" : "hidden"}`}>AHMET YILMAZ</span>
-          <span className={`text-gray-400 ${isOpen ? "" : "hidden"}`}>
+          <span className={`${isSidebarOpen ? "" : "hidden"}`}>AHMET YILMAZ</span>
+          <span className={`text-gray-400 ${isSidebarOpen ? "" : "hidden"}`}>
             ayilmaz@gmail.com
           </span>
           <div className="p-3">
@@ -118,13 +120,13 @@ function Sidebar() {
               >
                 <div className="flex items-center">
                   <div className="mr-2">{menu.icon}</div>
-                  <div className={`${isOpen ? "block" : "hidden"}`}>
+                  <div className={`${isSidebarOpen ? "block" : "hidden"}`}>
                     {menu.name}
                   </div>
                 </div>
                 {menu.submenus.length > 0 && (
                   <MdChevronRight
-                    className={`${isOpen ? "block" : "hidden"} ${
+                    className={`${isSidebarOpen ? "block" : "hidden"} ${
                       expandedMenu === menu.id ? "transform rotate-90" : ""
                     }`}
                     color={theme === lightTheme ? "black" : "white"}
@@ -146,7 +148,7 @@ function Sidebar() {
                         }`
                       }
                     >
-                      <span className={`flex text-slate-500 ${isOpen ? "block" : "hidden"}`}>
+                      <span className={`flex text-slate-500 ${isSidebarOpen ? "block" : "hidden"}`}>
                           <LuDot size={25} /> {submenu.name}
                       </span>
                     </NavLink>

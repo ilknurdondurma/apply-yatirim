@@ -15,11 +15,11 @@ function ProductCard({ product }) {
     >
       <img
         src={product.image}
-        alt={product.name}
+        alt={product.name ?? ""}
         className="w-full h-60 object-cover"
       />
       <div className="p-4">
-        <h3 className="text-lg font-bold">{product.name}</h3>
+        <h3 className="text-lg font-bold">{product.name ?? ""}</h3>
         <p className="text-sm text-gray-500 line-clamp-1">
           {product.description}
         </p>

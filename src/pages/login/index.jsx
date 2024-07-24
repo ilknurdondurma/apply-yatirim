@@ -5,8 +5,8 @@ import { useNavigate } from "react-router-dom";
 import DynamicForm from "../../components/form";
 import { loginSchema } from "../../validations/auth/login";
 import { signupSchema } from "../../validations/auth/signup";
-import { fieldsLogin } from "../../formFields/login";
-import { fieldsSignUp } from "../../formFields/signup";
+import { fieldsLogin } from "../../form-fields/login";
+import { fieldsSignUp } from "../../form-fields/signup";
 
 function Login() {
   const [isLogin, setIsLogin] = useState(true);

@@ -6,7 +6,7 @@ import { contactData } from "../../dummy-data/contact";
 import { navbarElements } from "../../dummy-data/navbarElements";
 import DynamicForm from "../../components/form";
 import { messageSchema } from "../../validations/messageMe";
-import { fieldsMessage } from "../../formFields/messageMe";
+import { fieldsMessage } from "../../form-fields/messageMe";
 import { useSelector } from "react-redux";
 
 function Footer() {

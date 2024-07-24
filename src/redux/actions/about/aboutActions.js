@@ -1,6 +1,5 @@
 import { getAbouts } from '../../../api';
 import {GET_ABOUTS_REQUEST,GET_ABOUTS_SUCCESS,GET_ABOUTS_FAILURE} from '../../actionsType/about'
-import { fetchContactsSuccess } from '../contact/contactActions';
 
 export const fetchAboutsRequest =()=>({
     type: GET_ABOUTS_REQUEST
@@ -31,5 +30,5 @@ export const fetchAbouts=()=>{
 
 
 
-const aboutActions ={fetchAboutsRequest,fetchContactsSuccess, fetchAboutsFailure}; // ilgili ekşınlar buraya tek çatı altında
+const aboutActions ={fetchAboutsRequest,fetchAboutsSuccess, fetchAboutsFailure}; // ilgili ekşınlar buraya tek çatı altında
 export default aboutActions;

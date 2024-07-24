@@ -4,8 +4,9 @@ import Navbar from "./user/navbar";
 import Footer from "./user/footer";
 import Navigation from "./user/navigation";
 import Sidebar from "./admin/sidebar";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import NavigationAdmin from "./admin/navigation";
+import { toggleSidebar } from "../redux/actions/sidebar/sidebarActions";
 
 export function Layout({ children }) {
   const bellekteTutulanNavbar = useMemo(() => <Navbar />, []);
@@ -27,14 +28,20 @@ export function Layout({ children }) {
 
 export function AdminLayout({ children }) {
   const theme = useSelector((state) => state.theme.theme);
+  const isSidebarOpen = useSelector((state) => state.sidebar.isSidebarOpen);
+  const dispatch = useDispatch();
+
+  const handleToggleSidebar = () => {
+    dispatch(toggleSidebar());
+  };
 
   return (
-      <div className=" flex" style={theme}>
-      <div className="" >
+    <div className="flex" style={theme}>
+      <div className={`fixed h-full `}>
         <Sidebar />
       </div>
-      <div className=" min-h-screen w-full pl-5" >
-        <NavigationAdmin/>
+      <div className={`min-h-screen w-full pl-5  ${isSidebarOpen ? 'ml-64' : 'ml-20'}`}>
+        <NavigationAdmin onToggleSidebar={handleToggleSidebar} />
         {children}
         <Outlet />
       </div>

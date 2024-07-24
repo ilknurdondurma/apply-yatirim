@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API=axios.create({baseURL:'https://jsonplaceholder.typicode.com'})
+const API=axios.create({baseURL:'https://fakestoreapi.com'})
 
 
 const storedUser = JSON.parse(localStorage.getItem('user'));
@@ -30,13 +30,14 @@ export const updateContacts = (contact) => API.put(`/Contact/`, contact)
 export const getAbouts = () => API.get(`/todos`)
 export const updateAbouts = (about) => API.put(`/about`, about)
 
-//user
-export const login = (formdata) => API.post('/User/login', formdata)
-export const signUp = (user) => API.post('/User/sign-up', user)
-export const updateUser = (id,user) => API.put(`/User/update/${id}`, user)
+//category
+export const getCategories = () => API.get(`/users`)
+
+
 
 //product
-export const getAllProducts = (userId) => API.get(`/Product/get-all/${userId}`)
+export const getAllProducts = () => API.get(`/products`)
+
 export const getHighlightsProducts = (userId) => API.get(`/Product/get-highlights/${userId}`)
 export const getProductsByCategoryId = (id) => API.get(`/Product/get-category/${id}`)
 export const getProductsByBrandId = (id) => API.get(`/Product/get-brand/${id}`)
@@ -45,9 +46,13 @@ export const addProduct = (product) => API.post(`/Product/add/`,product, {header
 export const updateProduct = (product) => API.put(`/Product/`,product)
 export const deleteProduct = (id) => API.delete(`/Product/${id}`)
 export const getProductsBySearch = (categoryName) => API.get(`/Product/category/${categoryName}`)
-//category
-export const getCategories = () => API.get(`/Category/get-categories`)
-//brand
+
+
+//user
+export const login = (formdata) => API.post('/User/login', formdata)
+export const signUp = (user) => API.post('/User/sign-up', user)
+export const updateUser = (id,user) => API.put(`/User/update/${id}`, user)
+
 export const getAllBrand=()=>API.get(`/Brand/get-all`)
 export const getBrandByCategory=(categoryId)=>API.get(`/Brand/get/${categoryId}`)
 //comment

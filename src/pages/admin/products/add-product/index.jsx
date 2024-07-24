@@ -1,18 +1,23 @@
-import React, { useState } from "react";
-import { AnimateContainer } from "react-animate-container";
-import ProductCard from "../../components/card";
-import productss from "../../dummy-data/products";
-import DynamicForm from "../../components/form";
+import React, { useEffect, useState } from "react";
+import DynamicForm from "../../../../components/form";
 import { IoIosPricetags } from "react-icons/io";
 import { MdOutlineWbIncandescent } from "react-icons/md";
 import { MdCategory } from "react-icons/md";
-import { GiCargoCrate } from "react-icons/gi";
-import { categoriess } from "../../dummy-data/categories";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCategories } from "../../../../redux/actions/category/categoryActions";
 
-const ProductsAdmin = () => {
-  const [categories, setCategories] = useState(categoriess);
-  const [products, setProducts] = useState(productss);
+const AdminAddProduct = () => {
+  const dispatch = useDispatch();
+  const { categories, loading, error } = useSelector((state) => state.category);
 
+  useEffect(() => {
+    dispatch(fetchCategories());
+  }, [dispatch]);
+
+  if (loading) return <div>Yükleniyor...</div>;
+  if (error) return <div className="mx-auto">Hata: {error}</div>;
+
+  //asagısı düzeltileek formfield
   const formFields = [
     {
       name: "name",
@@ -38,15 +43,9 @@ const ProductsAdmin = () => {
       type: "select",
       icon: <MdCategory />,
       options: categories.map((category) => ({
-        label: category.name,
+        label: category.username,         // hataaaaaaaaaaaaaaaaaaaaaaaaa
         value: category.id,
       })),
-    },
-    {
-      name: "inStock",
-      label: "Stokta Var Mı?",
-      icon: <GiCargoCrate />,
-      type: "checkbox",
     },
     {
       name: "image",
@@ -68,18 +67,8 @@ const ProductsAdmin = () => {
         header="Ürün Ekle"
       />
 
-      <sections className="flex flex-col text-center my-5">
-        <h2 className="text-2xl font-bold mb-8">Ürünler</h2>
-        <div className="grid grid-cols-4 lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-1 gap-5 justify-center mx-auto">
-          {products.map((product, index) => (
-            <AnimateContainer.bounceIn duration={index}>
-              <ProductCard key={product.id} product={product} />
-            </AnimateContainer.bounceIn>
-          ))}
-        </div>
-      </sections>
     </div>
   );
 };
 
-export default ProductsAdmin;
+export default AdminAddProduct;
