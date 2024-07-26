@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { AnimateContainer } from "react-animate-container";
 import ProductCard from "../../../../components/card";
-import productss from "../../../../dummy-data/products";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllProduct } from "../../../../redux/actions/product/productActions";
 

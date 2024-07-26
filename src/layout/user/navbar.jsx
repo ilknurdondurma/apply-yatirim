@@ -42,7 +42,7 @@ function Navbar() {
               <div className="flex flex-col">
                 <AnimateContainer.fadeInLeft duration={0.1} active>
                   <div className="text-2xl sm:text-xl px-5">
-                    {contacts[0].name}
+                    {contacts[0].title}
                   </div>
                 </AnimateContainer.fadeInLeft>
                 <AnimateContainer.fadeInLeft duration={0.1} active>

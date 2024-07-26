@@ -5,6 +5,7 @@ import aboutReducers from './about/aboutReducers';
 import sidebarReducers from './sidebar/sidebarReducers';
 import categoryReducers from './category/categoryReducers';
 import productReducers from './product/productReducers';
+import serviceReducers from './service/serviceReducers';
 
 const Reducers = combineReducers({
   theme: themeReducer,
@@ -12,7 +13,8 @@ const Reducers = combineReducers({
   about:aboutReducers,
   sidebar:sidebarReducers,
   category:categoryReducers,
-  product:productReducers
+  product:productReducers,
+  service:serviceReducers
   
 });
 

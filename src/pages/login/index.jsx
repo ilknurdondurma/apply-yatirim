@@ -11,6 +11,7 @@ import { fieldsSignUp } from "../../form-fields/signup";
 function Login() {
   const [isLogin, setIsLogin] = useState(true);
   const [animation, setAnimation] = useState(true);
+
   const navigate = useNavigate();
 
   const validationSchemaLogin = loginSchema;
@@ -39,7 +40,7 @@ function Login() {
   };
 
   return (
-    <div className="flex items-center justify-center my-20 ">
+    <div className="flex items-center justify-center my-20 " >
       <div
         className={`w-full max-w-md  p-8 rounded-lg shadow-lg items-center flex flex-col justify-center`}
       >

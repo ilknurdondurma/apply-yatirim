@@ -27,21 +27,29 @@ export const updateContacts = (contact) => API.put(`/Contact/`, contact)
 
 //abouts
 
-export const getAbouts = () => API.get(`/todos`)
+export const getAbouts = () => API.get(`/products`)
 export const updateAbouts = (about) => API.put(`/about`, about)
 
 //category
 export const getCategories = () => API.get(`/users`)
 
-
-
 //product
 export const getAllProducts = () => API.get(`/products`)
+export const getProductsById = (id) => API.get(`/products/${id}`)
+export const getProductsByCategoryId = (id) => API.get(`/products/category/${id}`) // name ile ama biz id yapcaz !
+
+//services
+export const getServices = () => API.get(`/products`)
+export const addService = (service) => API.get(`/products`,service)
+export const updateService = (id, updatedService) => API.get(`/products/${id}`,updatedService)
+export const deleteService = (id) => API.get(`/products/${id}`)
+
+
+
+
 
 export const getHighlightsProducts = (userId) => API.get(`/Product/get-highlights/${userId}`)
-export const getProductsByCategoryId = (id) => API.get(`/Product/get-category/${id}`)
 export const getProductsByBrandId = (id) => API.get(`/Product/get-brand/${id}`)
-export const getProductsById = (productId,userId) => API.get(`/Product/get/${productId}/${userId}`)
 export const addProduct = (product) => API.post(`/Product/add/`,product, {headers: {'Content-Type':'multipart/form-data'}})
 export const updateProduct = (product) => API.put(`/Product/`,product)
 export const deleteProduct = (id) => API.delete(`/Product/${id}`)

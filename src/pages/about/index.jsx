@@ -17,7 +17,7 @@ function About() {
               </h2>
 
               <div className={`border-l-2 p-5 rounded-lg h-auto`}>
-                <p > {item.content}</p>
+                <p > {item.description}</p>
               </div>
             </div>
 

@@ -16,13 +16,13 @@ import AdminProductList from "../pages/admin/products/product-list";
 import AdminWebsite from "../pages/admin/home/website";
 import AdminServices from "../pages/admin/home/services";
 import AdminTeams from "../pages/admin/home/teams";
-import AdminBlogs from "../pages/admin/home/blogs";
 import AdminQuality from "../pages/admin/quality";
 import AdminAbout from "../pages/admin/about";
 import AdminAddProduct from "../pages/admin/products/add-product";
 import AdminCatalogList from "../pages/admin/catalogs/catalog-list";
 import AdminAddCatalog from "../pages/admin/catalogs/add-catalog";
 import AdminContact from "../pages/admin/contact";
+import ProductDetail from "../pages/detail";
 
 
 const routes = createBrowserRouter([
@@ -52,6 +52,22 @@ const routes = createBrowserRouter([
         element: <Products />,
       },
       {
+        path: '/product',
+        element: <ProductDetail/>,
+        children:[
+            {
+                index:true,
+                element:<ProductDetail/>
+            },
+            {
+                path:"/product/:id" , element:<ProductDetail/>
+            },
+            {
+                path:"/product/:name" , element:<ProductDetail/>
+            }
+        ]
+    },
+      {
         path: "/katalog",
         element: <Catalog />,
       },
@@ -69,13 +85,11 @@ const routes = createBrowserRouter([
     path: "/admin",
     element: <AdminLayout />,
     children: [
-      {
-        index: true,
-        element: <Admin />,
-      },
+      
 
       //*****Anasayfa */
       {
+        index: true,
         path: "website",
         element: <AdminWebsite />,
       },
@@ -86,10 +100,6 @@ const routes = createBrowserRouter([
       {
         path: "ekibimiz",
         element: <AdminTeams />,
-      },
-      {
-        path: "bloglar",
-        element: <AdminBlogs />,
       },
       {
         path: "hakkimizda",

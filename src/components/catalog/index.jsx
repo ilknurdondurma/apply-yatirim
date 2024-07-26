@@ -17,14 +17,14 @@ function CatalogItem({ catalog }) {
       <div className="p-10 md:p-2 sm:p-1 flex items-center justify-center mb-4 ">
         <img
           src={book}
-          alt={catalog.name}
+          alt={catalog.title}
           className="object-cover rounded-lg border-[1px] p-2"
         />
       </div>
       <div className="flex flex-col p-5 rounded-lg gap-5 justify-center">
         <span className="flex flex-col">
           <span className="text-lg font-bold">Katalog Adı:</span>
-          <span>{catalog.name}</span>
+          <span>{catalog.title}</span>
         </span>
         <span className="flex flex-col">
           <span className="text-lg font-bold">İçerik:</span>

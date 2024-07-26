@@ -14,7 +14,6 @@ export const navbarElements = [
       { id: 12, name: 'Web Sitesi', path: 'website' },
       { id: 13, name: 'Hizmetler', path: 'hizmetler' },
       { id: 14, name: 'Ekibimiz', path: 'ekibimiz' },
-      { id: 15, name: 'Bloglar', path: 'bloglar' },
     ],
   },
   {

@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ProductCard from "../../components/card";
-import productss from "../../dummy-data/products";
 import servicess from "../../dummy-data/services";
 import customerStoriess from "../../dummy-data/customerStories";
 import teamMembers from "../../dummy-data/team";
@@ -9,13 +8,25 @@ import Banner from "../../components/banner";
 import Slider from "../../components/slider";
 import { AnimateContainer } from "react-animate-container";
 import { NavLink } from "react-router-dom";
+import { fetchAllProduct } from "../../redux/actions/product/productActions";
+import { useDispatch, useSelector } from "react-redux";
+
 
 function Home() {
-  const [products, setProducts] = useState(productss);
   const [services, setServices] = useState(servicess);
   const [customerStories, setCustomerStories] = useState(customerStoriess);
   const [team, setTeam] = useState(teamMembers);
   const [blogs, setBlogs] = useState(blogPosts);
+
+  const dispatch=useDispatch();
+  const {products , loading ,error}= useSelector((state)=>state.product);
+
+  useEffect(()=>{
+    dispatch(fetchAllProduct());
+  },[dispatch]);
+
+ if (loading) return <div>Yükleniyor...</div>;
+  if (error) return <div className="mx-auto">Hata: {error}</div>;
 
   return (
     <div>
@@ -52,16 +63,18 @@ function Home() {
       </section>
 
       {/* Ürünler Bölümü */}
-      <section className="flex flex-col text-center my-5 mx-auto p-5 ">
+      <section className="flex flex-col text-center my-5 mx-auto p-5">
         <h2 className="text-2xl font-bold mb-8">Son Eklenen Ürünler</h2>
         <div className="grid grid-cols-4 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 gap-5 justify-center mx-auto">
-          {products.slice(-4).map((product, index) => (
+          {Array.isArray(products) && products.slice(-4).map((product, index) => (
             <AnimateContainer.bounceIn duration={index} key={product.id}>
               <ProductCard product={product} />
             </AnimateContainer.bounceIn>
           ))}
         </div>
-        <NavLink to={"/urunler"} className="m-10 text-primary"><span >Tüm ürünler için tıklayın  ...</span></NavLink>
+        <NavLink to="/urunler" className="m-10 text-primary">
+          <span>Tüm ürünler için tıklayın...</span>
+        </NavLink>
       </section>
 
      

@@ -27,6 +27,16 @@ export const fetchAbouts=()=>{
         }
     }
 };
+export const updateAbout = (about) => {
+    return async (dispatch) => {
+      try {
+        await updateAbout(about);
+        dispatch(fetchAbouts()); // Re-fetch the abouts after updating
+      } catch (error) {
+        console.error("Failed to update about:", error);
+      }
+    };
+  };
 
 
 

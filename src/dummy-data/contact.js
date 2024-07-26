@@ -1,6 +1,6 @@
 export const contactData = [
   {
-    name: "APPLY YATIRIM DANIŞMANLIK",
+    title: "APPLY YATIRIM DANIŞMANLIK",
     subTitle: "Apply Yatırım Danışmanlık",
     slogan: "Arge ve Ürge Destekli Projelerimiz ile bu sorunlarınıza çözümler buluyoruz.",
     email: "johndoe@example.com",

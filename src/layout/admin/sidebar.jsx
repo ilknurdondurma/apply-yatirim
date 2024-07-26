@@ -44,7 +44,7 @@ function Sidebar() {
 
   useEffect(() => {
     if (location.pathname === "/admin") {
-      navigate("/admin/");
+      navigate("/admin/website");
     }
     setSidebarElements(navbarElements);
   }, [location, navigate]);

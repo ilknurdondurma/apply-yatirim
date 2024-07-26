@@ -4,9 +4,20 @@ import * as aboutActions from "../actions/about/aboutActions"; // Tüm eylemleri
 import * as sidebarActions from "./sidebar/sidebarActions";
 import * as categoryActions from "./category/categoryActions";
 import * as productActions from "./product/productActions";
+import * as serviceActions from "./service/serviceActions";
 
 
 
-const Actions ={ themeActions , contactActions , aboutActions , sidebarActions , categoryActions , productActions}; // tüm ekşınlar buraya eklenecek
+const Actions =
+{ themeActions ,
+     contactActions ,
+      aboutActions ,
+       sidebarActions ,
+        categoryActions ,
+         productActions,
+         serviceActions,
+        
+        
+        }; // tüm ekşınlar buraya eklenecek
 
 export default Actions;

@@ -1,25 +1,29 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { grayDarkTheme, grayLightTheme, lightTheme } from "../../redux/reducers/theme/themeReducers";
+import { NavLink } from "react-router-dom";
 
 function ProductCard({ product }) {
   const [isHovered, setIsHovered] = useState(false);
   const theme = useSelector((state) => state.theme.theme);
+  
 
   return (
-    <div
-      className="relative p-4  rounded-lg shadow-md  hover:bg-opacity-50 w-80"
+    <NavLink to={`${product ? `/product/${product.id}` :`/*` }`}>
+      <div
+      className="relative p-4  rounded-lg shadow-md  hover:bg-opacity-50 max-w-72 h-auto"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       style={theme===lightTheme ? grayLightTheme: grayDarkTheme}
     >
       <img
         src={product.image}
-        alt={product.name ?? ""}
+        alt={product.title ?? ""}
         className="w-full h-60 object-cover"
       />
+      {/* <img className="object-contain h-96 w-96" src={`data:image/jpeg;base64,${product.image}`}/> */}
       <div className="p-4">
-        <h3 className="text-lg font-bold">{product.name ?? ""}</h3>
+        <h3 className="text-lg font-bold line-clamp-1">{product.title ?? ""}</h3>
         <p className="text-sm text-gray-500 line-clamp-1">
           {product.description}
         </p>
@@ -29,11 +33,14 @@ function ProductCard({ product }) {
           isHovered ? "opacity-100" : ""
         } transition-opacity`}
       >
-        <button className={`px-4 py-2  text-white rounded-lg `}>
-          İletişime Geç
-        </button>
+        <NavLink to={`/iletisim`}>
+          <button className={`px-4 py-2  text-white rounded-lg `}>
+            İletişime Geç
+          </button>
+        </NavLink>
       </div>
     </div>
+    </NavLink>
   );
 }
 
