@@ -16,7 +16,7 @@ export const fetchProductsFailure=(error)=>({
     payload: error
 });
 
-export const fetchAllProduct=()=>{
+export const GetAllProducts=()=>{
     return async (dispatch)=>{
         dispatch(fetchProductsRequest());
         try {
@@ -30,7 +30,7 @@ export const fetchAllProduct=()=>{
     }
    
 }
-export const fetchProductById=(id)=>{
+export const GetProductById=(id)=>{
     return async (dispatch)=>{
         dispatch(fetchProductsRequest());
         try {
@@ -44,7 +44,7 @@ export const fetchProductById=(id)=>{
     }
    
 }
-export const fetchProductByCategoryId=(id)=>{
+export const GetProductByCategoryId=(id)=>{
     return async (dispatch)=>{
         dispatch(fetchProductsRequest());
         try {

@@ -7,7 +7,7 @@ import { MdChevronRight, MdMenu, MdClose } from "react-icons/md";
 import { LuPanelLeftClose, LuPanelLeftOpen, LuDot } from "react-icons/lu";
 import { navbarElements } from "../../dummy-data/navbarElements";
 import { useDispatch, useSelector } from "react-redux";
-import { darkTheme, lightTheme } from "../../redux/reducers/theme/themeReducers";
+import { darkTheme, grayDarkTheme, grayLightTheme, lightTheme } from "../../redux/reducers/theme/themeReducers";
 import SearchBar from "../../components/searchBar";
 import { useAuth } from "../../context/authContext/authContext";
 import { toggleSidebar } from "../../redux/actions/sidebar/sidebarActions";
@@ -61,16 +61,16 @@ function Sidebar() {
 
   return (
     <div
-      className={`flex flex-col h-full border-r-[1px] ${
+      className={`flex flex-col h-full ${
         isSidebarOpen ? "w-64" : "w-20"
       }`}
-      style={theme}
+      style={theme===lightTheme ?grayLightTheme :grayDarkTheme}
     >
       <section>
         <div className="flex flex-col justify-between items-center p-4">
           <button
             onClick={handleToggleSidebar}
-            className="text-white focus:outline-none self-end"
+            className={`text-white focus:outline-none self-end ${isSidebarOpen ?"":"self-center"}`}
           >
             {isSidebarOpen ? (
               <LuPanelLeftClose
@@ -113,7 +113,7 @@ function Sidebar() {
       <section>
         <div className={`flex flex-col transition-all duration-300`}>
           {filteredElements.map((menu) => (
-            <div key={menu.id} className="flex flex-col">
+            <div key={menu.id} className="flex flex-col ">
               <div
                 onClick={() => handleMenuClick(menu.id)}
                 className={`flex justify-between items-center m-2 p-2 cursor-pointer rounded-md `}
@@ -148,7 +148,7 @@ function Sidebar() {
                         }`
                       }
                     >
-                      <span className={`flex text-slate-500 ${isSidebarOpen ? "block" : "hidden"}`}>
+                      <span className={`flex text-slate-400 ${isSidebarOpen ? "block" : "hidden"}`}>
                           <LuDot size={25} /> {submenu.name}
                       </span>
                     </NavLink>

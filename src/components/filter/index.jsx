@@ -21,11 +21,11 @@ const Filter = ({ categories, selectedCategory, handleCategoryChange }) => {
         <button style={theme===lightTheme ? grayLightTheme : grayDarkTheme}
           key={category.id}
           className={`py-3 px-4 mx-2 mb-1 border-t-[1px] rounded-lg flex justify-between items-center hover:bg-gray-400 ${
-            selectedCategory === category.username ? "bg-gray-200" : "bg-white"
+            selectedCategory === category.category ? "bg-gray-200" : "bg-white"
           }`}
-          onClick={() => handleCategoryChange(category.username)}
+          onClick={() => handleCategoryChange(category.category)}
         >
-          <input type="checkbox"/> {category.username} <FaChevronRight />
+          <input type="checkbox"/> {category.category} <FaChevronRight />
         </button>
       ))}
     </div>

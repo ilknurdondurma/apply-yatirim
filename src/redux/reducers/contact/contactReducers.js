@@ -6,19 +6,19 @@ const initialState = {
 
 const contactReducers = (state = initialState, action) => {
   switch (action.type) {
-    case "FETCH_CONTACTS_REQUEST":
+    case "GET_CONTACTS_REQUEST":
       return {
         ...state,
         loading: true,
         error: null,
       };
-    case "FETCH_CONTACTS_SUCCESS":
+    case "GET_CONTACTS_SUCCESS":
       return {
         ...state,
         loading: false,
         contacts: action.payload,
       };
-    case "FETCH_CONTACTS_FAILURE":
+    case "GET_CONTACTS_FAILURE":
       return {
         ...state,
         loading: false,

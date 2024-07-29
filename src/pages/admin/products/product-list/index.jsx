@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 import { AnimateContainer } from "react-animate-container";
 import ProductCard from "../../../../components/card";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAllProduct } from "../../../../redux/actions/product/productActions";
+import { GetAllProducts } from "../../../../redux/actions/product/productActions";
 
 const AdminProductList = () => {
   const dispatch=useDispatch();
   const {products , loading ,error}= useSelector((state)=>state.product);
 
   useEffect(()=>{
-    dispatch(fetchAllProduct());
+    dispatch(GetAllProducts());
   },[dispatch]);
 
  if (loading) return <div>Yükleniyor...</div>;

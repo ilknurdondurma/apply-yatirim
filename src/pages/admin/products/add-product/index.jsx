@@ -4,14 +4,14 @@ import { IoIosPricetags } from "react-icons/io";
 import { MdOutlineWbIncandescent } from "react-icons/md";
 import { MdCategory } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCategories } from "../../../../redux/actions/category/categoryActions";
+import { GetCategories } from "../../../../redux/actions/category/categoryActions";
 
 const AdminAddProduct = () => {
   const dispatch = useDispatch();
   const { categories, loading, error } = useSelector((state) => state.category);
 
   useEffect(() => {
-    dispatch(fetchCategories());
+    dispatch(GetCategories());
   }, [dispatch]);
 
   if (loading) return <div>Yükleniyor...</div>;
@@ -43,7 +43,7 @@ const AdminAddProduct = () => {
       type: "select",
       icon: <MdCategory />,
       options: categories.map((category) => ({
-        label: category.username,         // hataaaaaaaaaaaaaaaaaaaaaaaaa
+        label: category.category,         // hataaaaaaaaaaaaaaaaaaaaaaaaa
         value: category.id,
       })),
     },

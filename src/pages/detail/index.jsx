@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { fetchProductById } from '../../redux/actions/product/productActions';
+import { GetProductById } from '../../redux/actions/product/productActions';
 import DetailCard from '../../components/detail-card';
 
 export default function ProductDetail() {
@@ -11,7 +11,7 @@ export default function ProductDetail() {
   const { products, loading, error } = useSelector((state) => state.product);
 
   useEffect(() => {
-    dispatch(fetchProductById(id));
+    dispatch(GetProductById(id));
   }, [dispatch, id]);
 
   

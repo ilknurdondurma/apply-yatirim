@@ -7,7 +7,7 @@ function CatalogItem({ catalog }) {
   const theme = useSelector((state) => state.theme.theme);
   
   const handleDownload = () => {
-    alert(`"${catalog.name}" kataloğu indiriliyor...`);
+    alert(`"${catalog.title}" kataloğu indiriliyor...`);
   };
 
   const appliedTheme = theme === lightTheme ? grayLightTheme : grayDarkTheme;
@@ -24,11 +24,11 @@ function CatalogItem({ catalog }) {
       <div className="flex flex-col p-5 rounded-lg gap-5 justify-center">
         <span className="flex flex-col">
           <span className="text-lg font-bold">Katalog Adı:</span>
-          <span>{catalog.title}</span>
+          <span className="line-clamp-2">{catalog.title}</span>
         </span>
         <span className="flex flex-col">
           <span className="text-lg font-bold">İçerik:</span>
-          <span>{catalog.content}</span>
+          <span className="line-clamp-5">{catalog.description}</span>
         </span>
       </div>
       <div className=" flex items-center justify-center w-full col-span-2 ">

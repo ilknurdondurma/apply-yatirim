@@ -1,24 +1,20 @@
 import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { grayDarkTheme, grayLightTheme, lightTheme } from "../../redux/reducers/theme/themeReducers";
 import { useSelector } from "react-redux";
+import { lightTheme, grayDarkTheme } from "../../redux/reducers/theme/themeReducers";
 
 const DynamicForm = ({
   fields,
   header = "",
   onSubmit,
   validationsSchema,
-  initialsValues = {}, // Varsayılan olarak boş nesne
+  initialsValues = {},
 }) => {
   const initialValues = fields.reduce((acc, field) => {
     if (field.type === "checkbox") {
       acc[field.name] = initialsValues[field.name] || false;
-    } else if (
-      field.type === "select" &&
-      field.options &&
-      field.options.length > 0
-    ) {
+    } else if (field.type === "select" && field.options && field.options.length > 0) {
       acc[field.name] = initialsValues[field.name] || field.options[0].value;
     } else {
       acc[field.name] = initialsValues[field.name] || "";
@@ -26,26 +22,9 @@ const DynamicForm = ({
     return acc;
   }, {});
 
-  const validationSchema =
-    validationsSchema ??
-    fields.reduce((acc, field) => {
-      if (field.name === "email") {
-        acc[field.name] = Yup.string()
-          .email("Geçersiz email adresi")
-          .required("Email gerekli");
-      } else if (field.name === "password") {
-        acc[field.name] = Yup.string()
-          .min(6, "Şifre en az 6 karakter olmalıdır")
-          .required("Şifre gerekli");
-      } else {
-        acc[field.name] = Yup.string().required(`${field.label} zorunlu alan`);
-      }
-      return acc;
-    }, {});
-
   const formik = useFormik({
     initialValues,
-    validationSchema: Yup.object(validationSchema),
+    validationSchema: validationsSchema,
     onSubmit: (values) => {
       onSubmit(values);
     },
@@ -56,12 +35,12 @@ const DynamicForm = ({
   return (
     <form
       onSubmit={formik.handleSubmit}
-      className="space-y-6 border-2 p-5 m-5 rounded-md  w-full"
+      className="space-y-6 border-2 p-5 m-5 rounded-md w-full flex flex-col justify-center items-center mx-auto"
       style={theme === lightTheme ? null : grayDarkTheme}
     >
       <h2 className="text-2xl font-bold text-center mb-5 text-gray-500">{header}</h2>
       {fields.map((field) => (
-        <div key={field.name} className="space-y-2">
+        <div key={field.name} className="space-y-2 w-full">
           <label className="block font-bold">{field.label}:</label>
           {field.type === "text" ||
           field.type === "password" ||
@@ -78,6 +57,8 @@ const DynamicForm = ({
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 className="shadow appearance-none border rounded w-full py-2 px-10 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                style={theme === lightTheme ? null : grayDarkTheme}
+
               />
             </div>
           ) : field.type === "textarea" ? (
@@ -87,6 +68,8 @@ const DynamicForm = ({
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               className="block w-full p-2 border border-gray-300 rounded-md"
+              style={theme === lightTheme ? null : grayDarkTheme}
+
             />
           ) : field.type === "select" ? (
             <select
@@ -95,6 +78,8 @@ const DynamicForm = ({
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               className="block w-full p-2 border border-gray-300 rounded-md"
+              style={theme === lightTheme ? null : grayDarkTheme}
+
             >
               {field.options.map((option) => (
                 <option key={option.value} value={option.value}>
@@ -110,6 +95,8 @@ const DynamicForm = ({
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               className="ml-2"
+              style={theme === lightTheme ? null : grayDarkTheme}
+
             />
           ) : field.type === "file" ? (
             <input
@@ -120,6 +107,8 @@ const DynamicForm = ({
               }}
               onBlur={formik.handleBlur}
               className="block w-full p-2 border border-gray-300 rounded-md"
+              style={theme === lightTheme ? null : grayDarkTheme}
+
             />
           ) : null}
           {formik.touched[field.name] && formik.errors[field.name] ? (

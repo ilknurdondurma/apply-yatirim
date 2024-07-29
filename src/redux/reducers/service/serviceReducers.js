@@ -1,47 +1,38 @@
-import {
-  GET_SERVICES_REQUEST,
-  GET_SERVICES_SUCCESS,
-  GET_SERVICES_FAILURE,
-  ADD_SERVICE_SUCCESS,
-  UPDATE_SERVICE_SUCCESS,
-  DELETE_SERVICE_SUCCESS
-} from '../../actionsType/service';
 
-const initialValues = {
+const initialStates = {
   services: [],
   loading: false,
   error: null,
 };
 
-const serviceReducer = (state = initialValues, action) => {
+const serviceReducer = (state = initialStates, action) => {
   switch (action.type) {
-    case GET_SERVICES_REQUEST:
+    case "GET_SERVICES_REQUEST":
       return {
         ...state,
         loading: true,
         error: null,
       };
-    case GET_SERVICES_SUCCESS:
+    case "GET_SERVICES_SUCCESS":
       return {
         ...state,
         services: action.payload,
         loading: false,
-        error: null,
       };
-    case GET_SERVICES_FAILURE:
+    case "GET_SERVICES_FAILURE":
       return {
         ...state,
         loading: false,
         error: action.payload,
       };
-    case ADD_SERVICE_SUCCESS:
+    case "ADD_SERVICE_SUCCESS":
       return {
         ...state,
         services: [...state.services, action.payload],
         loading: false,
         error: null,
       };
-    case UPDATE_SERVICE_SUCCESS:
+    case "UPDATE_SERVICE_SUCCESS":
       return {
         ...state,
         services: state.services.map(service =>
@@ -50,7 +41,7 @@ const serviceReducer = (state = initialValues, action) => {
         loading: false,
         error: null,
       };
-    case DELETE_SERVICE_SUCCESS:
+    case "DELETE_SERVICE_SUCCESS":
       return {
         ...state,
         services: state.services.filter(service => service.id !== action.payload.id),

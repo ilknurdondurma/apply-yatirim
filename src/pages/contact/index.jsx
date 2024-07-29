@@ -6,8 +6,9 @@ import 'leaflet/dist/leaflet.css';
 import 'leaflet-gesture-handling';
 import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.css';
 import { AnimateContainer } from 'react-animate-container';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {lightTheme , grayDarkTheme , grayLightTheme} from "../../redux/reducers/theme/themeReducers"
+import { GetContacts } from '../../redux/actions/contact/contactActions';
 
 // npm install react-leaflet leaflet leaflet-gesture-handling
 
@@ -24,37 +25,53 @@ function GestureHandling() {
 }
 
 function Contact() {
-  const [contacts, setContacts] = useState(contactData);
-  const position = [37.9035985, 32.4633813];
+  const dispatch=useDispatch();
+  const {contacts , loading ,error}= useSelector((state)=>state.contact);
   const theme=useSelector((state)=>state.theme.theme);
+  const position = [37.9035985, 32.4633813];
+
+
+  useEffect(()=>{
+    dispatch(GetContacts());
+  },[dispatch]);
+
+ if (loading) return <div>Yükleniyor...</div>;
+  if (error) return <div className="mx-auto">Hata: {error}</div>;
+
 
   return (
     <div className="flex flex-col w-4/5 mx-auto">
       <h3 className='self-center text-xl'>İletişim Bilgileri </h3>
-      <div className={`md:grid-cols-1 sm:grid-cols-1 sm:gap-2 grid grid-cols-3 gap-5`} >
-        <AnimateContainer.fadeInUp duration={1} active>
-          <div className="border-2 p-5 flex justify-center flex-col shadow-lg my-5 hover:cursor-pointer max-h-52 min-h-52" style={theme===lightTheme ? null: grayDarkTheme}>
-            <div className="flex justify-center font-bold text-xl">Email</div>
-            <div className="flex justify-center py-5"><FaEnvelope size={50} /></div>
-            <div className="flex justify-center">{contacts[0].email}</div>
-          </div>
-        </AnimateContainer.fadeInUp>
+      <div>
+        {
+          contacts.map((contact)=>(
+            <div className={`md:grid-cols-1 sm:grid-cols-1 sm:gap-2 grid grid-cols-3 gap-5`}>
+              <AnimateContainer.fadeInUp duration={1} active>
+                <div className="border-2 p-5 flex justify-center flex-col shadow-lg my-5 hover:cursor-pointer max-h-52 min-h-52" style={theme===lightTheme ? null: grayDarkTheme}>
+                  <div className="flex justify-center font-bold text-xl">Email</div>
+                  <div className="flex justify-center py-5"><FaEnvelope size={50} /></div>
+                  <div className="flex justify-center">{contact.email}</div>
+                </div>
+              </AnimateContainer.fadeInUp>
 
-        <AnimateContainer.fadeInDown duration={1} active>
-          <div className="border-2 p-5 flex justify-center flex-col shadow-lg my-5 hover:cursor-pointer max-h-52 min-h-52"style={theme===lightTheme ? null: grayDarkTheme}>
-            <div className="flex justify-center font-bold text-xl">Telefon</div>
-            <div className="flex justify-center py-5"><FaPhone size={50} /></div>
-            <div className="flex justify-center">{contacts[0].phone}</div>
-          </div>
-        </AnimateContainer.fadeInDown>
+              <AnimateContainer.fadeInDown duration={1} active>
+                <div className="border-2 p-5 flex justify-center flex-col shadow-lg my-5 hover:cursor-pointer max-h-52 min-h-52"style={theme===lightTheme ? null: grayDarkTheme}>
+                  <div className="flex justify-center font-bold text-xl">Telefon</div>
+                  <div className="flex justify-center py-5"><FaPhone size={50} /></div>
+                  <div className="flex justify-center">{contact.phone}</div>
+                </div>
+              </AnimateContainer.fadeInDown>
 
-        <AnimateContainer.fadeInRight duration={1} active>
-          <div className="border-2 p-5 flex justify-center flex-col shadow-lg my-5 hover:cursor-pointer max-h-52 min-h-52"style={theme===lightTheme ? null: grayDarkTheme}>
-            <div className="flex justify-center font-bold text-xl">İletişim Adresi :</div>
-            <div className="flex justify-center py-5"><FaAddressCard size={50} /></div>
-            <div className="flex justify-center">{contacts[0].address}</div>
-          </div>
-        </AnimateContainer.fadeInRight>
+              <AnimateContainer.fadeInRight duration={1} active>
+                <div className="border-2 p-5 flex justify-center flex-col shadow-lg my-5 hover:cursor-pointer max-h-52 min-h-52"style={theme===lightTheme ? null: grayDarkTheme}>
+                  <div className="flex justify-center font-bold text-xl">İletişim Adresi :</div>
+                  <div className="flex justify-center py-5"><FaAddressCard size={50} /></div>
+                  <div className="flex justify-center">{contact.address.city}</div>
+                </div>
+              </AnimateContainer.fadeInRight>
+            </div>
+          ))
+        }
        
       </div>
 

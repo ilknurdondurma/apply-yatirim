@@ -1,4 +1,4 @@
-import { getAbouts } from '../../../api';
+import { getAbouts, updateAbout } from '../../../api';
 import {GET_ABOUTS_REQUEST,GET_ABOUTS_SUCCESS,GET_ABOUTS_FAILURE} from '../../actionsType/about'
 
 export const fetchAboutsRequest =()=>({
@@ -15,7 +15,7 @@ export const fetchAboutsFailure=(error)=>({
     payload: error
 });
 
-export const fetchAbouts=()=>{
+export const GetAbouts=()=>{
     return async (dispatch)=>{
         dispatch(fetchAboutsRequest());
         try{
@@ -27,11 +27,11 @@ export const fetchAbouts=()=>{
         }
     }
 };
-export const updateAbout = (about) => {
+export const UpdateAbout = (about) => {
     return async (dispatch) => {
       try {
         await updateAbout(about);
-        dispatch(fetchAbouts()); // Re-fetch the abouts after updating
+        dispatch(GetAbouts());
       } catch (error) {
         console.error("Failed to update about:", error);
       }
@@ -39,6 +39,3 @@ export const updateAbout = (about) => {
   };
 
 
-
-const aboutActions ={fetchAboutsRequest,fetchAboutsSuccess, fetchAboutsFailure}; // ilgili ekşınlar buraya tek çatı altında
-export default aboutActions;

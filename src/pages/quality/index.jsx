@@ -1,18 +1,25 @@
-import React, { useState } from "react";
-import qualityData from "../../dummy-data/qualityData";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { GetQualities } from "../../redux/actions/quality/qualityActions";
 
 function Quality() {
-  const [guality, setQuality] = useState(qualityData);
+  const dispatch=useDispatch();
   const theme=useSelector((state)=>state.theme.theme);
+  const {qualities , loading ,error}= useSelector((state)=>state.quality);
+
+  useEffect(()=>{
+    dispatch(GetQualities());
+  },[dispatch]);
+
+ if (loading) return <div>Yükleniyor...</div>;
+  if (error) return <div className="mx-auto">Hata: {error}</div>;
+
+
   return (
     <div className="max-w-7xl mx-auto p-4">
-      <section className="text-center my-8">
-        <h1 className="text-xl font-bold mb-4">{guality.title}</h1>
-        <p className=" ">{guality.description}</p>
-      </section>
+      <h2 className="mx-auto flex justify-center text-xl">KALİTE</h2>
       <section>
-        {guality.sections.map((section) => (
+        {qualities.map((section) => (
           <div
             key={section.id}
             className="my-10 p-4 shadow-xl  rounded-lg flex flex-col md:flex-row items-center border-b-[1px] "
@@ -25,7 +32,7 @@ function Quality() {
             />
             <div className="md:w-1/2 text-center">
               <h2 className="font-bold mb-2">{section.title}</h2>
-              <p className="">{section.content}</p>
+              <p className="">{section.description}</p>
             </div>
           </div>
         ))}

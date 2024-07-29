@@ -1,18 +1,18 @@
 export const categoriess = [
   {
     id: 1,
-    name: "Bilgisayar",
+    title: "Bilgisayar",
   },
   {
     id: 2,
-    name: "Telefon",
+    title: "Telefon",
   },
   {
     id: 3,
-    name: "Küçük Ev Aletleri",
+    title: "Küçük Ev Aletleri",
   },
   {
     id: 4,
-    name: "Kitaplar",
+    title: "Kitaplar",
   },
 ];

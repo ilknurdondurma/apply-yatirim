@@ -4,8 +4,8 @@ import ProductCard from "../../components/card";
 import { AnimateContainer } from "react-animate-container";
 import SearchBar from "../../components/searchBar";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAllProduct, fetchProductByCategoryId } from "../../redux/actions/product/productActions";
-import { fetchCategories} from "../../redux/actions/category/categoryActions";
+import { GetAllProducts} from "../../redux/actions/product/productActions";
+import { GetCategories} from "../../redux/actions/category/categoryActions";
 import Filter from "../../components/filter";
 
 function Products() {
@@ -16,8 +16,8 @@ function Products() {
   const [selectedCategory, setSelectedCategory] = useState("all");
 
   useEffect(()=>{
-    dispatch(fetchAllProduct());
-    dispatch(fetchCategories());
+    dispatch(GetAllProducts());
+    dispatch(GetCategories());
   },[dispatch]);
 
   useEffect(() => {
@@ -71,7 +71,9 @@ function Products() {
 
         <div className="w-full grid grid-cols-5  sm:flex sm:flex-col sm:justify-center sm:items-center gap-10 sm:gap-5">
           {/* kategoriler */}
-          <div className="col-span-1 md:col-span-2"> <Filter categories={categories} handleCategoryChange={handleCategoryChange} selectedCategory={selectedCategory} /></div>
+          <div className="col-span-1 md:col-span-2"> 
+            <Filter categories={categories} handleCategoryChange={handleCategoryChange} selectedCategory={selectedCategory} />
+            </div>
 
           {/* ürünler */}
           <div className="w-full col-span-4 md:col-span-3 grid grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 gap-3">

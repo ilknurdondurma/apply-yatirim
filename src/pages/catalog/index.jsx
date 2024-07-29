@@ -1,16 +1,27 @@
-import React, { useState } from "react";
-import catalogss from "../../dummy-data/catalogs";
+import React, { useEffect, useState } from "react";
 import CatalogItem from "../../components/catalog";
 import SearchBar from "../../components/searchBar";
+import { useDispatch, useSelector } from "react-redux";
+import { GetCatalogs } from "../../redux/actions/catalog/catalogActions";
 
 function Catalog() {
-  const [catalogs, setCatalogs] = useState(catalogss);
+  const dispatch=useDispatch();
+  const {catalogs , loading ,error}= useSelector((state)=>state.catalog);
   const [filteredCatalogs, setFilteredCatalogs] = useState(catalogs);
+
+  useEffect(()=>{
+    dispatch(GetCatalogs());
+    setFilteredCatalogs(catalogs)
+  },[dispatch]);
+
+ if (loading) return <div>Yükleniyor...</div>;
+  if (error) return <div className="mx-auto">Hata: {error}</div>;
+
 
   const handleSearch = (searchTerm) => {
     if (searchTerm) {
       const filtered = catalogs.filter(catalog =>
-        catalog.name.toLowerCase().includes(searchTerm.toLowerCase())
+        catalog.title.toLowerCase().includes(searchTerm.toLowerCase())
       );
       setFilteredCatalogs(filtered);
     } else {

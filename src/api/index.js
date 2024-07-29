@@ -22,27 +22,48 @@ API.interceptors.request.use(
 
 
 //contacts
-export const getContacts = () => API.get(`/posts`)
+export const getContacts = () => API.get(`/products`)
 export const updateContacts = (contact) => API.put(`/Contact/`, contact)
 
 //abouts
 
 export const getAbouts = () => API.get(`/products`)
-export const updateAbouts = (about) => API.put(`/about`, about)
+export const updateAbout = (about) => API.put(`/about`, about)
 
 //category
-export const getCategories = () => API.get(`/users`)
+export const getCategories = () => API.get(`/products`)
 
 //product
 export const getAllProducts = () => API.get(`/products`)
 export const getProductsById = (id) => API.get(`/products/${id}`)
 export const getProductsByCategoryId = (id) => API.get(`/products/category/${id}`) // name ile ama biz id yapcaz !
 
+//catalogs
+export const getAllCatalogs = () => API.get(`/products`)
+
 //services
 export const getServices = () => API.get(`/products`)
 export const addService = (service) => API.get(`/products`,service)
 export const updateService = (id, updatedService) => API.get(`/products/${id}`,updatedService)
 export const deleteService = (id) => API.get(`/products/${id}`)
+
+//quality
+export const getQualities = () => API.get(`/products`)
+export const addQualiity = (service) => API.get(`/products`,service)
+export const updateQuality = (id, updatedQuality) => API.get(`/products/${id}`,updatedQuality)
+export const deleteQuality = (id) => API.get(`/products/${id}`)
+
+//customer stories
+export const getCustomerStories = () => API.get(`/products`)
+
+//team
+export const getTeams = () => API.get(`/products`)
+
+
+
+
+
+
 
 
 

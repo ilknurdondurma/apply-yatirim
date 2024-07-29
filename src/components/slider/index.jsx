@@ -26,8 +26,8 @@ function CustomSlider({ story }) {
               key={story.id}
               className="p-4 border-2 shadow-lg rounded-xl mx-2"
             >
-              <h3 className="text-lg font-bold mb-2">{story.customerName}</h3>
-              <p className="text-gray-400">{story.story}</p>
+              <h3 className="text-lg font-bold mb-2">{story.title}</h3>
+              <p className="text-gray-400">{story.title}</p>
             </div>
           ))}
         </Slider>

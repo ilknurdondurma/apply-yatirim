@@ -15,7 +15,7 @@ export const fetchCategoriesFailure=(error)=>({
     payload: error
 });
 
-export const fetchCategories=()=>{
+export const GetCategories=()=>{
     return async (dispatch)=>{
         dispatch(fetchCategoriesRequest());
         try{
