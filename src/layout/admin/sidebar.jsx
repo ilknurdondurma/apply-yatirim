@@ -74,20 +74,20 @@ function Sidebar() {
           >
             {isSidebarOpen ? (
               <LuPanelLeftClose
-                size={24}
-                color={theme === lightTheme ? "#8b0000" : "#8b0000"}
+                size={20}
+                color={theme === lightTheme ? "black" : "white"}
               />
             ) : (
               <LuPanelLeftOpen
-                size={24}
-                color={theme === lightTheme ? "#8b0000" : "#8b0000"}
+                size={20}
+                color={theme === lightTheme ? "black" : "white"}
               />
             )}
           </button>
           <img
             src={theme === lightTheme ? logoDark : logo}
             alt="logo"
-            className={`h-16 w-auto ${isSidebarOpen ? "block" : "hidden"}`}
+            className={`h-12 w-auto ${isSidebarOpen ? "block" : "hidden"}`}
             onClick={handleClick}
           />
         </div>
@@ -98,7 +98,7 @@ function Sidebar() {
           <img
             src={user}
             alt="admin"
-            className="rounded-full w-1/2 h-1/2 self-center"
+            className="rounded-full w-1/3 h-1/3 self-center"
           />
           <span className={`${isSidebarOpen ? "" : "hidden"}`}>AHMET YILMAZ</span>
           <span className={`text-gray-400 ${isSidebarOpen ? "" : "hidden"}`}>

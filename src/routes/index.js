@@ -23,6 +23,11 @@ import AdminCatalogList from "../pages/admin/catalogs/catalog-list";
 import AdminAddCatalog from "../pages/admin/catalogs/add-catalog";
 import AdminContact from "../pages/admin/contact";
 import ProductDetail from "../pages/detail";
+import AdminCategories from "../pages/admin/manager/categories";
+import AdminUsers from "../pages/admin/manager/users";
+import AdminComments from "../pages/admin/manager/comments";
+import AdminProperties from "../pages/admin/manager/properties";
+import AdminModels from "../pages/admin/manager/brand-model";
 
 
 const routes = createBrowserRouter([
@@ -101,6 +106,27 @@ const routes = createBrowserRouter([
         path: "ekibimiz",
         element: <AdminTeams />,
       },
+      {
+        path: "kategoriler",
+        element: <AdminCategories />,
+      },
+      {
+        path: "kullanicilar",
+        element: <AdminUsers />,
+      },
+      {
+        path: "yorumlar",
+        element: <AdminComments />,
+      },
+      {
+        path: "ozellikler",
+        element: <AdminProperties />,
+      },
+      {
+        path: "modeller",
+        element: <AdminModels />,
+      },
+
       {
         path: "hakkimizda",
         element: <AdminAbout />,

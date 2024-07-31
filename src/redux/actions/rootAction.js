@@ -9,6 +9,10 @@ import * as catalogActions from "./catalog/catalogActions";
 import * as customerStoryActions from "./customerStory/customerStoryActions";
 import * as teamActions from "./team/teamActions";
 import * as qualityActions from "./quality/qualityActions";
+import * as userActions from "./user/userActions";
+import * as commentActions from "./comment/commentActions";
+import * as propertyActions from "./property/propertyActions";
+import * as brandModelActions from "./brand-model/brandModelActions";
 
 
 
@@ -23,7 +27,12 @@ const Actions =
            catalogActions,
             customerStoryActions,
              teamActions,
-             qualityActions
+              qualityActions,
+               userActions,
+                commentActions,
+                 propertyActions,
+                  brandModelActions
+                  
         
         
         }; // tüm ekşınlar buraya eklenecek

@@ -59,9 +59,18 @@ export const getCustomerStories = () => API.get(`/products`)
 //team
 export const getTeams = () => API.get(`/products`)
 
+//users
+ export const getUsers = () => API.get(`/users`)
 
+//comment
+export const getComments=()=>API.get('/products')
 
+//property
+export const getProperties=()=>API.get('/products');
+export const getPropertyTypes=()=>API.get('/products');
 
+//models
+export const getBrandModels=()=>API.get('/products')
 
 
 
