@@ -8,6 +8,7 @@ import { BsDatabaseLock } from "react-icons/bs";
 export const navbarElements = [
   {
     id: 1,
+    key:"duo",
     name: "Anasayfa",
     icon: <IoHomeOutline/>,
     path: "",
@@ -19,6 +20,7 @@ export const navbarElements = [
   },
   {
     id: 2,
+    key:"admin",
     name: "Yönetim",
     icon: <BsDatabaseLock/>,
     path: "yonetim",
@@ -32,6 +34,7 @@ export const navbarElements = [
   },
   {
     id: 3,
+    key:"duo",
     name: "Hakkımızda",
     icon: <FaQuestionCircle/>,
     path: "hakkimizda",
@@ -41,6 +44,7 @@ export const navbarElements = [
   },
   {
     id: 4,
+    key:"duo",
     name: "Kalite",
     icon: <Gi3dStairs/>,
     path: "kalite",
@@ -51,6 +55,7 @@ export const navbarElements = [
 
   {
     id: 5,
+    key:"duo",
     name: "Ürünler",
     icon: <AiOutlineProduct/>,
     path: "urunler",
@@ -61,6 +66,7 @@ export const navbarElements = [
   },
   {
     id: 6,
+    key:"duo",
     name: "E-Katalog",
     icon: <GrCatalog/>,
     path: "katalog",
@@ -71,6 +77,7 @@ export const navbarElements = [
   },
   {
     id: 7,
+    key:"duo",
     name: "İletişim",
     icon: <RiMapPin2Line/>,
     path: "iletisim",

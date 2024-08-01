@@ -3,14 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import {GetProperties} from '../../../../redux/actions/property/propertyActions';
 import {GetAllProducts} from '../../../../redux/actions/product/productActions';
 import {GetPropertyTypes} from '../../../../redux/actions/propertyType/propertyTypeActions';
-import {GetBrandModels} from '../../../../redux/actions/brand-model/brandModelActions';
 
 export default function AdminProperties() {
   const dispatch = useDispatch();
   const { propertyTypes, loading, error } = useSelector((state) => state.propertyType);
   const { properties } = useSelector((state) => state.property);
   const { products } = useSelector((state) => state.product);
-  const { brandModels} = useSelector((state) => state.brandModel);
 
   const [newPropertyType, setNewPropertyType] = useState('');
   const [newProperty, setNewProperty] = useState({
@@ -23,7 +21,6 @@ export default function AdminProperties() {
     dispatch(GetPropertyTypes());
     dispatch(GetProperties());
     dispatch(GetAllProducts());
-    dispatch(GetBrandModels());
   }, [dispatch]);
 
   const handleAddPropertyType = () => {
@@ -98,7 +95,7 @@ export default function AdminProperties() {
           />
           <button
             onClick={handleAddProperty}
-            className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600"
+            className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg "
           >
             Ekle
           </button>

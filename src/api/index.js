@@ -22,7 +22,7 @@ API.interceptors.request.use(
 
 
 //contacts
-export const getContacts = () => API.get(`/products`)
+export const getContacts = () => API.get(`/users`)
 export const updateContacts = (contact) => API.put(`/Contact/`, contact)
 
 //abouts
@@ -70,7 +70,17 @@ export const getProperties=()=>API.get('/products');
 export const getPropertyTypes=()=>API.get('/products');
 
 //models
-export const getBrandModels=()=>API.get('/products')
+export const getModels=()=>API.get('/products');
+export const addModel=(model)=>API.get('/products');
+export const updateModel=(id,model)=>API.get('/products');
+export const deleteModel=(id)=>API.get('/products');
+
+// BRANDS
+export const getBrands=()=>API.get('/products');
+export const addBrand=(brand)=>API.get('/products');
+export const updateBrand=(id,brand)=>API.get('/products');
+export const deleteBrand=(id)=>API.get('/products');
+
 
 
 

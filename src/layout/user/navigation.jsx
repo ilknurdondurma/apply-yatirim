@@ -37,7 +37,8 @@ function Navigation() {
 
           <div className="flex flex-row justify-between items-center gap-5 sm:hidden md:hidden">
             {navbarElement.map((element, index) => (
-              <NavLink
+              element.key==="duo" ? (
+                <NavLink
                 to={`${element.path}`}
                 key={index}
                 className={({ isActive }) =>
@@ -47,6 +48,7 @@ function Navigation() {
                 {element.icon}
                 {element.name}
               </NavLink>
+              ) : (null)
             ))}
             
           </div>

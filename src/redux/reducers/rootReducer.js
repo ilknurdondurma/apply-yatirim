@@ -14,7 +14,8 @@ import userReducers from './user/userReducers';
 import commentReducers from './comment/commentReducers';
 import propertyReducers from './property/propertyReducers';
 import propertyTypeReducers from './propertyType/propertyTypeReducers';
-import brandModelReducers from './brand-model/brandModelReducers';
+import brandReducers from './brand/brandReducers';
+import modelReducers from './model/modelReducers';
 
 const Reducers = combineReducers({
   theme: themeReducer,
@@ -32,7 +33,8 @@ const Reducers = combineReducers({
   comment:commentReducers,
   property:propertyReducers,
   propertyType:propertyTypeReducers,
-  brandModel:brandModelReducers
+  brand:brandReducers,
+  model:modelReducers,
   
 });
 

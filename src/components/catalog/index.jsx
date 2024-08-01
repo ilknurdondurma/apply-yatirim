@@ -13,32 +13,35 @@ function CatalogItem({ catalog }) {
   const appliedTheme = theme === lightTheme ? grayLightTheme : grayDarkTheme;
 
   return (
-    <div className={`grid grid-cols-2 sm:grid-cols-1 justify-between items-center m-5 p-5 rounded-lg shadow-xl mx-auto `} style={appliedTheme}>
-      <div className="p-10 md:p-2 sm:p-1 flex items-center justify-center mb-4 ">
-        <img
-          src={book}
-          alt={catalog.title}
-          className="object-cover rounded-lg border-[1px] p-2"
-        />
-      </div>
-      <div className="flex flex-col p-5 rounded-lg gap-5 justify-center">
-        <span className="flex flex-col">
-          <span className="text-lg font-bold">Katalog Adı:</span>
-          <span className="line-clamp-2">{catalog.title}</span>
-        </span>
-        <span className="flex flex-col">
-          <span className="text-lg font-bold">İçerik:</span>
-          <span className="line-clamp-5">{catalog.description}</span>
-        </span>
-      </div>
-      <div className=" flex items-center justify-center w-full col-span-2 ">
+    <div className="w-full grid p-5 rounded-3xl" style={appliedTheme}>
+        <div className={`grid grid-cols-5 sm:grid-cols-1 justify-between items-center  rounded-lg mx-auto`} >
+            <div className="col-span-1 flex items-center justify-center mb-4 rounded-full">
+              <img
+                src={book}
+                alt={catalog.title}
+                className="w-full h-full object-contain rounded-full border-2 border-white"
+              />
+            </div>
+
+            <div className="col-span-4 flex flex-col p-5 rounded-lg gap-5 justify-center ">
+              <span className="flex flex-col">
+                <span className="font-bold line-clamp-2">{catalog.title}</span>
+              </span>
+              <span className="flex flex-col">
+                <span className="line-clamp-5">{catalog.description}</span>
+              </span>
+            </div>
+        </div>
+
+
+        <div className=" flex items-center justify-center w-full col-span-2 ">
         <button
           onClick={handleDownload}
           className="px-4 py-2 bg-primary text-white rounded-lg"
         >
           Hemen İncele
         </button>
-      </div>
+        </div>
     </div>
   );
 }

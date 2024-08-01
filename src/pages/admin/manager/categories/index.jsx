@@ -70,7 +70,7 @@ export default function AdminCategories() {
         />
         <button
           onClick={handleAddCategory}
-          className="bg-primary text-white py-2 px-4 rounded-lg hover:bg-primary/60"
+          className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg"
         >
           Kategori Ekle
         </button>

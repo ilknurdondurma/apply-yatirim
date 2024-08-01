@@ -9,10 +9,13 @@ function Catalog() {
   const {catalogs , loading ,error}= useSelector((state)=>state.catalog);
   const [filteredCatalogs, setFilteredCatalogs] = useState(catalogs);
 
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(GetCatalogs());
-    setFilteredCatalogs(catalogs)
-  },[dispatch]);
+  }, [dispatch]);
+
+  useEffect(() => {
+    setFilteredCatalogs(catalogs);
+  }, [catalogs]);
 
  if (loading) return <div>Yükleniyor...</div>;
   if (error) return <div className="mx-auto">Hata: {error}</div>;
@@ -30,14 +33,14 @@ function Catalog() {
   };
   return (
     <div>
-      <section className="flex flex-col items-center">
+      <section className="w-3/5 sm:w-full flex flex-col items-center mx-auto">
         <h2 className="text-2xl font-bold mb-8">Ürün Katalogları</h2>
         <div className="w-3/4 mx-auto m-5">
         <SearchBar onSearch={handleSearch} placeholder="Kataloglarda Ara" />
         </div>
 
-        <div className="w-4/5 md:w-4/5 sm:w-full  mx-auto p-5">
-          <div className="w-full grid grid-cols-2 gap-2 " >
+        <div className=" mx-auto p-5">
+          <div className="grid grid-cols-1 gap-5 " >
             {filteredCatalogs.length >0 ? (filteredCatalogs.map((catalog) => (
               <CatalogItem catalog={catalog} />
             ))) :(<div className="flex items-center justify-center">Katalog Bulunamadı..</div>)}

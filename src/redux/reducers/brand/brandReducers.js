@@ -1,24 +1,24 @@
 const initialStates={
-    brandModels:[],
+    brands:[],
     loading:false,
     error:null
 }
 
-const brandModelReducers=(state=initialStates , action)=>{
+const brandReducers=(state=initialStates , action)=>{
     switch(action.type){
-        case 'GET_BRAND_MODELS_REQUEST':
+        case 'GET_BRANDS_REQUEST':
             return {
                 ...state,
                 loading: true,
                 error: null
             }
-        case 'GET_BRAND_MODELS_SUCCESS':
+        case 'GET_BRANDS_SUCCESS':
             return {
                 loading: false,
                 error: null,
-                brandModels: action.payload
+                brands: action.payload
             }
-        case 'GET_BRAND_MODELS_FAILURE':
+        case 'GET_BRANDS_FAILURE':
             return {
                 loading: false,
                 error: action.payload
@@ -27,4 +27,4 @@ const brandModelReducers=(state=initialStates , action)=>{
             return state
     }
 }
-export default brandModelReducers;
+export default brandReducers;
