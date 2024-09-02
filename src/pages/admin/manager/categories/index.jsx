@@ -19,7 +19,7 @@ export default function AdminCategories() {
 
   const handleAddCategory = async () => {
     try {
-      const response = await axios.post('/api/categories', { name: newCategory });
+      const response = await axios.post('/api/categories', { title: newCategory });
       //dispatch(addCategory(response.data));
       setNewCategory('');
     } catch (error) {
@@ -29,7 +29,7 @@ export default function AdminCategories() {
 
   const handleEditCategory = async (id) => {
     try {
-      const response = await axios.put(`/api/categories/${id}`, { name: editedCategoryName });
+      const response = await axios.put(`/api/categories/${id}`, { title: editedCategoryName });
      // dispatch(updateCategory(response.data));
       setEditingCategoryId(null);
       setEditedCategoryName('');
@@ -53,9 +53,16 @@ export default function AdminCategories() {
     setExpandedCategoryId(expandedCategoryId === id ? null : id);
   };
 
-  if (loading) return <div className="text-center">Yükleniyor...</div>;
-  if (error) return <div className="text-center text-red-500">Hata: {error}</div>;
+  if (loading) return <div className="text-center text-lg font-semibold py-10">Yükleniyor...</div>;
 
+  if (error) return (
+    <div className="flex justify-center items-center min-h-screen">
+      <div className="text-center">
+        <h1 className="text-6xl font-bold text-red-600">{error}</h1>
+        <p className="text-xl mt-4 text-gray-600">Bir hata oluştu, lütfen daha sonra tekrar deneyin.</p>
+      </div>
+    </div>
+  );
   return (
     <div className="max-w-4xl p-6 grid grid-cols-1 mx-auto">
       <h1 className="text-2xl font-bold mb-6">Kategoriler</h1>
@@ -137,7 +144,10 @@ export default function AdminCategories() {
                 {category.products && category.products.length > 0 ? (
                   <ul className="list-disc pl-5">
                     {category.products.map(product => (
-                      <li key={product.id}>{product.title}</li>
+                      <div key={product.id} className='flex gap-5'>
+                        <li >{product.title}</li>
+                        <li className ="opacity-50" >{product.price} TL </li>
+                      </div>
                     ))}
                   </ul>
                 ) : (

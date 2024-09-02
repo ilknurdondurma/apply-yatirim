@@ -101,7 +101,7 @@ function Sidebar() {
             className="rounded-full w-1/3 h-1/3 self-center"
           />
           <span className={`${isSidebarOpen ? "" : "hidden"}`}>AHMET YILMAZ</span>
-          <span className={`text-gray-400 ${isSidebarOpen ? "" : "hidden"}`}>
+          <span className={`text-gray-500 ${isSidebarOpen ? "" : "hidden"}`}>
             ayilmaz@gmail.com
           </span>
           <div className="p-3">
@@ -148,7 +148,7 @@ function Sidebar() {
                         }`
                       }
                     >
-                      <span className={`flex text-slate-400 ${isSidebarOpen ? "block" : "hidden"}`}>
+                      <span className={`flex text-gray-500 ${isSidebarOpen ? "block" : "hidden"}`}>
                           <LuDot size={25} /> {submenu.name}
                       </span>
                     </NavLink>

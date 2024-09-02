@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import { AdminLayout, Layout } from "../layout";
+import PrivateRoute from "./private route"
 //user
 import Home from "../pages/home";
 import Login from "../pages/login";
@@ -28,12 +29,18 @@ import AdminUsers from "../pages/admin/manager/users";
 import AdminComments from "../pages/admin/manager/comments";
 import AdminProperties from "../pages/admin/manager/properties";
 import AdminModels from "../pages/admin/manager/brand-model";
+import { ScrollToTop } from "./scroll";
 
 
 const routes = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />,
+    element: (
+      <>
+        <ScrollToTop />
+        <Layout />
+      </>
+    ),
     children: [
       {
         index: true,
@@ -88,7 +95,13 @@ const routes = createBrowserRouter([
   },
   {
     path: "/admin",
-    element: <AdminLayout />,
+    element:
+      <>
+        <ScrollToTop />
+        <PrivateRoute>
+          <AdminLayout />
+        </PrivateRoute>
+      </>,
     children: [
       
 
@@ -96,68 +109,68 @@ const routes = createBrowserRouter([
       {
         index: true,
         path: "website",
-        element: <AdminWebsite />,
+        element: <PrivateRoute> <AdminWebsite /></PrivateRoute>,
       },
       {
         path: "hizmetler",
-        element: <AdminServices />,
+        element: <PrivateRoute><AdminServices /></PrivateRoute> ,
       },
       {
         path: "ekibimiz",
-        element: <AdminTeams />,
+        element: <PrivateRoute> <AdminTeams /></PrivateRoute> ,
       },
       {
         path: "kategoriler",
-        element: <AdminCategories />,
+        element: <PrivateRoute> <AdminCategories /></PrivateRoute>,
       },
       {
         path: "kullanicilar",
-        element: <AdminUsers />,
+        element: <PrivateRoute> <AdminUsers /></PrivateRoute>,
       },
       {
         path: "yorumlar",
-        element: <AdminComments />,
+        element: <PrivateRoute> <AdminComments /></PrivateRoute>,
       },
       {
         path: "ozellikler",
-        element: <AdminProperties />,
+        element: <PrivateRoute> <AdminProperties /></PrivateRoute>,
       },
       {
         path: "modeller",
-        element: <AdminModels />,
+        element: <PrivateRoute> <AdminModels /></PrivateRoute>,
       },
 
       {
         path: "hakkimizda",
-        element: <AdminAbout />,
+        element: <PrivateRoute> <AdminAbout /></PrivateRoute>,
       },
       {
         path: "kalite",
-        element: <AdminQuality />,
+        element: <PrivateRoute> <AdminQuality /></PrivateRoute>,
       },
       {
         path: "urun-listesi",
-        element: <AdminProductList />,
+        element: <PrivateRoute> <AdminProductList /></PrivateRoute>,
       },
       {
         path: "urun-ekle",
-        element: <AdminAddProduct/>,
+        element: <PrivateRoute> <AdminAddProduct/></PrivateRoute>,
       },
       {
         path: "katalog-listesi",
-        element: <AdminCatalogList />,
+        element: <PrivateRoute> <AdminCatalogList /></PrivateRoute>,
       },
       {
         path: "katalog-ekle",
-        element: <AdminAddCatalog/>,
+        element: <PrivateRoute> <AdminAddCatalog/></PrivateRoute>,
       },
       {
         path: "iletisim",
-        element: <AdminContact />,
+        element: <PrivateRoute> <AdminContact /></PrivateRoute>,
       },
       {
         path:'*',
-        element: <AdminPageNotFound/>
+        element:<PrivateRoute>  <AdminPageNotFound/></PrivateRoute>
     },
     ],
   },

@@ -34,8 +34,15 @@ export default function DetailCard({products}) {
 
           {/* kategori */}
            <div className='mb-10 flex items-center gap-2'>
-            Ürünler <FaChevronRight /> {products.category} <FaChevronRight/> {products.title}
-           </div>
+            Ürünler <FaChevronRight />
+              {products?.category?.title ? (
+                <>
+                  {products.category.title} <FaChevronRight /> {products.title}
+                </>
+              ) : (
+                "Kategori Bulunamadı"
+              )}
+          </div>
 
 
           {/* fotograf ve isim */}
@@ -43,7 +50,7 @@ export default function DetailCard({products}) {
               <div className='col-span-1 grid grid-cols-11  m-2'>
                   <span className='flex justify-center self-center'><FaChevronLeft onClick={() => handleImageChange('left')} /></span>
                   <div className="col-span-9 flex justify-center items-center">
-                      <img className="object-contain h-96 w-auto" src={`${products.image}`}/>
+                      <img className="object-contain h-96 w-auto" src={`${products.imageUrl1}`}/>
                       {/* <img className="object-contain h-96 w-96" src={data:image/jpeg;base64,${product[filE_URL_${currentImageIndex + 1}]}}/> */}
                   </div>
                   <span className='flex justify-center self-center'><FaChevronRight onClick={() => handleImageChange('right')} /></span>
@@ -52,7 +59,16 @@ export default function DetailCard({products}) {
               <div>
                 <h1 className="text-3xl font-bold mb-4">{products.title}</h1>
                 <p className=" mb-4">{products.description}</p>
-                <div className="text-lg t mb-2">Kategori: {products.category}</div>
+                <div className=" mb-2">
+                 <span className='font-bold'> Kategori: </span> 
+                  {products?.category?.title ? (
+                    <span>
+                      {products.category.title}
+                    </span>
+                      ) : (
+                        "Kategori Bulunamadı"
+                      )}
+                  </div>
               </div>
               <div>
                 <div className="text-lg 0 mb-2">Stok Durumu: {products.stock}</div>

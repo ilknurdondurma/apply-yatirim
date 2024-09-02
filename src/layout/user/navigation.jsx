@@ -63,7 +63,8 @@ function Navigation() {
           <div className={`hidden sm:block md:block z-10 w-full h-auto`}>
             {isSidebarOpen &&
               navbarElement.map((menu, index) => (
-                <NavLink
+                menu.key==="duo" ? (
+                  <NavLink
                   key={index}
                   to={`${menu.path}`}
                   onClick={() => setIsSidebarOpen(false)}
@@ -75,6 +76,7 @@ function Navigation() {
                     {menu.name}
                   </div>
                 </NavLink>
+                ) :(null)
               ))}
           </div>
 

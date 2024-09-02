@@ -22,9 +22,16 @@ export default function AdminComments() {
     }
   };
 
-  if (loading) return <div className="text-center">Yükleniyor...</div>;
-  if (error) return <div className="text-center text-red-500">{error}</div>;
+  if (loading) return <div className="text-center text-lg font-semibold py-10">Yükleniyor...</div>;
 
+  if (error) return (
+    <div className="flex justify-center items-center min-h-screen">
+      <div className="text-center">
+        <h1 className="text-6xl font-bold text-red-600">{error}</h1>
+        <p className="text-xl mt-4 text-gray-600">Bir hata oluştu, lütfen daha sonra tekrar deneyin.</p>
+      </div>
+    </div>
+  );
   return (
     <div className="grid p-6  mx-auto">
       <h1 className="text-2xl font-bold mb-6">Yorumlar</h1>
@@ -34,10 +41,10 @@ export default function AdminComments() {
           {comments.map((comment) => (
             <div key={comment.id} className="border border-gray-300 rounded-lg p-4 shadow-sm flex flex-col justify-between items-center" style={theme===lightTheme ? null : grayDarkTheme}>
               <div className="w-full flex justify-between mb-2" >
-                <span className="font-semibold">{comment.rating.rate}</span>
+                <span className="font-semibold">{comment.customer.name}</span>
                 <span className="text-sm text-gray-500">{new Date(comment.date).toLocaleDateString()}</span>
               </div>
-              <p className="mb-4 line-clamp-6">{comment.description}</p>
+              <p className="mb-4 line-clamp-6">{comment.content}</p>
               <button
                 onClick={() => handleDeleteComment(comment.id)}
                 className="bg-primary text-white py-2 px-4 rounded-lg hover:bg-red-600"

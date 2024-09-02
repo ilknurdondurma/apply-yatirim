@@ -19,15 +19,15 @@ function CustomSlider({ story }) {
 
   return (
     <div className="py-10 px-4 rounded-lg ">
-      <div className="max-w-5xl mx-auto text-center rounded-lg " style={theme===lightTheme ? grayLightTheme: grayDarkTheme}>
+      <div className="max-w-5xl mx-auto text-center rounded-lg " style={theme}>
         <Slider {...settings}>
           {story.map((story) => (
             <div
               key={story.id}
               className="p-4 border-2 shadow-lg rounded-xl mx-2"
             >
-              <h3 className="text-lg font-bold mb-2">{story.title}</h3>
-              <p className="text-gray-400">{story.title}</p>
+              <h3 className="text-lg font-bold mb-2">{story.customer.name}</h3>
+              <p className="text-gray-500">{story.content}</p>
             </div>
           ))}
         </Slider>

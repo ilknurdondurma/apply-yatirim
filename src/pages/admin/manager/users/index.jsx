@@ -7,9 +7,9 @@ export default function AdminUsers() {
   const dispatch = useDispatch();
   const { users, loading, error } = useSelector(state => state.user);
 
-  const [newUser, setNewUser] = useState({ uername: '', email: '' });
+  const [newUser, setNewUser] = useState({ name: '', email: '' });
   const [editingUserId, setEditingUserId] = useState(null);
-  const [editedUser, setEditedUser] = useState({ username: '', email: '' });
+  const [editedUser, setEditedUser] = useState({ name: '', email: '' });
 
   useEffect(() => {
     dispatch(GetUsers());
@@ -30,7 +30,7 @@ export default function AdminUsers() {
       const response = await axios.put(`/api/users/${id}`, editedUser);
      // dispatch(updateUser(response.data));
       setEditingUserId(null);
-      setEditedUser({ username: '', email: '' });
+      setEditedUser({ name: '', email: '' });
     } catch (error) {
       console.error('Kullanıcı düzenlenemedi:', error);
     }
@@ -47,9 +47,16 @@ export default function AdminUsers() {
     }
   };
 
-  if (loading) return <div className="text-center">Yükleniyor...</div>;
-  if (error) return <div className="text-center text-red-500">Hata: {error}</div>;
+  if (loading) return <div className="text-center text-lg font-semibold py-10">Yükleniyor...</div>;
 
+  if (error) return (
+    <div className="flex justify-center items-center min-h-screen">
+      <div className="text-center">
+        <h1 className="text-6xl font-bold text-red-600">{error}</h1>
+        <p className="text-xl mt-4 text-gray-600">Bir hata oluştu, lütfen daha sonra tekrar deneyin.</p>
+      </div>
+    </div>
+  );
   return (
     <div className="p-6 max-w-4xl mx-auto">
       <h1 className="text-2xl font-bold mb-6">Kullanıcılar</h1>
@@ -57,8 +64,8 @@ export default function AdminUsers() {
       <div className="mb-6 flex flex-col">
         <input
           type="text"
-          value={newUser.username}
-          onChange={(e) => setNewUser({ ...newUser, username: e.target.value })}
+          value={newUser.name}
+          onChange={(e) => setNewUser({ ...newUser, name: e.target.value })}
           placeholder="Kullanıcı adı"
           className="border border-gray-300 rounded-lg p-2 mb-2"
         />
@@ -86,8 +93,8 @@ export default function AdminUsers() {
                 <div className="flex items-center flex-1">
                   <input
                     type="text"
-                    value={editedUser.username}
-                    onChange={(e) => setEditedUser({ ...editedUser, username: e.target.value })}
+                    value={editedUser.name}
+                    onChange={(e) => setEditedUser({ ...editedUser, name: e.target.value })}
                     className="border border-gray-300 rounded-lg p-2 mr-4 flex-1"
                   />
                   <input
@@ -112,13 +119,13 @@ export default function AdminUsers() {
               ) : (
                 <>
                   <div className="flex-1">
-                    <p><strong>Ad:</strong> {user.username}</p>
+                    <p><strong>Ad:</strong> {user.name}</p>
                     <p><strong>E-posta:</strong> {user.email}</p>
                   </div>
                   <button
                     onClick={() => {
                       setEditingUserId(user.id);
-                      setEditedUser({ username: user.username, email: user.email });
+                      setEditedUser({ name: user.name, email: user.email });
                     }}
                     className="bg-yellow-500 text-white py-2 px-4 rounded-lg hover:bg-yellow-600 mr-2"
                   >

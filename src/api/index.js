@@ -1,85 +1,93 @@
 import axios from "axios";
 
-const API=axios.create({baseURL:'https://fakestoreapi.com'})
+const API=axios.create({baseURL:'https://localhost:7183/api/v2'})
+function getTokenFromCookie() {
+    const cookieString = document.cookie;
+    const cookies = cookieString.split('; ').reduce((acc, cookie) => {
+        const [name, value] = cookie.split('=');
+        acc[name] = value;
+        return acc;
+    }, {});
 
+    return cookies.authToken;
+}
 
-const storedUser = JSON.parse(localStorage.getItem('user'));
-const token = storedUser ? storedUser.user.token : null;
-API.interceptors.request.use(
-  (config) => {
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
+// const token = getTokenFromCookie();
+// API.interceptors.request.use(
+//   (config) => {
+//     if (token) {
+//       config.headers.Authorization = `${token}`;
+//     }
+//     return config;
+//   },
+//   (error) => {
+//     return Promise.reject(error);
     
-  }
-);
+//   }
+// );
 
 
 
 
 //contacts
-export const getContacts = () => API.get(`/users`)
-export const updateContacts = (contact) => API.put(`/Contact/`, contact)
+export const getContacts = () => API.get(`/Contact`)
+export const updateContacts = (contact) => API.put(`/Contact/`, contact) //
 
 //abouts
 
-export const getAbouts = () => API.get(`/products`)
-export const updateAbout = (about) => API.put(`/about`, about)
+export const getAbouts = () => API.get(`/AboutUs`)
+export const updateAbout = (about) => API.put(`/AboutUs`, about) //
 
 //category
-export const getCategories = () => API.get(`/products`)
+export const getCategories = () => API.get(`/Category`)
 
 //product
-export const getAllProducts = () => API.get(`/products`)
-export const getProductsById = (id) => API.get(`/products/${id}`)
-export const getProductsByCategoryId = (id) => API.get(`/products/category/${id}`) // name ile ama biz id yapcaz !
+export const getAllProducts = () => API.get(`/Product`)
+export const getProductsById = (id) => API.get(`/Product/${id}`)
+export const getProductsByCategoryId = (id) => API.get(`/Product/Category/${id}`) // name ile ama biz id yapcaz ! //
 
 //catalogs
-export const getAllCatalogs = () => API.get(`/products`)
+export const getAllCatalogs = () => API.get(`/Catalog`)
 
 //services
-export const getServices = () => API.get(`/products`)
-export const addService = (service) => API.get(`/products`,service)
-export const updateService = (id, updatedService) => API.get(`/products/${id}`,updatedService)
-export const deleteService = (id) => API.get(`/products/${id}`)
+export const getServices = () => API.get(`/Employment`)
+export const addService = (service) => API.get(`/Employment`,service)
+export const updateService = (updatedService) => API.get(`/Employment`,updatedService)
+export const deleteService = (id) => API.get(`/Employment/${id}`)
 
 //quality
-export const getQualities = () => API.get(`/products`)
-export const addQualiity = (service) => API.get(`/products`,service)
-export const updateQuality = (id, updatedQuality) => API.get(`/products/${id}`,updatedQuality)
-export const deleteQuality = (id) => API.get(`/products/${id}`)
+export const getQualities = () => API.get(`/Quality`)
+export const addQualiity = (quality) => API.get(`/Quality`,quality)
+export const updateQuality = (updatedQuality) => API.get(`/Quality`,updatedQuality)
+export const deleteQuality = (id) => API.get(`/Quality/${id}`)
 
-//customer stories
-export const getCustomerStories = () => API.get(`/products`)
+//comments
+export const getCustomerStories = () => API.get(`/Comment`)
 
 //team
-export const getTeams = () => API.get(`/products`)
+export const getTeams = () => API.get(`/Member`)
 
 //users
- export const getUsers = () => API.get(`/users`)
+ export const getUsers = () => API.get(`/Customer`) //
 
 //comment
-export const getComments=()=>API.get('/products')
+export const getComments=()=>API.get('/Comment')//
 
 //property
-export const getProperties=()=>API.get('/products');
-export const getPropertyTypes=()=>API.get('/products');
+export const getProperties=()=>API.get('/Property'); 
+export const getPropertyTypes=()=>API.get('/PropertyType'); 
 
 //models
-export const getModels=()=>API.get('/products');
-export const addModel=(model)=>API.get('/products');
-export const updateModel=(id,model)=>API.get('/products');
-export const deleteModel=(id)=>API.get('/products');
+export const getModels=()=>API.get('/Product');
+export const addModel=(model)=>API.get('/Product');
+export const updateModel=(id,model)=>API.get('/Product');
+export const deleteModel=(id)=>API.get('/Product');
 
 // BRANDS
-export const getBrands=()=>API.get('/products');
-export const addBrand=(brand)=>API.get('/products');
-export const updateBrand=(id,brand)=>API.get('/products');
-export const deleteBrand=(id)=>API.get('/products');
+export const getBrands=()=>API.get('/Product');
+export const addBrand=(brand)=>API.get('/Product');
+export const updateBrand=(id,brand)=>API.get('/Product');
+export const deleteBrand=(id)=>API.get('/Product');
 
 
 

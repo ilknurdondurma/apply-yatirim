@@ -36,12 +36,12 @@ function Products() {
       applyCategoryFilter(products);
     }
   };
-  const handleCategoryChange = (category) => {
-    setSelectedCategory(category);
-    if (category === "all") {
+  const handleCategoryChange = (categoryId) => {
+    setSelectedCategory(categoryId);
+    if (categoryId === "all") {
       setFilteredProducts(products);
     } else {
-      const filtered = products.filter((product) => product.category === category);
+      const filtered = products.filter((product) => product.categoryId === categoryId);
       setFilteredProducts(filtered);
     }
   };
@@ -50,17 +50,26 @@ function Products() {
     if (selectedCategory === "all") {
       setFilteredProducts(productsToFilter);
     } else {
-      const filtered = productsToFilter.filter((product) => product.category === selectedCategory);
+      const filtered = productsToFilter.filter((product) => product.categoryId === selectedCategory);
       setFilteredProducts(filtered);
     }
   };
 
-  if (loading) return <div>Yükleniyor...</div>;
-  if (error) return <div className="mx-auto">Hata: {error}</div>;
+  if (loading) return <div className="text-center text-lg font-semibold py-10">Yükleniyor...</div>;
+
+  if (error) return (
+    <div className="flex justify-center items-center min-h-screen">
+      <div className="text-center">
+        <h1 className="text-6xl font-bold text-red-600">{error}</h1>
+        <p className="text-xl mt-4 text-gray-600">Bir hata oluştu, lütfen daha sonra tekrar deneyin.</p>
+      </div>
+    </div>
+  );
   return (
     <div>
       <section className="flex flex-col text-center mb-5 mx-5">
-        <h2 className="text-2xl font-bold mb-8">Tüm Ürünler</h2>
+      <h1 className="text-4xl font-bold  mt-20  text-center mb-12">Tüm Ürünler</h1>
+
           {/* arama */}
         <div className="w-4/5 self-end  m-5">
           <SearchBar onSearch={handleSearch} placeholder="Ürünlerde Ara"/>

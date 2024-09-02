@@ -1,19 +1,15 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import bannerData from "../../dummy-data/bannerData";
-import image from "../../assets/bg.png";
 
-function Banner() {
+function Banner({banner , backgroundImage}) {
   // const { title, subtitle, buttonText, buttonLink, backgroundImage } =
   //   bannerData;
-
-  const [banner, setBanner] = useState(bannerData);
 
   return (
     <div
       className="relative flex items-center justify-center h-96"
       style={{
-        backgroundImage: `url(${image})`,
+        backgroundImage: `url(${backgroundImage})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
