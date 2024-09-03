@@ -3,6 +3,7 @@ import { AnimateContainer } from "react-animate-container";
 import ProductCard from "../../../../components/card";
 import { useDispatch, useSelector } from "react-redux";
 import { GetAllProducts } from "../../../../redux/actions/product/productActions";
+import { ToastContainer } from "react-toastify";
 
 const AdminProductList = () => {
   const dispatch=useDispatch();
@@ -36,6 +37,7 @@ const AdminProductList = () => {
           ))}
         </div>
       </sections>
+      <ToastContainer />
     </div>
   );
 };

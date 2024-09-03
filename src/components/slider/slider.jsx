@@ -3,7 +3,6 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useSelector } from "react-redux";
-import { grayDarkTheme, grayLightTheme, lightTheme } from "../../redux/reducers/theme/themeReducers";
 
 function MySlider({ slidesToShow, children }) {
   const settings = {
@@ -19,14 +18,15 @@ function MySlider({ slidesToShow, children }) {
   };
   
   const theme = useSelector((state) => state.theme.theme);
+  const childrenArray = React.Children.toArray(children);
 
   return (
     <div className="py-10 px-4 rounded-lg">
       <div className=" mx-auto text-center rounded-lg" style={theme}>
       <Slider {...settings}>
-          {children.map((element, index) => (
+      {childrenArray.map((element, index) => (
             <div key={index} className="p-2">
-                {element}
+              {element}
             </div>
           ))}
         </Slider>

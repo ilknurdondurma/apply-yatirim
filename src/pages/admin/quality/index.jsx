@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { GetQualities, AddQuality, UpdateQuality, DeleteQuality } from "../../../redux/actions/quality/qualityActions";
 import InlineEdit from "../../../components/inline-edit";
 import { grayDarkTheme, lightTheme } from "../../../redux/reducers/theme/themeReducers";
+import { ToastContainer } from "react-toastify";
 
 const initialQualitySection = { id: null, title: "", description: "", image: null };
 
@@ -123,6 +124,7 @@ const AdminQuality = () => {
           />
         ))}
       </div>
+      <ToastContainer />
     </div>
   );
 };

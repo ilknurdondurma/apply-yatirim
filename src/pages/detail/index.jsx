@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { GetProductById } from '../../redux/actions/product/productActions';
 import DetailCard from '../../components/detail-card';
+import { ToastContainer } from 'react-toastify';
 
 export default function ProductDetail() {
   
@@ -31,6 +32,7 @@ export default function ProductDetail() {
   return (
     <div>
       <DetailCard products={products}/>
+      <ToastContainer />
     </div>
   );
 }

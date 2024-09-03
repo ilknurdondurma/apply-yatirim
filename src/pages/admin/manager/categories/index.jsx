@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { GetCategories } from '../../../../redux/actions/category/categoryActions';
+import { ToastContainer } from 'react-toastify';
 // import { fetchCategories, addCategory, updateCategory, deleteCategory } from '../../../../redux/actions/category/categoryActions';
 
 export default function AdminCategories() {
@@ -158,6 +159,7 @@ export default function AdminCategories() {
           </div>
         ))}
       </div>
+      <ToastContainer />
     </div>
   );
 }

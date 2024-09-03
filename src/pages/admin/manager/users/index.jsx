@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { GetUsers} from '../../../../redux/actions/user/userActions';
+import { ToastContainer } from 'react-toastify';
 
 export default function AdminUsers() {
   const dispatch = useDispatch();
@@ -143,6 +144,7 @@ export default function AdminUsers() {
           </div>
         ))}
       </div>
+      <ToastContainer />
     </div>
   );
 }

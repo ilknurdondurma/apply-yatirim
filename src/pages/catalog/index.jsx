@@ -3,6 +3,7 @@ import CatalogItem from "../../components/catalog";
 import SearchBar from "../../components/searchBar";
 import { useDispatch, useSelector } from "react-redux";
 import { GetCatalogs } from "../../redux/actions/catalog/catalogActions";
+import { ToastContainer } from "react-toastify";
 
 function Catalog() {
   const dispatch=useDispatch();
@@ -55,6 +56,7 @@ function Catalog() {
           </div>
       </div>
       </section>
+      <ToastContainer />
     </div>
   );
 }

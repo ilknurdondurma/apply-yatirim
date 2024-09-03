@@ -71,7 +71,7 @@ const InlineEdit = ({ item, onSave, onDelete }) => {
         </div>
       ) : (
         <div className="w-full">
-          <div className="text-xl font-bold line-clamp-1">{item.title}</div>
+          <div className="text-xl font-bold line-clamp-1">{item.name}</div>
           <div className='line-clamp-2'>{item.description}</div>
           {item.image && (
             <img src={item.image} alt={item.title} className="w-24 h-24 object-cover rounded-full mb-2" />

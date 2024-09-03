@@ -5,6 +5,7 @@ import { MdOutlineWbIncandescent } from "react-icons/md";
 import { MdCategory } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { GetCategories } from "../../../../redux/actions/category/categoryActions";
+import { ToastContainer } from "react-toastify";
 
 const AdminAddProduct = () => {
   const dispatch = useDispatch();
@@ -74,7 +75,7 @@ const AdminAddProduct = () => {
         onSubmit={handleSubmit}
         header="Ürün Ekle"
       />
-
+ <ToastContainer />
     </div>
   );
 };

@@ -30,11 +30,22 @@ function getTokenFromCookie() {
 
 
 //contacts
-export const getContacts = () => API.get(`/Contact`)
-export const updateContacts = (contact) => API.put(`/Contact/`, contact) //
+export const getContacts = () => API.get(`/Contact`)//ok
+export const updateContact = (id, contact) => API.put(`/Contact/${id}`, contact);//ok
+
+//services
+export const getServices = () => API.get(`/Employment`) //ok
+export const addService = (service) => API.post(`/Employment`,service) // ok
+export const updateService = (id , updatedService) => API.put(`/Employment/${id}`,updatedService)//ok
+export const deleteService = (id) => API.delete(`/Employment/${id}`) //ok
+
+//team
+export const getTeams = () => API.get(`/Member`)
+export const addTeam = (team) => API.post(`/Member`,team)
+export const updateTeam = (id,updatedTeam) => API.put(`/Member/${id}` , updatedTeam)
+export const deleteTeam = (id) => API.delete(`/Member/${id}`)
 
 //abouts
-
 export const getAbouts = () => API.get(`/AboutUs`)
 export const updateAbout = (about) => API.put(`/AboutUs`, about) //
 
@@ -49,11 +60,6 @@ export const getProductsByCategoryId = (id) => API.get(`/Product/Category/${id}`
 //catalogs
 export const getAllCatalogs = () => API.get(`/Catalog`)
 
-//services
-export const getServices = () => API.get(`/Employment`)
-export const addService = (service) => API.get(`/Employment`,service)
-export const updateService = (updatedService) => API.get(`/Employment`,updatedService)
-export const deleteService = (id) => API.get(`/Employment/${id}`)
 
 //quality
 export const getQualities = () => API.get(`/Quality`)
@@ -64,8 +70,7 @@ export const deleteQuality = (id) => API.get(`/Quality/${id}`)
 //comments
 export const getCustomerStories = () => API.get(`/Comment`)
 
-//team
-export const getTeams = () => API.get(`/Member`)
+
 
 //users
  export const getUsers = () => API.get(`/Customer`) //

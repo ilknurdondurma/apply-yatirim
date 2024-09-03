@@ -5,6 +5,7 @@ import {GetAllProducts} from '../../../../redux/actions/product/productActions';
 import {GetPropertyTypes} from '../../../../redux/actions/propertyType/propertyTypeActions';
 import { IoMdCloseCircleOutline } from "react-icons/io";
 import axios from 'axios';
+import { ToastContainer } from 'react-toastify';
 export default function AdminProperties() {
   const dispatch = useDispatch();
   const { propertyTypes, loading, error } = useSelector((state) => state.propertyType);
@@ -96,7 +97,7 @@ export default function AdminProperties() {
           />
           <button
             onClick={handleAddPropertyType}
-            className="bg-blue-500 hover:bg-blue-600  py-1 px-4 rounded-lg "
+            className=" bg-blue-500 hover:bg-blue-600  py-1 px-4 rounded-lg text-white"
           >
             Ekle
           </button>
@@ -114,7 +115,7 @@ export default function AdminProperties() {
         />
         <button
           onClick={handleAddPropertyType}
-          className="bg-blue-500  py-2 px-4 rounded-lg hover:bg-blue-600"
+          className=" bg-blue-500 text-white  py-2 px-4 rounded-lg hover:bg-blue-600"
         >
           Ekle
         </button>
@@ -151,12 +152,7 @@ export default function AdminProperties() {
               <div className='w-full flex justify-between sm:flex-col md:flex-col '>
                 <span className="flex-1">{propertyType.title}</span>
                 <div>
-                  <button
-                      onClick={() => toggleExpandProperty(propertyType.id)}
-                      className="bg-gray-300  py-1 px-4 rounded-lg hover:bg-gray-400 mr-2"
-                  >
-                      {expandedPropertyTypeId === propertyType.id ? 'Kapat' : 'Ürünler'}
-                  </button>
+                 
                   <button
                       onClick={() => {
                       setEditingPropertyTypeId(propertyType.id);
@@ -199,7 +195,7 @@ export default function AdminProperties() {
       </div> 
     
 
-      
+      <ToastContainer />
     </div>
   );
 }

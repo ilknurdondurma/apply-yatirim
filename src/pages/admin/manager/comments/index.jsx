@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { GetComments } from '../../../../redux/actions/comment/commentActions';
 import { grayDarkTheme, lightTheme } from '../../../../redux/reducers/theme/themeReducers';
+import { ToastContainer } from 'react-toastify';
 export default function AdminComments() {
   const dispatch = useDispatch();
   const { comments, loading, error } = useSelector((state) => state.comment);
@@ -55,6 +56,7 @@ export default function AdminComments() {
           ))}
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 }

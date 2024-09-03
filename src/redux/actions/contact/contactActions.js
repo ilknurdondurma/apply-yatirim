@@ -1,5 +1,5 @@
-import { getContacts } from "../../../api";
-import {GET_CONTACTS_REQUEST,GET_CONTACTS_SUCCESS,GET_CONTACTS_FAILURE} from '../../actionsType/contact'
+import { getContacts, updateContact } from "../../../api";
+import {GET_CONTACTS_REQUEST,GET_CONTACTS_SUCCESS,GET_CONTACTS_FAILURE, UPDATE_CONTACT_SUCCESS} from '../../actionsType/contact'
 
 export const fetchContactsRequest = () => ({
   type: GET_CONTACTS_REQUEST,
@@ -14,7 +14,10 @@ export const fetchContactsFailure = (error) => ({
   type: GET_CONTACTS_FAILURE,
   payload: error,
 });
-
+export const updateContactSuccess = (contact) => ({
+  type: UPDATE_CONTACT_SUCCESS,
+  payload: contact,
+});
 
 // API isteği
 
@@ -31,4 +34,18 @@ export const GetContacts = () => {
   };
 };
 
+export const UpdateContact = (id,updatedContact) => {
+  return async (dispatch) => {
+    dispatch(fetchContactsRequest());
+    try {
+      const response = await updateContact(id, updatedContact);
+      const data = response.data;
+      dispatch(updateContactSuccess(data));
+    } catch (error) {
+      const errorMessage = error.response?.status === 500 ? 'Server Error' : error.message;
+      dispatch(fetchContactsFailure(errorMessage));
+    }
+  };
+};
 
+//OK

@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import {thunk} from 'redux-thunk';
 import rootReducer from './reducers/rootReducer';
+import apiResponseMiddleware from './apiResponseMiddleware';
 
 // Configure the store with thunk middleware
 const store = configureStore({
   reducer: rootReducer,
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(thunk),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(thunk, apiResponseMiddleware),
 });
 
 export default store;

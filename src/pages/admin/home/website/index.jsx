@@ -4,10 +4,10 @@ import { MdTitle } from "react-icons/md";
 import { MdOutlineSubtitles } from "react-icons/md";
 import { RxStitchesLogo } from "react-icons/rx";
 import { validationSchema } from "../../../../validations/admin/websites";
-import { contactData } from '../../../../dummy-data/contact';
 import { useDispatch, useSelector } from 'react-redux';
-import {GetContacts} from "../../../../redux/actions/contact/contactActions"
-
+import {GetContacts , UpdateContact} from "../../../../redux/actions/contact/contactActions"
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function AdminWebsite() {
   const dispatch=useDispatch();
@@ -34,8 +34,12 @@ export default function AdminWebsite() {
   
   ];
 
-  const handleFormSubmit = (values) => {
+  const handleFormSubmit = async (values) => {
     console.log(values);
+    var id =contacts[0].id;
+    console.log(id);
+    await dispatch(UpdateContact(id ,values));
+    dispatch(GetContacts());
   };
 
   return (
@@ -50,6 +54,7 @@ export default function AdminWebsite() {
           validationsSchema={validationSchema}
         />
       </div>
+      <ToastContainer />
     </div>
   );
 };

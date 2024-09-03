@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { lightTheme, grayDarkTheme, grayLightTheme } from "../../redux/reducers/theme/themeReducers";
 import { GetContacts } from '../../redux/actions/contact/contactActions';
 import { FiMapPin } from "react-icons/fi";
+import { ToastContainer } from 'react-toastify';
 
 // npm install react-leaflet leaflet leaflet-gesture-handling
 
@@ -110,6 +111,7 @@ function Contact() {
           </MapContainer>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 }

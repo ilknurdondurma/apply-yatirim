@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { GetBrands, AddBrand, UpdateBrand, DeleteBrand } from '../../../../redux/actions/brand/brandActions';
 import { GetModels, AddModel, UpdateModel, DeleteModel } from '../../../../redux/actions/model/modelActions';
 import { GetAllProducts } from '../../../../redux/actions/product/productActions';
+import { ToastContainer } from 'react-toastify';
 
 export default function AdminModels() {
   const dispatch = useDispatch();
@@ -227,6 +228,7 @@ export default function AdminModels() {
           ))}
         </ul>
       </div>
+      <ToastContainer />
     </div>
   );
 }
