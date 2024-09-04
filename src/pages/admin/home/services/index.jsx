@@ -67,6 +67,7 @@ const AdminServices = () => {
           style={theme === lightTheme ? null : grayDarkTheme}
         >
           <input
+          style={theme}
             type="text"
             placeholder="Title"
             value={newService.title}
@@ -74,6 +75,7 @@ const AdminServices = () => {
             className="border p-2 rounded w-full mb-2"
           />
           <textarea
+          style={theme}
             placeholder="Description"
             value={newService.description}
             onChange={(e) => setNewService({ ...newService, description: e.target.value })}
@@ -95,19 +97,18 @@ const AdminServices = () => {
             {editingServiceId === service.id ? (
               <div className="w-full">
                 <input
+                
                   type="text"
                   value={editableItem.title}
                   onChange={(e) => setEditableItem({ ...editableItem, title: e.target.value })}
                   className="border p-2 rounded w-full mb-2"
-                  style={theme === lightTheme ? null : grayLightTheme}
-                />
+                  style={theme}                />
                 <textarea
                   value={editableItem.description}
                   rows={4}
                   onChange={(e) => setEditableItem({ ...editableItem, description: e.target.value })}
                   className="border p-2 rounded w-full mb-2"
-                  style={theme === lightTheme ? null : grayLightTheme}
-                />
+                  style={theme}                />
               
                 <button onClick={handleSave} className="bg-green-500 text-white px-4 py-2 rounded mr-2">
                   Save

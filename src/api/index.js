@@ -40,22 +40,43 @@ export const updateService = (id , updatedService) => API.put(`/Employment/${id}
 export const deleteService = (id) => API.delete(`/Employment/${id}`) //ok
 
 //team
-export const getTeams = () => API.get(`/Member`)
-export const addTeam = (team) => API.post(`/Member`,team)
-export const updateTeam = (id,updatedTeam) => API.put(`/Member/${id}` , updatedTeam)
-export const deleteTeam = (id) => API.delete(`/Member/${id}`)
+export const getTeams = () => API.get(`/Member`) //ok
+export const addTeam = (team) => API.post(`/Member/sign-up`,team ,{headers: {'Content-Type':'multipart/form-data'}}) //ok
+export const updateTeam = (updatedTeam) => API.put(`/Member/update` , updatedTeam ,)//ok
+export const deleteTeam = (id) => API.delete(`/Member/${id}`)//ok
+
+//category
+export const getCategories = () => API.get(`/Category`)//ok
+export const addCategory = (category) => API.post(`/Category`,category,{headers: {'Content-Type': 'application/json',},}) //ok
+export const updateCategory = (id , updatedCategory) => API.put(`/Category/${id}`,updatedCategory ,{headers: {'Content-Type': 'application/json',},}) //ok
+export const deleteCategory= (id) => API.delete(`/Category/${id}`) //ok
+
+//property
+export const getProperties=()=>API.get('/Property'); //ok
+export const addProperty = (property) => API.post(`/Property`,property,{headers: {'Content-Type': 'application/json',},}) //ok
+export const updateProperty = (id , updatedProperty) => API.put(`/Property/${id}`,updatedProperty ,{headers: {'Content-Type': 'application/json',},}) 
+export const deleteProperty= (id) => API.delete(`/Property/${id}`)
+
+//PROPERTY TYPE
+export const getPropertyTypes=()=>API.get('/PropertyType'); //ok
+export const addPropertyType = (property) => API.post(`/PropertyType`,property,{headers: {'Content-Type': 'application/json',},}) //ok
+export const updatePropertyType = (id , updatedPropertyType) => API.put(`/PropertyType/${id}`,updatedPropertyType ,{headers: {'Content-Type': 'application/json',},}) //ok
+export const deletePropertyType= (id) => API.delete(`/PropertyType/${id}`) //ok
+
+
+
+
+
 
 //abouts
 export const getAbouts = () => API.get(`/AboutUs`)
 export const updateAbout = (about) => API.put(`/AboutUs`, about) //
 
-//category
-export const getCategories = () => API.get(`/Category`)
 
 //product
 export const getAllProducts = () => API.get(`/Product`)
 export const getProductsById = (id) => API.get(`/Product/${id}`)
-export const getProductsByCategoryId = (id) => API.get(`/Product/Category/${id}`) // name ile ama biz id yapcaz ! //
+export const getProductsByCategoryId = (id) => API.get(`/Product/Category/${id}`)
 
 //catalogs
 export const getAllCatalogs = () => API.get(`/Catalog`)
@@ -78,9 +99,7 @@ export const getCustomerStories = () => API.get(`/Comment`)
 //comment
 export const getComments=()=>API.get('/Comment')//
 
-//property
-export const getProperties=()=>API.get('/Property'); 
-export const getPropertyTypes=()=>API.get('/PropertyType'); 
+
 
 //models
 export const getModels=()=>API.get('/Product');

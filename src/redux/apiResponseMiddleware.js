@@ -42,6 +42,22 @@ const apiResponseMiddleware = store => next => action => {
     toast.error('Bir beklenmedik hata oluştu.');
   }
 
+
+  // else if (action.payload.status === 200) {
+  //   toast.success('İstek başarılı!');
+  // }
+  // else if (action.payload.status === 500) {
+  //   toast.error('Sunucu hatası. Lütfen tekrar deneyin.');  
+  // }
+  // else if (action.payload.status === 400) {
+  //   toast.error('İstekte Hata var. Lütfen tekrar deneyin.');  
+  // }
+  // else if (action.payload.status === 401) {
+  //   toast.error('UNAUTHORİZATİON .Lütfen giriş yapıp tekrar deneyin.');  
+  // }
+  
+
+
   return next(action);
 };
 

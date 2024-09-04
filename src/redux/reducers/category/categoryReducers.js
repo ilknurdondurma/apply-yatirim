@@ -24,6 +24,29 @@ const categoryReducers = (state = initialsState, action) => {
                 loading:false,
                 error: action.payload
             }
+        case "ADD_CATEGORY_SUCCESS":
+                return {
+                    ...state,
+                    categories: [...state.categories, action.payload],
+                    loading: false,
+                    error: null,
+                };
+        case "UPDATE_CATEGORY_SUCCESS":
+                return {
+                    ...state,
+                    categories: state.categories.map(category =>
+                    category.id === action.payload.id ? action.payload : category
+                    ),
+                    loading: false,
+                    error: null,
+                };
+        case "DELETE_CATEGORY_SUCCESS":
+                return {
+                    ...state,
+                    categories: state.categories.filter(category => category.id !== action.payload.id),
+                    loading: false,
+                    error: null,
+                };
         default:
             return state;
     }

@@ -1,49 +1,50 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
-import { GetCategories } from '../../../../redux/actions/category/categoryActions';
+import { AddCategory, DeleteCategory, GetCategories, UpdateCategory } from '../../../../redux/actions/category/categoryActions';
 import { ToastContainer } from 'react-toastify';
 // import { fetchCategories, addCategory, updateCategory, deleteCategory } from '../../../../redux/actions/category/categoryActions';
 
 export default function AdminCategories() {
   const dispatch = useDispatch();
   const { categories, loading, error } = useSelector(state => state.category);
+  const initialCategoryState = { title: ''};
+  const theme=useSelector((state)=>state.theme.theme);
 
-  const [newCategory, setNewCategory] = useState('');
+  const [newCategory, setNewCategory] = useState(initialCategoryState);
   const [editingCategoryId, setEditingCategoryId] = useState(null);
-  const [editedCategoryName, setEditedCategoryName] = useState('');
+  const [editedCategory, setEditedCategory] = useState(initialCategoryState);
   const [expandedCategoryId, setExpandedCategoryId] = useState(null);
 
   useEffect(() => {
     dispatch(GetCategories());
   }, [dispatch]);
 
-  const handleAddCategory = async () => {
-    try {
-      const response = await axios.post('/api/categories', { title: newCategory });
-      //dispatch(addCategory(response.data));
-      setNewCategory('');
-    } catch (error) {
-      console.error('Kategori eklenemedi:', error);
-    }
+  const handleAdd = async () => {
+    console.log(newCategory)
+    console.log(JSON.stringify(newCategory))
+    var newCategoryJson=JSON.stringify(newCategory);
+    await dispatch(AddCategory(newCategoryJson))
+    dispatch(GetCategories())
+    setNewCategory(initialCategoryState);
   };
 
-  const handleEditCategory = async (id) => {
-    try {
-      const response = await axios.put(`/api/categories/${id}`, { title: editedCategoryName });
-     // dispatch(updateCategory(response.data));
-      setEditingCategoryId(null);
-      setEditedCategoryName('');
-    } catch (error) {
-      console.error('Kategori düzenlenemedi:', error);
+  const handleEditCategory = async () => {
+    if (editedCategory) {
+      console.log(editingCategoryId);
+      console.log(JSON.stringify(editedCategory));
+      await dispatch(UpdateCategory(editingCategoryId , JSON.stringify(editedCategory)));
+      setEditingCategoryId(null)
+      dispatch(GetCategories());
+      setEditedCategory(initialCategoryState);
     }
   };
 
   const handleDeleteCategory = async (id) => {
     if (window.confirm('Bu kategori ve içindeki ürünler silinecektir. Devam etmek istiyor musunuz?')) {
       try {
-        await axios.delete(`/api/categories/${id}`);
-        //dispatch(deleteCategory(id));
+        await dispatch(DeleteCategory(id));
+        dispatch(GetCategories());
       } catch (error) {
         console.error('Kategori silinemedi:', error);
       }
@@ -70,14 +71,15 @@ export default function AdminCategories() {
 
       <div className="mb-6 flex items-center">
         <input
+         style={theme}
           type="text"
-          value={newCategory}
-          onChange={(e) => setNewCategory(e.target.value)}
+          value={newCategory.title}
+          onChange={(e) => setNewCategory({ ...newCategory, title: e.target.value })}
           placeholder="Yeni kategori adı"
           className="border border-gray-300 rounded-lg p-2 mr-4 flex-1"
         />
         <button
-          onClick={handleAddCategory}
+          onClick={handleAdd}
           className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg"
         >
           Kategori Ekle
@@ -86,15 +88,16 @@ export default function AdminCategories() {
 
       <div>
         <h2 className="text-xl font-semibold mb-4">Mevcut Kategoriler</h2>
-        {categories.map(category => (
+        {categories.slice().reverse().map(category => (
           <div key={category.id} className="mb-4 border-[1px] p-5 rounded-lg">
             <div className="flex items-center">
               {editingCategoryId === category.id ? (
                 <div className="flex sm:flex-col  md:flex-col items-center flex-1">
                   <input
+                    style={theme}
                     type="text"
-                    value={editedCategoryName}
-                    onChange={(e) => setEditedCategoryName(e.target.value)}
+                    value={editedCategory.title}
+                    onChange={(e) => setEditedCategory({ ...editedCategory, title: e.target.value })}
                     className="border border-gray-300 rounded-lg p-2 mr-4 flex-1"
                   />
                   <button
@@ -123,7 +126,7 @@ export default function AdminCategories() {
                     <button
                         onClick={() => {
                         setEditingCategoryId(category.id);
-                        setEditedCategoryName(category.title);
+                        setEditedCategory(category);
                         }}
                         className="bg-yellow-500 text-white py-2 px-4 rounded-lg hover:bg-yellow-600 mr-2"
                     >

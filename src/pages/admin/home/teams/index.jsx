@@ -4,12 +4,14 @@ import { GetTeams, AddTeam, UpdateTeam, DeleteTeam } from '../../../../redux/act
 import { grayDarkTheme, grayLightTheme, lightTheme } from '../../../../redux/reducers/theme/themeReducers';
 import { ToastContainer } from 'react-toastify';
 
-const initialTeamState = { name: '', position: '', image: null };
+const initialTeamState = { name: '', position: '',email:'',phone:''};
+const initialTeamStateSign = { name: '', position: '',email:'',password:'', phone:''};
 
 const AdminTeams = () => {
   const dispatch = useDispatch();
   const { teams, loading, error } = useSelector((state) => state.team);
-  const [newTeam, setNewTeam] = useState(initialTeamState);
+  const [newTeam, setNewTeam] = useState(initialTeamStateSign);
+  const [selectedFile, setSelectedFile] = useState(null);
   const [editingTeamId, setEditingTeamId] = useState(null);
   const [editableTeam, setEditableTeam] = useState(initialTeamState);
   const theme = useSelector((state) => state.theme.theme);
@@ -19,9 +21,13 @@ const AdminTeams = () => {
   }, [dispatch]);
 
   const handleAdd = async () => {
-    await dispatch(AddTeam(newTeam));
+    const teamAddRequest = new FormData()
+    teamAddRequest.append('data', JSON.stringify(newTeam));
+    teamAddRequest.append('imageUrl1',selectedFile );
+
+    await dispatch(AddTeam(teamAddRequest));
     dispatch(GetTeams());
-    setNewTeam(initialTeamState);
+    setNewTeam(initialTeamStateSign);
   };
 
   const handleEdit = (team) => {
@@ -31,10 +37,18 @@ const AdminTeams = () => {
 
   const handleSave = async () => {
     if (editableTeam) {
-      await dispatch(UpdateTeam(editingTeamId, editableTeam));
+      const teamUpdateRequest = new FormData();
+      teamUpdateRequest.append('data', JSON.stringify(editableTeam));
+      
+      if (selectedFile) {
+        teamUpdateRequest.append('imageUrl1', selectedFile);
+      }
+      
+      await dispatch(UpdateTeam(teamUpdateRequest));
       dispatch(GetTeams());
       setEditingTeamId(null);
       setEditableTeam(initialTeamState);
+      setSelectedFile(null);  // Reset the selected file
     }
   };
 
@@ -50,13 +64,14 @@ const AdminTeams = () => {
 
   const handleFileChange = (e, type) => {
     const file = e.target.files[0];
+    setSelectedFile(file);
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
         if (type === 'new') {
-          setNewTeam((prev) => ({ ...prev, image: reader.result }));
+          setNewTeam((prev) => ({ ...prev, imageUrl: reader.result }));
         } else if (type === 'edit') {
-          setEditableTeam((prev) => ({ ...prev, image: reader.result }));
+          setEditableTeam((prev) => ({ ...prev, imageUrl: reader.result }));
         }
       };
       reader.readAsDataURL(file);
@@ -82,6 +97,7 @@ const AdminTeams = () => {
       <div className="space-y-4 mb-5">
         <div className="border p-4 rounded-lg bg-white shadow-md" style={theme === lightTheme ? null : grayDarkTheme}>
           <input
+          style={theme}
             type="text"
             placeholder="Name"
             value={newTeam.name}
@@ -89,6 +105,7 @@ const AdminTeams = () => {
             className="border p-2 rounded w-full mb-2"
           />
           <input
+          style={theme}
             type="text"
             placeholder="Position"
             value={newTeam.position}
@@ -96,6 +113,7 @@ const AdminTeams = () => {
             className="border p-2 rounded w-full mb-2"
           />
           <input
+          style={theme}
             type="number"
             placeholder="Phone"
             value={newTeam.phone}
@@ -103,20 +121,23 @@ const AdminTeams = () => {
             className="border p-2 rounded w-full mb-2"
           />
           <input
+          style={theme}
             type="text"
             placeholder="Email"
-            value={newTeam.phone}
+            value={newTeam.email}
             onChange={(e) => setNewTeam({ ...newTeam, email: e.target.value })}
             className="border p-2 rounded w-full mb-2"
           />
           <input
+          style={theme}
             type="text"
             placeholder="Password"
-            value={newTeam.phone}
+            value={newTeam.password}
             onChange={(e) => setNewTeam({ ...newTeam, password: e.target.value })}
             className="border p-2 rounded w-full mb-2"
           />
           <input
+          style={theme}
             type="file"
             onChange={(e) => handleFileChange(e, 'new')}
             className="border p-2 rounded w-full mb-2"
@@ -142,16 +163,27 @@ const AdminTeams = () => {
                   value={editableTeam.name}
                   onChange={(e) => setEditableTeam({ ...editableTeam, name: e.target.value })}
                   className="border p-2 rounded w-full mb-2"
-                  style={theme === lightTheme ? null : grayLightTheme}
-                />
+                  style={theme}                />
                 <input
                   type="text"
                   value={editableTeam.position}
                   onChange={(e) => setEditableTeam({ ...editableTeam, position: e.target.value })}
                   className="border p-2 rounded w-full mb-2"
-                  style={theme === lightTheme ? null : grayLightTheme}
-                />
+                  style={theme}                />
                 <input
+                  type="text"
+                  value={editableTeam.phone}
+                  onChange={(e) => setEditableTeam({ ...editableTeam, phone: e.target.value })}
+                  className="border p-2 rounded w-full mb-2"
+                  style={theme}                />
+                <input
+                  type="text"
+                  value={editableTeam.email}
+                  onChange={(e) => setEditableTeam({ ...editableTeam, email: e.target.value })}
+                  className="border p-2 rounded w-full mb-2"
+                  style={theme}                />
+                <input
+                style={theme}
                   type="file"
                   onChange={(e) => handleFileChange(e, 'edit')}
                   className="border p-2 rounded w-full mb-2"
@@ -167,7 +199,8 @@ const AdminTeams = () => {
             ) : (
               <div className="w-full">
                 <div className='grid grid-cols-4'>
-                  {team.imageUrl && <img src={team.imageUrl} alt="Team Member" className="w-24 h-24 object-cover rounded-full mb-2" />}
+                  {team.imageUrl && <img src={`data:image/jpeg;base64,${team.imageUrl}`} alt="Team Member" className="w-24 h-24 object-cover rounded-full mb-2" />}
+                  {/* {team.imageUrl && <img src={team.imageUrl} alt="Team Member" className="w-24 h-24 object-cover rounded-full mb-2" />} */}
                   <div className='col-span-3'>
                       <div className="text-xl font-bold line-clamp-1">ADI SOYADI : {team.name}</div>
                       <div className=" text-lg line-clamp-1"> POSİZYONU : {team.position}</div>

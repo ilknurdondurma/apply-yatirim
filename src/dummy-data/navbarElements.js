@@ -26,7 +26,7 @@ export const navbarElements = [
     path: "yonetim",
     submenus: [
       { id: 21, name: 'Kategoriler', path: 'kategoriler' },
-      { id: 22, name: 'Kullancılar', path: 'kullanicilar' },
+      //{ id: 22, name: 'Kullancılar', path: 'kullanicilar' },
       { id: 23, name: 'Gelen Yorumlar', path: 'yorumlar' },
       { id: 24, name: 'Ürün Özellikleri', path: 'ozellikler' },
       { id: 25, name: 'Model ve Uyumluluklar', path: 'modeller' },

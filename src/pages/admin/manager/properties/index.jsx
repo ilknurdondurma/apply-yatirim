@@ -1,51 +1,62 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {GetProperties} from '../../../../redux/actions/property/propertyActions';
+import {AddProperty, GetProperties} from '../../../../redux/actions/property/propertyActions';
 import {GetAllProducts} from '../../../../redux/actions/product/productActions';
-import {GetPropertyTypes} from '../../../../redux/actions/propertyType/propertyTypeActions';
-import { IoMdCloseCircleOutline } from "react-icons/io";
+import {AddPropertyType, DeletePropertyType, GetPropertyTypes, UpdatePropertyType} from '../../../../redux/actions/propertyType/propertyTypeActions';
 import axios from 'axios';
-import { ToastContainer } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
+
 export default function AdminProperties() {
   const dispatch = useDispatch();
   const { propertyTypes, loading, error } = useSelector((state) => state.propertyType);
   const { products } = useSelector((state) => state.product);
+  const theme=useSelector((state)=>state.theme.theme);
 
-  const [newPropertyType, setNewPropertyType] = useState('');
-  const [newProperty, setNewProperty] = useState({
-    productId: '',
-    propertyTypeId: '',
-    value: '',
-  });
-  const [expandedPropertyTypeId, setExpandedPropertyTypeId] = useState(null);
+  const initialStateProperty={productId: '',propertyTypeId: '',value: ''}
+  const initialStatePropertyType={title: ''}
+
+  const [newProperty, setNewProperty] = useState(initialStateProperty);
+  const [selectedProductId, setSelectedProductId] = useState(null);
+  const [selectedPropertyTypeId, setSelectedPropertyTypeId] = useState(null);
+
+  const [newPropertyType, setNewPropertyType] = useState(initialStatePropertyType);
   const [editingPropertyTypeId, setEditingPropertyTypeId] = useState(null);
-  const [editedPropertyTypeName, setEditedPropertyTypeName] = useState('');
+  const [editedPropertyType, setEditedPropertyType] = useState(initialStatePropertyType);
 
   useEffect(() => {
     dispatch(GetPropertyTypes());
     dispatch(GetAllProducts());
   }, [dispatch]);
 
-  const handleAddPropertyType = () => {
-    //dispatch(addPropertyType({ title: newPropertyType }));
-    setNewPropertyType('');
-  };
-  const handleDeleteProperty = (id) => {
-   console.log(id); //db de silindiğinde urunlerde bu özelliğe sahip urulnlerden de silinecek
-  };
-  const handleEditPropertyType = async (id) => {
-    try {
-      const response = await axios.put(`/api/Property/${id}`, { title: editedPropertyTypeName });
-     // dispatch(updateCategory(response.data));
-     setEditingPropertyTypeId(null);
-     setEditedPropertyTypeName('');
-    } catch (error) {
-      console.error('propertytYpe düzenlenemedi:', error);
-    }
+  const handleAddProperty = async () => {
+    console.log(JSON.stringify(newProperty));
+    await dispatch(AddProperty(JSON.stringify(newProperty)));
+    dispatch(GetAllProducts());
+    setNewProperty(initialStateProperty);
+    toast.success()
   };
 
-  const toggleExpandProperty = (id) => {
-    setExpandedPropertyTypeId(expandedPropertyTypeId === id ? null : id);
+  const handleAddPropertyType =async () => {
+    await dispatch(AddPropertyType(JSON.stringify(newPropertyType)));
+    setNewPropertyType(initialStatePropertyType);
+    dispatch(GetPropertyTypes());
+  };
+
+  const handleEditPropertyType = async (id) => {
+   if(editedPropertyType){
+    await dispatch(UpdatePropertyType(editingPropertyTypeId,JSON.stringify(editedPropertyType)));
+    setEditingPropertyTypeId(null);
+    setEditedPropertyType(initialStatePropertyType);
+    dispatch(GetPropertyTypes());
+   }
+  };
+
+
+  const handleDeleteProperty = async (id) => {
+   console.log(id); 
+   await dispatch(DeletePropertyType(id));
+   dispatch(GetPropertyTypes());
+
   };
 
 
@@ -65,11 +76,12 @@ export default function AdminProperties() {
       <div className="mb-6">
         <div className="flex flex-col space-y-4">
           <select
+            style={theme}
             value={newProperty.productId}
             onChange={(e) => setNewProperty({ ...newProperty, productId: e.target.value })}
             className="border border-gray-300 rounded-lg p-2"
           >
-            <option value="">Ürün Seçin</option>
+            <option value="" >Ürün Seçin</option>
             {products.map((product) => (
               <option key={product.id} value={product.id}>
                 {product.title}
@@ -77,6 +89,7 @@ export default function AdminProperties() {
             ))}
           </select>
           <select
+          style={theme}
             value={newProperty.propertyTypeId}
             onChange={(e) => setNewProperty({ ...newProperty, propertyTypeId: e.target.value })}
             className="border border-gray-300 rounded-lg p-2"
@@ -89,6 +102,7 @@ export default function AdminProperties() {
             ))}
           </select>
           <input
+          style={theme}
             type="text"
             value={newProperty.value}
             onChange={(e) => setNewProperty({ ...newProperty, value: e.target.value })}
@@ -96,7 +110,7 @@ export default function AdminProperties() {
             className="border border-gray-300 rounded-lg p-1"
           />
           <button
-            onClick={handleAddPropertyType}
+            onClick={handleAddProperty}
             className=" bg-blue-500 hover:bg-blue-600  py-1 px-4 rounded-lg text-white"
           >
             Ekle
@@ -107,9 +121,10 @@ export default function AdminProperties() {
       <h2 className="text-xl font-semibold mb-4">Yeni Özellik Türü Ekle</h2>
       <div className="flex space-x-4 mb-4">
         <input
+        style={theme}
           type="text"
-          value={newPropertyType}
-          onChange={(e) => setNewPropertyType(e.target.value)}
+          value={newPropertyType.title}
+          onChange={(e) => setNewPropertyType({ ...newPropertyType, title: e.target.value })}
           placeholder="Özellik Türü Adı"
           className="border border-gray-300 rounded-lg p-2 flex-1"
         />
@@ -124,15 +139,16 @@ export default function AdminProperties() {
       <h1 className="text-2xl font-bold mb-6">Özellikler</h1>
       <div className='w-full grid grid-cols-1 '>
       {
-        propertyTypes.map((propertyType)=>(
+        propertyTypes.slice().reverse().map((propertyType)=>(
           <div key={propertyType.id} className="mb-4 border-[1px] p-2 rounded-lg">
           <div className="flex items-center">
             {editingPropertyTypeId === propertyType.id ? (
               <div className="flex sm:flex-col  md:flex-col items-center flex-1">
                 <input
+                  style={theme}
                   type="text"
-                  value={editingPropertyTypeId}
-                  onChange={(e) => setEditingPropertyTypeId(e.target.value)}
+                  value={editedPropertyType.title}
+                  onChange={(e) => setEditedPropertyType({ ...editedPropertyType, title: e.target.value })}
                   className="border border-gray-300 rounded-lg p-1 mr-4 flex-1"
                 />
                 <button
@@ -156,7 +172,7 @@ export default function AdminProperties() {
                   <button
                       onClick={() => {
                       setEditingPropertyTypeId(propertyType.id);
-                      setEditingPropertyTypeId(propertyType.title);
+                      setEditedPropertyType(propertyType);
                       }}
                       className="bg-yellow-500  py-1 px-4 rounded-lg hover:bg-yellow-600 mr-2"
                   >
@@ -172,23 +188,7 @@ export default function AdminProperties() {
               </div>
             )}
           </div>
-          {expandedPropertyTypeId === propertyType.id && (
-            <div className="mt-4">
-              <h3 className="text-lg font-semibold">Ürünler:</h3>
-              {propertyType.products && propertyType.products.length > 0 ? (
-                <ul className="list-disc pl-5">
-                  {propertyType.products.map(product => (
-                    <div key={product.id} className='flex gap-5'>
-                      <li >{product.title}</li>
-                      <li className ="opacity-50" >{product.price} TL </li>
-                    </div>
-                  ))}
-                </ul>
-              ) : (
-                <p>Bu özelliğin uygulandığı ürün bulunmamaktadır.</p>
-              )}
-            </div>
-          )}
+         
         </div>
         ))
       }

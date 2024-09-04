@@ -57,11 +57,11 @@ export const AddTeam = (newTeam) => {
 };
 
 
-export const UpdateTeam = (id, updatedTeam) => {
+export const UpdateTeam = (updatedTeam) => {
   return async (dispatch) => {
     dispatch(fetchTeamsRequest());
     try {
-      const response = await updateTeam(id, updatedTeam);
+      const response = await updateTeam(updatedTeam);
       const data = response.data;
       dispatch(updateTeamSuccess(data));
     } catch (error) {
