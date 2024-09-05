@@ -38,7 +38,7 @@ function About() {
             <div className="grid grid-cols-3 sm:grid-cols-2 gap-8">
               {teams.map((member) => (
                 <div key={member.id} style={theme===darkTheme ? grayDarkTheme :null} className="p-4  shadow-lg rounded-lg bg-white">
-                  <img src={member.imageUrl} alt={member.name} className="rounded-full mx-auto mb-4" style={{height:"100px" , width:"auto"}}/>
+                  <img src={`data:image/jpeg;base64,${member.imageUrl}`} alt={member.name} className="rounded-full mx-auto mb-4" style={{height:"100px" , width:"100px"}}/>
                   <h3 className="text-lg font-bold mb-2">{member.name}</h3>
                   <p className="text-gray-500">Tel : {member.phone}</p>
                   <p className="text-gray-400">{member.position}</p>

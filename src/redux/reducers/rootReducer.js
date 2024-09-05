@@ -7,7 +7,6 @@ import categoryReducers from './category/categoryReducers';
 import productReducers from './product/productReducers';
 import serviceReducers from './service/serviceReducers';
 import catalogReducers from './catalog/catalogReducers';
-import customerStoryReducers from './customerStory/customerStoryRedurcers';
 import teamReducers from './team/teamReducers';
 import qualityReducers from './quality/qualityReducers';
 import userReducers from './user/userReducers';
@@ -16,6 +15,7 @@ import propertyReducers from './property/propertyReducers';
 import propertyTypeReducers from './propertyType/propertyTypeReducers';
 import brandReducers from './brand/brandReducers';
 import modelReducers from './model/modelReducers';
+import compatibleModelReducers from './compatibleModel/compatibleModelReducer';
 
 const Reducers = combineReducers({
   theme: themeReducer,
@@ -26,7 +26,6 @@ const Reducers = combineReducers({
   product:productReducers,
   service:serviceReducers,
   catalog:catalogReducers,
-  story:customerStoryReducers,
   team:teamReducers,
   quality:qualityReducers,
   user:userReducers,
@@ -35,6 +34,7 @@ const Reducers = combineReducers({
   propertyType:propertyTypeReducers,
   brand:brandReducers,
   model:modelReducers,
+  compatibleModel:compatibleModelReducers
   
 });
 

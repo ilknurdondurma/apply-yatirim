@@ -63,14 +63,41 @@ export const addPropertyType = (property) => API.post(`/PropertyType`,property,{
 export const updatePropertyType = (id , updatedPropertyType) => API.put(`/PropertyType/${id}`,updatedPropertyType ,{headers: {'Content-Type': 'application/json',},}) //ok
 export const deletePropertyType= (id) => API.delete(`/PropertyType/${id}`) //ok
 
+// BRANDS
+export const getBrands=()=>API.get('/Brand');//ok
+export const addBrand=(brand)=>API.post(`/Brand`,brand,{headers: {'Content-Type': 'application/json',},}); //ok
+export const updateBrand=(id,updatedBrand)=>API.put(`/Brand/${id}`,updatedBrand ,{headers: {'Content-Type': 'application/json',},}) //ok
+export const deleteBrand=(id)=>API.delete(`/Brand/${id}`);
 
+//models
+export const getModels=()=>API.get('/Model');//ok
+export const addModel=(model)=>API.post(`/Model`,model,{headers: {'Content-Type': 'application/json',},}); //ok
+export const updateModel=(id,updatedModel)=>API.put(`/Model/${id}`,updatedModel ,{headers: {'Content-Type': 'application/json',},}) //ok
+export const deleteModel=(id)=>API.delete(`/Model/${id}`); //ok
 
-
+//compatible models
+export const getCompatibleModels=()=>API.get('/CompatibleModel'); 
+export const addCompatibleModel=(compatibleModel)=>API.post(`/CompatibleModel`,compatibleModel,{headers: {'Content-Type': 'application/json',},}); //OK
+export const updateCompatibleModel=(id,updatedCompatibleModel)=>API.put(`/CompatibleModel/${id}`,updatedCompatibleModel ,{headers: {'Content-Type': 'application/json',},}) 
+export const deleteCompatibleModel=(id)=>API.delete(`/CompatibleModel/${id}`); 
 
 
 //abouts
-export const getAbouts = () => API.get(`/AboutUs`)
-export const updateAbout = (about) => API.put(`/AboutUs`, about) //
+export const getAbouts = () => API.get(`/AboutUs`)//ok
+export const addAbout=(about)=>API.post(`/AboutUs`,about,{headers: {'Content-Type': 'application/json',},}); 
+export const updateAbout=(id,updatedAbout)=>API.put(`/AboutUs/${id}`,updatedAbout ,{headers: {'Content-Type':'multipart/form-data'}}) 
+export const deleteAbout=(id)=>API.delete(`/AboutUs/${id}`); 
+
+//quality
+export const getQualities = () => API.get(`/Quality`)
+export const addQualiity = (quality) => API.post(`/Quality`,quality,{headers: {'Content-Type': 'application/json',},})
+export const updateQuality = (id ,updatedQuality) => API.put(`/Quality/update`,updatedQuality,{headers: {'Content-Type': 'application/json',},})
+export const deleteQuality = (id) => API.delete(`/Quality/${id}`)
+
+
+
+
+
 
 
 //product
@@ -82,11 +109,6 @@ export const getProductsByCategoryId = (id) => API.get(`/Product/Category/${id}`
 export const getAllCatalogs = () => API.get(`/Catalog`)
 
 
-//quality
-export const getQualities = () => API.get(`/Quality`)
-export const addQualiity = (quality) => API.get(`/Quality`,quality)
-export const updateQuality = (updatedQuality) => API.get(`/Quality`,updatedQuality)
-export const deleteQuality = (id) => API.get(`/Quality/${id}`)
 
 //comments
 export const getCustomerStories = () => API.get(`/Comment`)
@@ -101,17 +123,7 @@ export const getComments=()=>API.get('/Comment')//
 
 
 
-//models
-export const getModels=()=>API.get('/Product');
-export const addModel=(model)=>API.get('/Product');
-export const updateModel=(id,model)=>API.get('/Product');
-export const deleteModel=(id)=>API.get('/Product');
 
-// BRANDS
-export const getBrands=()=>API.get('/Product');
-export const addBrand=(brand)=>API.get('/Product');
-export const updateBrand=(id,brand)=>API.get('/Product');
-export const deleteBrand=(id)=>API.get('/Product');
 
 
 

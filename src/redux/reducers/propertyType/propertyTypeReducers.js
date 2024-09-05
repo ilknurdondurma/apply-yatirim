@@ -1,7 +1,7 @@
 const initialStates={
     propertyTypes:[],
     loading:false,
-    eroor:null
+    error:null
 };
 
 const propertyTypeReducers=(state=initialStates , action)=>{

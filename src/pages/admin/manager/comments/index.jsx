@@ -28,7 +28,8 @@ export default function AdminComments() {
   if (error) return (
     <div className="flex justify-center items-center min-h-screen">
       <div className="text-center">
-        <h1 className="text-6xl font-bold text-red-600">{error}</h1>
+        <h1 className="text-6xl font-bold text-red-600">{error && <div>{error.message}</div>}
+        </h1>
         <p className="text-xl mt-4 text-gray-600">Bir hata oluştu, lütfen daha sonra tekrar deneyin.</p>
       </div>
     </div>

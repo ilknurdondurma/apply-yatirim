@@ -41,7 +41,7 @@ const AdminTeams = () => {
       teamUpdateRequest.append('data', JSON.stringify(editableTeam));
       
       if (selectedFile) {
-        teamUpdateRequest.append('imageUrl1', selectedFile);
+        teamUpdateRequest.append('imageUrl', selectedFile);
       }
       
       await dispatch(UpdateTeam(teamUpdateRequest));
@@ -83,7 +83,8 @@ const AdminTeams = () => {
   if (error) return (
     <div className="flex justify-center items-center min-h-screen">
       <div className="text-center">
-        <h1 className="text-6xl font-bold text-red-600">{error}</h1>
+        <h1 className="text-6xl font-bold text-red-600">{error && <div>{error.message}</div>}
+        </h1>
         <p className="text-xl mt-4 text-gray-600">Bir hata oluştu, lütfen daha sonra tekrar deneyin.</p>
       </div>
     </div>
@@ -183,7 +184,7 @@ const AdminTeams = () => {
                   className="border p-2 rounded w-full mb-2"
                   style={theme}                />
                 <input
-                style={theme}
+                  style={theme}
                   type="file"
                   onChange={(e) => handleFileChange(e, 'edit')}
                   className="border p-2 rounded w-full mb-2"

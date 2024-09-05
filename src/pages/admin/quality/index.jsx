@@ -1,28 +1,54 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { GetQualities, AddQuality, UpdateQuality, DeleteQuality } from "../../../redux/actions/quality/qualityActions";
-import InlineEdit from "../../../components/inline-edit";
-import { grayDarkTheme, lightTheme } from "../../../redux/reducers/theme/themeReducers";
-import { ToastContainer } from "react-toastify";
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { GetQualities, AddQuality, UpdateQuality, DeleteQuality } from '../../../redux/actions/quality/qualityActions';
+import { ToastContainer } from 'react-toastify';
 
-const initialQualitySection = { id: null, title: "", description: "", image: null };
-
-const AdminQuality = () => {
+export default function AdminQuality() {
   const dispatch = useDispatch();
   const { qualities, loading, error } = useSelector((state) => state.quality);
-  const [localQualities, setLocalQualities] = useState([]);
-  const [formData, setFormData] = useState(initialQualitySection);
   const theme = useSelector((state) => state.theme.theme);
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [editingQualityId, setEditingQualityId] = useState(null);
+  const [editedQuality, setEditedQuality] = useState({ id: null, title: "", description: "", imageUrl: "" });
 
   useEffect(() => {
     dispatch(GetQualities());
   }, [dispatch]);
 
-  useEffect(() => {
-    if (qualities) {
-      setLocalQualities(qualities);
+  const handleSaveQuality = async () => {
+    if (editedQuality) {
+      const qualityRequest = new FormData();
+      console.log(editedQuality)
+      console.log(editingQualityId)
+      qualityRequest.append('data', JSON.stringify(editedQuality));
+      if (selectedFile) {
+        qualityRequest.append('imageUrl', selectedFile);
+      }
+     
+        await dispatch(UpdateQuality(editingQualityId , qualityRequest));
+   
+      setEditingQualityId(null);
+      setEditedQuality({ id: null, title: "", description: "", imageUrl: "" });
+      dispatch(GetQualities());
     }
-  }, [qualities]);
+  };
+
+  const handleCancelEdit = () => {
+    setEditingQualityId(null);
+    setEditedQuality({ id: null, title: "", description: "", imageUrl: "" });
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setSelectedFile(file);
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setEditedQuality((prev) => ({ ...prev, imageUrl: reader.result }));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   if (loading) return <div className="text-center text-lg font-semibold py-10">Yükleniyor...</div>;
 
@@ -35,98 +61,80 @@ const AdminQuality = () => {
     </div>
   );
 
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setFormData((prev) => ({ ...prev, image: reader.result }));
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-  const handleSave = () => {
-    if (formData.id) {
-      dispatch(UpdateQuality(formData.id, formData));
-    } else {
-      dispatch(AddQuality(formData));
-    }
-    setFormData(initialQualitySection);
-  };
-
-  const handleAddNew = () => {
-    setFormData(initialQualitySection); // Reset form for new entry
-  };
-
-  const handleInlineSave = (updatedItem) => {
-    dispatch(UpdateQuality(updatedItem.id, updatedItem));
-  };
-
-  const handleInlineDelete = (id) => {
-    dispatch(DeleteQuality(id));
-  };
-
   return (
-    <div className="grid grid-cols-1 p-5"  >
-      <h1 className="text-2xl font-bold mb-5">Admin Quality Management</h1>
-      <h2 className="text-xl font-bold mb-2">
-        {formData.id ? "Edit Quality Section" : "Add New Quality Section"}
+    <div className="pt-6 max-w-4xl mx-auto gap-10">
+      <h1 className="text-2xl font-bold mb-5">Admin Kalite Yönetimi</h1>
+      <h2 className="text-xl font-semibold mb-4">
+        {editingQualityId ? "Kaliteyi Güncelle" : "Yeni Kalite Ekle"}
       </h2>
-      {/* Add or Edit Section */}
-      <div className="border p-4 rounded-lg bg-white shadow-md" style={theme === lightTheme ? null : grayDarkTheme}>
-        <input
-          type="text"
-          placeholder="Title"
-          value={formData.title}
-          onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-          className="border p-2 rounded w-full mb-2"
-        />
-        <textarea
-          placeholder="Description"
-          value={formData.description}
-          onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-          className="border p-2 rounded w-full mb-2"
-        />
-        <input
-          type="file"
-          onChange={handleFileChange}
-          className="border p-2 rounded w-full mb-2"
-        />
-        {formData.image && (
-          <img
-            src={formData.image}
-            alt="Preview"
-            className="w-24 h-24 object-cover rounded-full mb-2"
-          />
-        )}
-        <button
-          onClick={handleSave}
-          className="bg-green-500 text-white px-4 py-2 rounded mr-2"
-        >
-          Save
-        </button>
-        <button
-          onClick={handleAddNew}
-          className="bg-blue-500 text-white px-4 py-2 rounded"
-        >
-          Add New
-        </button>
-      </div>
-      {/* List Sections */}
-      <div className="space-y-4 mt-5">
-        {localQualities.map((section) => (
-          <InlineEdit
-            key={section.id}
-            item={section}
-            onSave={handleInlineSave}
-            onDelete={handleInlineDelete}
-          />
+
+      <div className="w-full grid grid-cols-1">
+        {qualities.map((quality) => (
+          <div key={quality.id} className="mb-4 border-[1px] p-2 rounded-lg">
+            <div className="flex items-center">
+              {editingQualityId === quality.id ? (
+                <div className="grid grid-cols-5 items-center gap-5 p-1">
+                  <input
+                    style={theme}
+                    type="text"
+                    value={editedQuality.title}
+                    onChange={(e) => setEditedQuality({ ...editedQuality, title: e.target.value })}
+                    placeholder="Kalite Başlığı"
+                    className="border border-gray-300 rounded-lg p-2"
+                  />
+                  <textarea
+                    style={theme}
+                    value={editedQuality.description}
+                    rows={10}
+                    placeholder="Kalite İçeriği"
+                    onChange={(e) => setEditedQuality({ ...editedQuality, description: e.target.value })}
+                    className="col-span-2 border border-gray-300 rounded-lg flex-1 p-2"
+                  />
+                  <input
+                    style={theme}
+                    type="file"
+                    onChange={handleFileChange}
+                    className="col-span-1 border p-2 rounded w-full mb-2"
+                  />
+                  <div className="col-span-1">
+                    <button
+                      onClick={handleSaveQuality}
+                      className="bg-green-500 py-1 px-4 rounded-lg hover:bg-green-600 mr-2"
+                    >
+                      Kaydet
+                    </button>
+                    <button
+                      onClick={handleCancelEdit}
+                      className="bg-gray-300 py-1 px-4 rounded-lg hover:bg-gray-400"
+                    >
+                      İptal
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <div className="grid grid-cols-5 items-center gap-5">
+                  <span className="col-span-1 text-center">{quality.title}</span>
+                  <span className="col-span-2">{quality.description}</span>
+                  <div>
+                    {quality.imageUrl && <img src={`data:image/jpeg;base64,${quality.imageUrl}`} alt="Kalite Resmi" className="col-span-1"/>}
+                  </div>
+                  <div>
+                    <button
+                      onClick={() => { setEditedQuality(quality); setEditingQualityId(quality.id); }}
+                      className="bg-yellow-500 py-1 px-4 rounded-lg hover:bg-yellow-600 mr-2"
+                    >
+                      Düzenle
+                    </button>
+                    
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
         ))}
       </div>
+
       <ToastContainer />
     </div>
   );
-};
-
-export default AdminQuality;
+}

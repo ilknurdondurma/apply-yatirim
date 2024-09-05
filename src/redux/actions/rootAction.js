@@ -6,7 +6,6 @@ import * as categoryActions from "./category/categoryActions";
 import * as productActions from "./product/productActions";
 import * as serviceActions from "./service/serviceActions";
 import * as catalogActions from "./catalog/catalogActions";
-import * as customerStoryActions from "./customerStory/customerStoryActions";
 import * as teamActions from "./team/teamActions";
 import * as qualityActions from "./quality/qualityActions";
 import * as userActions from "./user/userActions";
@@ -14,6 +13,8 @@ import * as commentActions from "./comment/commentActions";
 import * as propertyActions from "./property/propertyActions";
 import * as brandActions from "./brand/brandActions";
 import * as modelActions from "./model/modelActions";
+import * as compatibleModelActions from "./compatibleModel/compatibleModelAction";
+
 
 
 
@@ -26,7 +27,6 @@ const Actions =
          productActions,
           serviceActions,
            catalogActions,
-            customerStoryActions,
              teamActions,
               qualityActions,
                userActions,
@@ -34,6 +34,7 @@ const Actions =
                  propertyActions,
                   brandActions,
                    modelActions,
+                   compatibleModelActions
                   
         
         

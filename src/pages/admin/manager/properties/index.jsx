@@ -16,9 +16,6 @@ export default function AdminProperties() {
   const initialStatePropertyType={title: ''}
 
   const [newProperty, setNewProperty] = useState(initialStateProperty);
-  const [selectedProductId, setSelectedProductId] = useState(null);
-  const [selectedPropertyTypeId, setSelectedPropertyTypeId] = useState(null);
-
   const [newPropertyType, setNewPropertyType] = useState(initialStatePropertyType);
   const [editingPropertyTypeId, setEditingPropertyTypeId] = useState(null);
   const [editedPropertyType, setEditedPropertyType] = useState(initialStatePropertyType);

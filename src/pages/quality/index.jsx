@@ -36,7 +36,7 @@ function Quality() {
             style={theme}
           >
             <img
-              src={section.imageUrl}
+              src={`data:image/jpeg;base64,${section.imageUrl}`}
               alt={section.title}
               className=" w-1/2 sm:w-full h-64 object-contain rounded-lg mb-4 md:mb-0 md:mr-4"
             />

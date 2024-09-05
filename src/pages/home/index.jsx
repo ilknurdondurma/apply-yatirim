@@ -1,9 +1,5 @@
 import React, { useEffect, useState } from "react";
 import ProductCard from "../../components/card";
-import servicess from "../../dummy-data/services";
-import customerStoriess from "../../dummy-data/customerStories";
-import teamMembers from "../../dummy-data/team";
-import blogPosts from "../../dummy-data/blogs";
 import Banner from "../../components/banner";
 import Slider from "../../components/slider";
 import { AnimateContainer } from "react-animate-container";
@@ -11,28 +7,25 @@ import { NavLink } from "react-router-dom";
 import { GetAllProducts } from "../../redux/actions/product/productActions";
 import { useDispatch, useSelector } from "react-redux";
 import { GetServices } from "../../redux/actions/service/serviceActions";
-import { GetTeams } from "../../redux/actions/team/teamActions";
-import { GetStories } from "../../redux/actions/customerStory/customerStoryActions";
-import ReactPlayer from "react-player";
-import { lightTheme } from "../../redux/reducers/theme/themeReducers";
 import bannerData from "../../dummy-data/bannerData";
 import imageBanner from "../../assets/bg.png"
-import { FcServices } from "react-icons/fc";
 import { GrServices } from "react-icons/gr";
 import MySlider from "../../components/slider/slider";
 import backgroundImage from '../../assets/image1-removebg.png'
+import { GetComments } from "../../redux/actions/comment/commentActions";
 
 function Home() {
   const dispatch=useDispatch();
   const [banner1, setBanner1] = useState(bannerData);
   const {products , loading ,error}= useSelector((state)=>state.product);
+  const { comments, } = useSelector((state) => state.comment);
   const {services }= useSelector((state)=>state.service);
-  const {customerStories }= useSelector((state)=>state.story);
 
   useEffect(()=>{
     dispatch(GetAllProducts());
     dispatch(GetServices());
-    dispatch(GetStories());
+    dispatch(GetComments());
+
   },[dispatch]);
 
   if (loading) return <div className="text-center text-lg font-semibold py-10">Yükleniyor...</div>;
@@ -112,7 +105,7 @@ function Home() {
           Müşteri Hikayeleri
         </h2>
         <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-8" >
-          <Slider story={customerStories} />
+          <Slider story={comments} />
         </div>
       </section>
 

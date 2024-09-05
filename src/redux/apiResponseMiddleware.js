@@ -12,7 +12,7 @@ const apiResponseMiddleware = store => next => action => {
     // Add more success messages for different status codes as needed
   } 
   
-  else if (action.type.endsWith('_FAILURE')) {
+  else if (action.type.endsWith('_FAILURE') || action.type.endsWith('_REFUSED')) {
     const statusCode = action.payload.response?.status;
 
     switch (statusCode) {
