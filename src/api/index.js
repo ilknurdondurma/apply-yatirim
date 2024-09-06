@@ -41,8 +41,8 @@ export const deleteService = (id) => API.delete(`/Employment/${id}`) //ok
 
 //team
 export const getTeams = () => API.get(`/Member`) //ok
-export const addTeam = (team) => API.post(`/Member/sign-up`,team ,{headers: {'Content-Type':'multipart/form-data'}}) //ok
-export const updateTeam = (updatedTeam) => API.put(`/Member/update` , updatedTeam ,)//ok
+/**/export const addTeam = (team) => API.post(`/Member/sign-up`,team ,{headers: {'Content-Type':'multipart/form-data'}}) //ok
+export const updateTeam = (updatedTeam) => API.put(`/Member/update` , updatedTeam ,{headers: {'Content-Type':'multipart/form-data'}})//ok
 export const deleteTeam = (id) => API.delete(`/Member/${id}`)//ok
 
 //category
@@ -81,29 +81,36 @@ export const addCompatibleModel=(compatibleModel)=>API.post(`/CompatibleModel`,c
 export const updateCompatibleModel=(id,updatedCompatibleModel)=>API.put(`/CompatibleModel/${id}`,updatedCompatibleModel ,{headers: {'Content-Type': 'application/json',},}) 
 export const deleteCompatibleModel=(id)=>API.delete(`/CompatibleModel/${id}`); 
 
-
 //abouts
 export const getAbouts = () => API.get(`/AboutUs`)//ok
 export const addAbout=(about)=>API.post(`/AboutUs`,about,{headers: {'Content-Type': 'application/json',},}); 
-export const updateAbout=(id,updatedAbout)=>API.put(`/AboutUs/${id}`,updatedAbout ,{headers: {'Content-Type':'multipart/form-data'}}) 
+export const updateAbout=(id,updatedAbout)=>API.put(`/AboutUs/${id}`,updatedAbout ,{headers: {'Content-Type': 'application/json',},}) //ok
 export const deleteAbout=(id)=>API.delete(`/AboutUs/${id}`); 
 
 //quality
-export const getQualities = () => API.get(`/Quality`)
-export const addQualiity = (quality) => API.post(`/Quality`,quality,{headers: {'Content-Type': 'application/json',},})
-export const updateQuality = (id ,updatedQuality) => API.put(`/Quality/update`,updatedQuality,{headers: {'Content-Type': 'application/json',},})
+export const getQualities = () => API.get(`/Quality`)//ok
+/**/export const addQualiity = (quality) => API.post(`/Quality`,quality,{headers: {'Content-Type':'multipart/form-data'}})
+/**/export const updateQuality = (id ,updatedQuality) => API.put(`/Quality/update`,updatedQuality,{headers: {'Content-Type':'multipart/form-data'}})//ok
 export const deleteQuality = (id) => API.delete(`/Quality/${id}`)
 
 
-
-
-
-
-
 //product
-export const getAllProducts = () => API.get(`/Product`)
-export const getProductsById = (id) => API.get(`/Product/${id}`)
+export const getAllProducts = () => API.get(`/Product`)//ok
+export const getProductsById = (id) => API.get(`/Product/${id}`)//ok
 export const getProductsByCategoryId = (id) => API.get(`/Product/Category/${id}`)
+/**/export const addProduct = (product) => API.post(`/Product`,product,{headers: {'Content-Type':'multipart/form-data'}})
+/**/export const updateProduct = (id ,updatedProduct) => API.put(`/Product/update`,updatedProduct,{headers: {'Content-Type':'multipart/form-data'}})//ok
+export const deleteProduct = (id) => API.delete(`/Product/${id}`)
+
+
+
+
+
+
+
+
+
+
 
 //catalogs
 export const getAllCatalogs = () => API.get(`/Catalog`)
@@ -120,53 +127,6 @@ export const getCustomerStories = () => API.get(`/Comment`)
 
 //comment
 export const getComments=()=>API.get('/Comment')//
-
-
-
-
-
-
-
-
-
-
-
-
-export const getHighlightsProducts = (userId) => API.get(`/Product/get-highlights/${userId}`)
-export const getProductsByBrandId = (id) => API.get(`/Product/get-brand/${id}`)
-export const addProduct = (product) => API.post(`/Product/add/`,product, {headers: {'Content-Type':'multipart/form-data'}})
-export const updateProduct = (product) => API.put(`/Product/`,product)
-export const deleteProduct = (id) => API.delete(`/Product/${id}`)
-export const getProductsBySearch = (categoryName) => API.get(`/Product/category/${categoryName}`)
-
-
-//user
-export const login = (formdata) => API.post('/User/login', formdata)
-export const signUp = (user) => API.post('/User/sign-up', user)
-export const updateUser = (id,user) => API.put(`/User/update/${id}`, user)
-
-export const getAllBrand=()=>API.get(`/Brand/get-all`)
-export const getBrandByCategory=(categoryId)=>API.get(`/Brand/get/${categoryId}`)
-//comment
-export const getCommentByProductId=(productId)=>API.get(`/Comment/get-by-product/${productId}`)
-export const getCommentByUserId=(userId)=>API.get(`/Comment/get-by-user/${userId}`)
-export const addComment=(comment)=>API.post(`/Comment/add`,comment)
-export const updateComment=(comment)=>API.put(`/Comment/update`,comment)
-export const deleteComment=(id)=>API.put(`/Comment/delete/${id}`)
-//favoritesw
-export const getFavoritesByUserId = (userId) => API.get(`/Product/get-favori/${userId}`)
-export const addFavorite=(product)=>API.post('/Favorite/add',product)
-export const deleteFavorite = (id) => API.delete(`/Favorite/delete/${id}`)
-export const deleteFavoriteByUserAndProductId = (userId,productId) => API.delete(`/Favorite/delete/${userId}/${productId}`)
-//rental
-export const getRentalsByUserId = (userId) => API.get(`/Rental/get-by-user-id/${userId}`)
-export const getRentalsByProductId = (prodId) => API.get(`/Rental/get-by-product-id/${prodId}`)
-export const addRental=(rental)=>API.post('/Rental/add',rental)
-
-//message
-export const getMessagesByUserId = (userId) => API.get(`/Message/get-by-user/${userId}`)
-export const getMessagesUserToUser = (senderId,receiverId) => API.get(`/Message/get-userto-user/${senderId}/${receiverId}`)
-
 
 
 

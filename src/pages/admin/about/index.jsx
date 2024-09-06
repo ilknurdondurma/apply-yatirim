@@ -19,6 +19,7 @@ export default function AdminAbout() {
 
   const handleSaveAbout = async () => {
     if (editedAbout) {
+      console.log(JSON.stringify(editedAbout))
       await dispatch(UpdateAbout(editingAboutId ,JSON.stringify(editedAbout)));
       setEditingAboutId(null);
       setEditedAbout(initialStateAbout);
@@ -52,7 +53,7 @@ export default function AdminAbout() {
           <div key={about.id} className="mb-4 border-[1px] p-2 rounded-lg">
             <div className="flex items-center">
               {editingAboutId === about.id ? (
-                <div className="flex flex-1 items-center gap-5 p-1">
+                <div className="w-full grid grid-cols-5 gap-5 sm:grid-cols-1 sm:gap-3 p-1">
                   <input
                     style={theme}
                     type="text"
@@ -64,29 +65,31 @@ export default function AdminAbout() {
                   <textarea
                     style={theme}
                     value={editedAbout.description}
-                    rows={10}
+                    rows={15}
                     placeholder="Hakkımızda İçeriği"
                     onChange={(e) => setEditedAbout({ ...editedAbout, description: e.target.value })}
-                    className="border border-gray-300 rounded-lg flex-1 p-2"
+                    className="col-span-3 border border-gray-300 rounded-lg  p-2"
                   />
-                  <button
-                    onClick={handleSaveAbout}
-                    className="bg-green-500 py-1 px-4 rounded-lg hover:bg-green-600 mr-2"
-                  >
-                    Kaydet
-                  </button>
-                  <button
-                    onClick={handleCancelEdit}
-                    className="bg-gray-300 py-1 px-4 rounded-lg hover:bg-gray-400"
-                  >
-                    İptal
-                  </button>
+                  <div className='my-auto gap-1'>
+                      <button
+                        onClick={handleSaveAbout}
+                        className="bg-green-500 py-1 px-4 rounded-lg hover:bg-green-600 mr-2"
+                      >
+                        Kaydet
+                      </button>
+                      <button
+                        onClick={handleCancelEdit}
+                        className="bg-gray-300 py-1 px-4 rounded-lg hover:bg-gray-400"
+                      >
+                        İptal
+                      </button>
+                  </div>
                 </div>
               ) : (
-                <div className="grid grid-cols-5 items-center ">
+                <div className="grid grid-cols-5 gap-5 sm:grid-cols-1 sm:gap-3 items-center ">
                   <span className="col-span-1 text-center">{about.title}</span>
                   <span className="col-span-3">{about.description}</span>
-                  <div>
+                  <div className='sm:flex sm:justify-center'>
                     <button
                       onClick={() => {setEditedAbout(about); setEditingAboutId(about.id)}}
                       className="bg-yellow-500 py-1 px-4 rounded-lg hover:bg-yellow-600 mr-2"

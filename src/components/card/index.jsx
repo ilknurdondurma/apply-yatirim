@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { grayDarkTheme, grayLightTheme, lightTheme } from "../../redux/reducers/theme/themeReducers";
 import { NavLink } from "react-router-dom";
 
-function ProductCard({ product }) {
+function ProductCard({ product}) {
   const [isHovered, setIsHovered] = useState(false);
   const theme = useSelector((state) => state.theme.theme);
   
@@ -17,7 +17,7 @@ function ProductCard({ product }) {
       style={theme===lightTheme ? grayLightTheme: grayDarkTheme}
     >
       <img
-        src={product.imageUrl1}
+        src={`data:image/jpeg;base64,${product.imageUrl1}`}
         alt={product.title ?? ""}
         className="w-full h-60 sm:h-52 object-cover"
       />

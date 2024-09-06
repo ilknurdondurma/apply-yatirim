@@ -73,7 +73,7 @@ export default function AdminQuality() {
           <div key={quality.id} className="mb-4 border-[1px] p-2 rounded-lg">
             <div className="flex items-center">
               {editingQualityId === quality.id ? (
-                <div className="grid grid-cols-5 items-center gap-5 p-1">
+                <div className="w-full grid grid-cols-5 sm:grid-cols-1 items-center gap-5 p-1">
                   <input
                     style={theme}
                     type="text"
@@ -112,7 +112,7 @@ export default function AdminQuality() {
                   </div>
                 </div>
               ) : (
-                <div className="grid grid-cols-5 items-center gap-5">
+                <div className="w-full grid grid-cols-5 sm:grid-cols-1 items-center gap-5">
                   <span className="col-span-1 text-center">{quality.title}</span>
                   <span className="col-span-2">{quality.description}</span>
                   <div>

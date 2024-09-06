@@ -2,41 +2,207 @@ import React, { useEffect, useState } from "react";
 import { AnimateContainer } from "react-animate-container";
 import ProductCard from "../../../../components/card";
 import { useDispatch, useSelector } from "react-redux";
-import { GetAllProducts } from "../../../../redux/actions/product/productActions";
+import { GetAllProducts, DeleteProduct, UpdateProduct } from "../../../../redux/actions/product/productActions";
 import { ToastContainer } from "react-toastify";
+import { MdDelete, MdEdit } from "react-icons/md";
 
 const AdminProductList = () => {
-  const dispatch=useDispatch();
-  const {products , loading ,error}= useSelector((state)=>state.product);
+  const dispatch = useDispatch();
+  const { products, loading, error } = useSelector((state) => state.product);
+  const [selectedProductId, setSelectedProductId] = useState(null);
+  const [editingProductId, setEditingProductId] = useState(null);
+  const initialProductState = {
+    id: null,
+    title: "",
+    description: "",
+    price: null,
+    stock: null,
+    categoryId: null,
+    imageUrl1: "",
+    imageUrl2: "",
+    imageUrl3: ""
+  };
+  const [editedProduct, setEditedProduct] = useState(initialProductState);
+  const [showModal, setShowModal] = useState(false); // Modal visibility state
+  const [selectedFiles, setSelectedFiles] = useState({ imageUrl1: null, imageUrl2: null, imageUrl3: null });
 
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(GetAllProducts());
-  },[dispatch]);
+  }, [dispatch]);
 
- if (loading) return <div className="text-center text-lg font-semibold py-10">Yükleniyor...</div>;
+  const handleDelete = async (productName) => {
+    if (window.confirm(`${productName} silinecektir ve işlem geri alınamayacaktır. Devam etmek istiyor musunuz?`)) {
+      try {
+        await dispatch(DeleteProduct(selectedProductId));
+        dispatch(GetAllProducts());
+      } catch (error) {
+        console.error('Ürün silinemedi:', error);
+      }
+    }
+  };
 
-  if (error) return (
-    <div className="flex justify-center items-center min-h-screen">
-      <div className="text-center">
-        <h1 className="text-6xl font-bold text-red-600">{error}</h1>
-        <p className="text-xl mt-4 text-gray-600">Bir hata oluştu, lütfen daha sonra tekrar deneyin.</p>
+  const handleEdit = (product) => {
+    setEditingProductId(product.id);
+    setEditedProduct(product);
+    setShowModal(true); // Open modal
+  };
+
+  const handleFileChange = (e, imageKey) => {
+    const file = e.target.files[0];
+    setSelectedFiles((prev) => ({ ...prev, [imageKey]: file }));
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setEditedProduct((prev) => ({ ...prev, [imageKey]: reader.result }));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleEditSubmit = async (e) => {
+    e.preventDefault(); // Prevent default form submission
+    if (editedProduct) {
+      const productRequest = new FormData();
+      productRequest.append('data', JSON.stringify(editedProduct));
+      if (selectedFiles.imageUrl1) {
+        productRequest.append('imageUrl1', selectedFiles.imageUrl1);
+      }
+      if (selectedFiles.imageUrl2) {
+        productRequest.append('imageUrl2', selectedFiles.imageUrl2);
+      }
+      if (selectedFiles.imageUrl3) {
+        productRequest.append('imageUrl3', selectedFiles.imageUrl3);
+      }
+      try {
+        await dispatch(UpdateProduct(editingProductId, productRequest));
+        setShowModal(false);
+        setEditingProductId(null);
+        setEditedProduct(initialProductState);
+        setSelectedFiles({ imageUrl1: null, imageUrl2: null, imageUrl3: null });
+        dispatch(GetAllProducts());
+      } catch (error) {
+        console.error('Ürün güncellenirken bir hata oluştu:', error);
+      }
+    }
+  };
+
+  if (loading)
+    return <div className="text-center text-lg font-semibold py-10">Yükleniyor...</div>;
+
+  if (error)
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <div className="text-center">
+          <h1 className="text-6xl font-bold text-red-600">{error}</h1>
+          <p className="text-xl mt-4 text-gray-600">Bir hata oluştu, lütfen daha sonra tekrar deneyin.</p>
+        </div>
       </div>
-    </div>
-  );
+    );
 
   return (
-    <div style={{ padding: "20px" }} className="flex flex-col justify-center items-center">
-
-      <sections className="flex flex-col text-center my-5">
+    <div className="flex flex-col justify-center items-center p-5">
+      <section className="flex flex-col text-center my-5">
         <h2 className="text-2xl font-bold mb-8">Ürünler</h2>
         <div className="grid grid-cols-4 lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-1 gap-5 justify-center mx-auto">
-          {products.map((product, index) => (
-            <AnimateContainer.fadeIn duration={1}>
-              <ProductCard key={index} product={product} />
-            </AnimateContainer.fadeIn>
-          ))}
+          {Array.isArray(products) && products.length > 0 
+            ? products.map((product, index) => (
+                <div key={index}>
+                  <AnimateContainer.fadeIn duration={1}>
+                    <ProductCard product={product} />
+                  </AnimateContainer.fadeIn>
+                  <div className="flex justify-start m-1 gap-5 ">
+                    <MdDelete size={25} onClick={() => { setSelectedProductId(product.id); handleDelete(product.title); }} />
+                    <MdEdit size={25} onClick={() => handleEdit(product)} />
+                  </div>
+                </div>
+              ))
+            : <p>No products available</p>}
         </div>
-      </sections>
+      </section>
+
+      {/* Modal */}
+      {showModal && (
+        <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center">
+          <div className="bg-white rounded-lg shadow-lg p-6 w-1/3">
+            <h3 className="text-xl font-semibold mb-4">Ürünü Güncelle</h3>
+            <form onSubmit={handleEditSubmit}>
+              <div className="mb-4">
+                <label className="block text-gray-700">Başlık</label>
+                <input
+                  type="text"
+                  value={editedProduct.title}
+                  onChange={(e) => setEditedProduct({ ...editedProduct, title: e.target.value })}
+                  className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700">Açıklaması</label>
+                <input
+                  type="text"
+                  value={editedProduct.description}
+                  onChange={(e) => setEditedProduct({ ...editedProduct, description: e.target.value })}
+                  className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700">Fiyat</label>
+                <input
+                  type="text"
+                  value={editedProduct.price}
+                  onChange={(e) => setEditedProduct({ ...editedProduct, price: e.target.value })}
+                  className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700">Stok</label>
+                <input
+                  type="text"
+                  value={editedProduct.stock}
+                  onChange={(e) => setEditedProduct({ ...editedProduct, stock: e.target.value })}
+                  className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700">Kategori</label>
+                <input
+                  type="text"
+                  value={editedProduct.categoryId}
+                  onChange={(e) => setEditedProduct({ ...editedProduct, categoryId: e.target.value })}
+                  className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                />
+              </div>
+              <div className="grid grid-cols-3 gap-5">
+                {['imageUrl1', 'imageUrl2', 'imageUrl3'].map((imageKey) => (
+                  <div key={imageKey} className="mb-4">
+                    <label className="block text-gray-700">Resim {imageKey.slice(-1)}</label>
+                    <input type="file" onChange={(e) => handleFileChange(e, imageKey)} />
+                    {editedProduct[imageKey] && (
+                      <>
+                        {/* Resim base64 formatında ise */}
+                        <img 
+                          src={editedProduct[imageKey].startsWith('data:image') ? editedProduct[imageKey] : ''}
+                          alt={`Resim ${imageKey.slice(-1)}`} 
+                          className={`${editedProduct[imageKey].startsWith('data:image') ? 'block' : 'hidden'} mt-2 h-32 w-full`}
+                        />
+                        {/* Resim URL formatında ise */}
+                        <img 
+                          src={!editedProduct[imageKey].startsWith('data:image') ? `data:image/jpeg;base64,${editedProduct[imageKey]}` : ''}
+                          alt={`Resim ${imageKey.slice(-1)}`}
+                          className={`${!editedProduct[imageKey].startsWith('data:image') ? 'block' : 'hidden'} mt-2 h-32 w-full`}
+                        />
+                      </>
+                    )}
+                  </div>
+                ))}
+              </div>
+              <div className="flex justify-end gap-4">
+                <button type="button" onClick={() => setShowModal(false)} className="px-4 py-2 bg-gray-500 text-white rounded-lg">Kapat</button>
+                <button type="submit" className="px-4 py-2 bg-blue-500 text-white rounded-lg">Güncelle</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
       <ToastContainer />
     </div>
   );

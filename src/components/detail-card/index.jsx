@@ -52,7 +52,7 @@ export default function DetailCard({ products: product }) {
           <div className='col-span-1 grid grid-cols-11 m-2'>
             <span className='flex justify-center self-center'><FaChevronLeft onClick={() => handleImageChange('left')} /></span>
             <div className="col-span-9 flex justify-center items-center">
-              <img className="object-contain h-96 w-96" src={imageUrl} />
+              <img className="object-contain h-96 w-96" src={`data:image/jpeg;base64,${imageUrl}`} alt='ürün'/>
             </div>
             <span className='flex justify-center self-center'><FaChevronRight onClick={() => handleImageChange('right')} /></span>
           </div>
