@@ -98,35 +98,23 @@ export const deleteQuality = (id) => API.delete(`/Quality/${id}`)
 export const getAllProducts = () => API.get(`/Product`)//ok
 export const getProductsById = (id) => API.get(`/Product/${id}`)//ok
 export const getProductsByCategoryId = (id) => API.get(`/Product/Category/${id}`)
-/**/export const addProduct = (product) => API.post(`/Product`,product,{headers: {'Content-Type':'multipart/form-data'}})
+/**/export const addProduct = (product) => API.post(`/Product/add`,product,{headers: {'Content-Type':'multipart/form-data'}})//OK
 /**/export const updateProduct = (id ,updatedProduct) => API.put(`/Product/update`,updatedProduct,{headers: {'Content-Type':'multipart/form-data'}})//ok
-export const deleteProduct = (id) => API.delete(`/Product/${id}`)
-
-
-
-
-
-
-
-
-
+export const deleteProduct = (id) => API.delete(`/Product/${id}`) //ok
 
 
 //catalogs
-export const getAllCatalogs = () => API.get(`/Catalog`)
-
-
-
-//comments
-export const getCustomerStories = () => API.get(`/Comment`)
-
+export const getAllCatalogs = () => API.get(`/Catalog`)//OK
+/**/export const addCatalog = (id, product) => API.post(`/Catalog/upload/${id}`,product,{headers: {'Content-Type':'multipart/form-data'}})
+/**/export const updateCatalog = (id ,updatedCatalog) => API.put(`/Catalog/update`,updatedCatalog,{headers: {'Content-Type':'multipart/form-data'}})
+export const deletePCatalog = (id) => API.delete(`/Catalog/${id}`)
 
 
 //users
- export const getUsers = () => API.get(`/Customer`) //
+ export const getUsers = () => API.get(`/Customer`) //OK
 
 //comment
-export const getComments=()=>API.get('/Comment')//
+export const getComments=()=>API.get('/Comment')//OK
 
 
 

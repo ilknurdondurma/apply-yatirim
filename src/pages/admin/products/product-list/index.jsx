@@ -3,7 +3,7 @@ import { AnimateContainer } from "react-animate-container";
 import ProductCard from "../../../../components/card";
 import { useDispatch, useSelector } from "react-redux";
 import { GetAllProducts, DeleteProduct, UpdateProduct } from "../../../../redux/actions/product/productActions";
-import { ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import { MdDelete, MdEdit } from "react-icons/md";
 
 const AdminProductList = () => {
@@ -58,9 +58,10 @@ const AdminProductList = () => {
       reader.readAsDataURL(file);
     }
   };
+  
 
   const handleEditSubmit = async (e) => {
-    e.preventDefault(); // Prevent default form submission
+    e.preventDefault(); 
     if (editedProduct) {
       const productRequest = new FormData();
       productRequest.append('data', JSON.stringify(editedProduct));
@@ -73,13 +74,19 @@ const AdminProductList = () => {
       if (selectedFiles.imageUrl3) {
         productRequest.append('imageUrl3', selectedFiles.imageUrl3);
       }
+      console.log(editedProduct)
+      console.log("resim1 : " + selectedFiles.imageUrl1)
+      console.log("resim2 : " +selectedFiles.imageUrl2)
+      console.log("resim3 : " +selectedFiles.imageUrl3)
       try {
         await dispatch(UpdateProduct(editingProductId, productRequest));
+        await dispatch(GetAllProducts());
         setShowModal(false);
+        toast.success("Ürün başarıyla güncellendi!");
         setEditingProductId(null);
         setEditedProduct(initialProductState);
         setSelectedFiles({ imageUrl1: null, imageUrl2: null, imageUrl3: null });
-        dispatch(GetAllProducts());
+        
       } catch (error) {
         console.error('Ürün güncellenirken bir hata oluştu:', error);
       }
@@ -123,7 +130,7 @@ const AdminProductList = () => {
       {/* Modal */}
       {showModal && (
         <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center">
-          <div className="bg-white rounded-lg shadow-lg p-6 w-1/3">
+          <div className="bg-white rounded-lg shadow-lg p-6 w-1/3 md:w-1/2 sm:w-full m-5">
             <h3 className="text-xl font-semibold mb-4">Ürünü Güncelle</h3>
             <form onSubmit={handleEditSubmit}>
               <div className="mb-4">
@@ -171,25 +178,27 @@ const AdminProductList = () => {
                   className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
                 />
               </div>
-              <div className="grid grid-cols-3 gap-5">
+              <div className="grid grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-5">
                 {['imageUrl1', 'imageUrl2', 'imageUrl3'].map((imageKey) => (
                   <div key={imageKey} className="mb-4">
                     <label className="block text-gray-700">Resim {imageKey.slice(-1)}</label>
                     <input type="file" onChange={(e) => handleFileChange(e, imageKey)} />
                     {editedProduct[imageKey] && (
                       <>
-                        {/* Resim base64 formatında ise */}
-                        <img 
-                          src={editedProduct[imageKey].startsWith('data:image') ? editedProduct[imageKey] : ''}
-                          alt={`Resim ${imageKey.slice(-1)}`} 
-                          className={`${editedProduct[imageKey].startsWith('data:image') ? 'block' : 'hidden'} mt-2 h-32 w-full`}
-                        />
-                        {/* Resim URL formatında ise */}
-                        <img 
-                          src={!editedProduct[imageKey].startsWith('data:image') ? `data:image/jpeg;base64,${editedProduct[imageKey]}` : ''}
-                          alt={`Resim ${imageKey.slice(-1)}`}
-                          className={`${!editedProduct[imageKey].startsWith('data:image') ? 'block' : 'hidden'} mt-2 h-32 w-full`}
-                        />
+                        {/* Base64 formatında olup olmadığını kontrol ediyoruz */}
+                        {editedProduct[imageKey].startsWith('data:image') ? (
+                          <img 
+                            src={editedProduct[imageKey]}
+                            alt={`Resim ${imageKey.slice(-1)}`} 
+                            className="mt-2 h-32 w-full sm:w-1/2"
+                          />
+                        ) : (
+                          <img 
+                            src={`data:image/jpeg;base64,${editedProduct[imageKey]}`}
+                            alt={`Resim ${imageKey.slice(-1)}`}
+                            className="mt-2 h-32 w-full sm:w-1/2 md:w-1/2"
+                          />
+                        )}
                       </>
                     )}
                   </div>

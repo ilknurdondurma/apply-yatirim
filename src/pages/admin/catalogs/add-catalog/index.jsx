@@ -4,9 +4,11 @@ import { IoIosPricetags } from "react-icons/io";
 import { MdOutlineWbIncandescent } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCategories } from "../../../../redux/actions/category/categoryActions";
+import { AddCatalog } from "../../../../redux/actions/catalog/catalogActions";
 
 
 export default function AdminAddCatalog() {
+  const dispatch = useDispatch();
 
   const formFields = [
     {
@@ -22,8 +24,8 @@ export default function AdminAddCatalog() {
       type: "text",
     },
     {
-      name: "image",
-      label: "Resim URL",
+      name: "file",
+      label: "Katalog Dosyası",
       icon: <IoIosPricetags />,
       type: "file",
     },
@@ -32,7 +34,15 @@ export default function AdminAddCatalog() {
 
   const handleSubmit = (values) => {
     console.log(values);
-    alert("Form submitted successfully!");
+    try{
+      const catalogRequest = new FormData();
+      catalogRequest.append('data', JSON.stringify(values));
+      dispatch(AddCatalog(0,values))
+    }
+    catch{
+      alert("Katalog ekleme işlemi başarısız oldu.");
+    }
+    
   };
 
   return (
