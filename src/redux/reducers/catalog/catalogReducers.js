@@ -48,6 +48,7 @@ const catalogReducers=(state = initialState , action )=>{
                 loading: false,
                 error: null,
             }
+        
         default:
             return state;
     }

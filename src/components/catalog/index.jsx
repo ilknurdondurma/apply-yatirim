@@ -2,12 +2,27 @@ import React from "react";
 import book from "../../assets/book.jpg";
 import { useSelector } from "react-redux";
 import { lightTheme, grayLightTheme, grayDarkTheme } from "../../redux/reducers/theme/themeReducers";
+import { downloadCatalog } from "../../api";
 
 function CatalogItem({ catalog }) {
   const theme = useSelector((state) => state.theme.theme);
   
-  const handleDownload = () => {
-    alert(`"${catalog.title}" kataloğu indiriliyor...`);
+
+  const handleDownload = async (id, fileName) => {
+    try {
+      alert(`"${catalog.title}" kataloğu indiriliyor...`);
+      const response = await downloadCatalog(id);
+      const blob = await response.data;
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = fileName;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (error) {
+      console.error("Dosya indirilirken bir hata oluştu", error);
+    }
   };
 
   const appliedTheme = theme === lightTheme ? grayLightTheme : grayDarkTheme;
@@ -36,7 +51,7 @@ function CatalogItem({ catalog }) {
 
         <div className=" flex items-center justify-center w-full col-span-2 ">
         <button
-          onClick={handleDownload}
+          onClick={() => handleDownload(catalog.id,catalog.fileName)}
           className="px-4 py-2 bg-primary text-white rounded-lg"
         >
           Hemen İncele

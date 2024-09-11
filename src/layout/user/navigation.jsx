@@ -17,11 +17,8 @@ import ToggleSwitch from "../../components/toggle";
 function Navigation() {
   const [navbarElement] = useState(navbarElements);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [contacts] = useState(contactData);
-  const facebook = contacts[0].facebook;
-  const twitter = contacts[0].twitter;
-  const instagram = contacts[0].instagram;
-  const youtube = contacts[0].youtube;
+  const {contacts ,loading,error} =useSelector((state)=>state.contact);
+ 
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -94,19 +91,23 @@ function Navigation() {
         </div>
         <div className="flex gap-2 self-center mx-2 sm:hidden">
              
-              <a href={facebook}>
+              {contacts.map((contact)=>(
+                <>
+                <a href={contact.facebook}>
                 <FaFacebook size={15} />
+                </a>
+                <a href={contact.twitter}>
+                  <FaTwitter size={15} />
+                </a>
+                <a href={contact.instagram}>
+                  <FaInstagram size={15} />
+                </a>
+                <a href={contact.youtube}>
+                  <AiFillYoutube size={15} />
               </a>
-              <a href={twitter}>
-                <FaTwitter size={15} />
-              </a>
-              <a href={instagram}>
-                <FaInstagram size={15} />
-              </a>
-              <a href={youtube}>
-                <AiFillYoutube size={15} />
-              </a>
-            </div>
+                </>
+              ))}
+          </div>
         
       </div>
       

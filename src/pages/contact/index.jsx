@@ -61,28 +61,42 @@ function Contact() {
       <h1 className="text-4xl font-bold mt-20  text-center mb-12">İletişim Bilgileri</h1>
       <div>
         {contacts.slice(0, 1).map((contact) => (
-          <div className="md:grid-cols-1 sm:grid-cols-1 sm:gap-2 grid grid-cols-3 gap-5" key={contact.id}>
+          <div className="md:grid-cols-1 sm:grid-cols-1 sm:gap-2 grid grid-cols-2 gap-3 justify-between sm:text-xs" key={contact.id}>
             <AnimateContainer.fadeInUp duration={1} active>
-              <div className="border-2 p-5 flex justify-center flex-col shadow-lg my-5 hover:cursor-pointer max-h-52 min-h-52" style={theme === lightTheme ? null : grayDarkTheme}>
+              <div className="border-2 p-5 flex justify-center items-center gap-10 shadow-lg my-5 hover:cursor-pointer max-h-20 min-h-20" style={theme === lightTheme ? null : grayDarkTheme}>
                 <div className="flex justify-center font-bold text-xl">Email</div>
-                <div className="flex justify-center py-5"><FaEnvelope size={50} /></div>
+                <div className="flex justify-center py-5"><FaEnvelope size={30} /></div>
                 <div className="flex justify-center">{contact.email}</div>
+              </div>
+            </AnimateContainer.fadeInUp>
+            <AnimateContainer.fadeInUp duration={1} active>
+              <div className="border-2 p-5 flex justify-center items-center gap-5 shadow-lg my-5 hover:cursor-pointer max-h-20 min-h-20" style={theme === lightTheme ? null : grayDarkTheme}>
+                <div className="flex justify-center font-bold text-xl">Email</div>
+                <div className="flex justify-center py-5"><FaEnvelope size={30} /></div>
+                <div className="flex justify-center">{contact.email2}</div>
               </div>
             </AnimateContainer.fadeInUp>
 
             <AnimateContainer.fadeInDown duration={1} active>
-              <div className="border-2 p-5 flex justify-center flex-col shadow-lg my-5 hover:cursor-pointer max-h-52 min-h-52" style={theme === lightTheme ? null : grayDarkTheme}>
+              <div className="border-2 p-5 flex justify-center items-center gap-10 shadow-lg my-5 hover:cursor-pointer max-h-20 min-h-20" style={theme === lightTheme ? null : grayDarkTheme}>
                 <div className="flex justify-center font-bold text-xl">Telefon</div>
-                <div className="flex justify-center py-5"><FaPhone size={50} /></div>
+                <div className="flex justify-center py-5"><FaPhone size={30} /></div>
                 <div className="flex justify-center">{contact.phone}</div>
+              </div>
+            </AnimateContainer.fadeInDown>
+            <AnimateContainer.fadeInDown duration={1} active>
+              <div className="text-start border-2 p-5 flex justify-center items-center gap-10 shadow-lg my-5 hover:cursor-pointer max-h-20 min-h-20" style={theme === lightTheme ? null : grayDarkTheme}>
+                <div className="flex justify-center font-bold text-xl">Telefon</div>
+                <div className="flex justify-center py-5"><FaPhone size={30} /></div>
+                <div className="flex justify-center">{contact.phone2}</div>
               </div>
             </AnimateContainer.fadeInDown>
 
             <AnimateContainer.fadeInRight duration={1} active>
-              <div className="border-2 p-5 flex justify-center flex-col shadow-lg my-5 hover:cursor-pointer max-h-52 min-h-52" style={theme === lightTheme ? null : grayDarkTheme}>
+              <div className="col-start-1 col-end-3 border-2 p-5 flex justify-center items-center gap-10 shadow-lg my-5 hover:cursor-pointer max-h-20 min-h-20" style={theme === lightTheme ? null : grayDarkTheme}>
                 <div className="flex justify-center font-bold text-xl">İletişim Adresi :</div>
-                <div className="flex justify-center py-5"><FaAddressCard size={50} /></div>
-                <div className="flex justify-center">{contact.address.city}</div>
+                <div className="flex justify-center py-5"><FaAddressCard size={30} /></div>
+                <div className="flex justify-center">{contact.address}</div>
               </div>
             </AnimateContainer.fadeInRight>
           </div>

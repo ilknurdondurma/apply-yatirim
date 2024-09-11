@@ -1,5 +1,5 @@
-import { addCatalog, getAllCatalogs, updateCatalog } from "../../../api";
-import { GET_CATALOGS_REQUEST, GET_CATALOGS_SUCCESS,GET_CATALOGS_FAILURE, ADD_CATALOG_SUCCESS, UPDATE_CATALOG_SUCCESS, DELETE_CATALOG_SUCCESS } from "../../actionsType/catalog";
+import { addCatalog, deleteCatalog, getAllCatalogs, updateCatalog } from "../../../api";
+import { GET_CATALOGS_REQUEST, GET_CATALOGS_SUCCESS,GET_CATALOGS_FAILURE, ADD_CATALOG_SUCCESS, UPDATE_CATALOG_SUCCESS, DELETE_CATALOG_SUCCESS, DOWNLOAD_CATALOG_SUCCESS } from "../../actionsType/catalog";
 
 export const fetchCatalogsRequest=()=>({
     type:GET_CATALOGS_REQUEST,
@@ -30,6 +30,7 @@ export const deleteCatalogSuccess=(catalog)=>({
 });
 
 
+
 export const GetCatalogs = () => {
     return async (dispatch) => {
       dispatch(fetchCatalogsRequest());
@@ -43,11 +44,12 @@ export const GetCatalogs = () => {
       }
     };
   };
-export const AddCatalog=(id ,newCatalog)=>{
+
+export const AddCatalog=(newCatalog)=>{
   return async (dispatch)=>{
     dispatch(fetchCatalogsRequest());
     try {
-      const response = await addCatalog(id ,newCatalog);
+      const response = await addCatalog(newCatalog);
       const data = response.data;
       dispatch(addCatalogSuccess(data));
     } catch (error) {
@@ -74,7 +76,7 @@ export const DeleteCatalog = (id) => {
   return async (dispatch) => {
     dispatch(fetchCatalogsRequest());
     try {
-      await DeleteCatalog(id);
+      await deleteCatalog(id);
       dispatch(deleteCatalogSuccess(id));
     } catch (error) {
       const errorMessage = error.response?.status === 500 ? 'Server Error' : error.message;

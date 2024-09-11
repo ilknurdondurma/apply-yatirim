@@ -105,9 +105,10 @@ export const deleteProduct = (id) => API.delete(`/Product/${id}`) //ok
 
 //catalogs
 export const getAllCatalogs = () => API.get(`/Catalog`)//OK
-/**/export const addCatalog = (id, product) => API.post(`/Catalog/upload/${id}`,product,{headers: {'Content-Type':'multipart/form-data'}})
+/**/export const addCatalog = (catalog) => API.post(`/Catalog/upload`,catalog,{headers: {'Content-Type':'multipart/form-data'}})//ok
+export const downloadCatalog = (id) => API.get(`/Catalog/download/${id}`,{responseType: 'blob'})//ok
 /**/export const updateCatalog = (id ,updatedCatalog) => API.put(`/Catalog/update`,updatedCatalog,{headers: {'Content-Type':'multipart/form-data'}})
-export const deletePCatalog = (id) => API.delete(`/Catalog/${id}`)
+export const deleteCatalog = (id) => API.delete(`/Catalog/${id}`)//ok
 
 
 //users

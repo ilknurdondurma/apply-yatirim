@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import DynamicForm from "../../../../components/form";
 import { IoIosPricetags } from "react-icons/io";
 import { MdOutlineWbIncandescent } from "react-icons/md";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchCategories } from "../../../../redux/actions/category/categoryActions";
+import { useDispatch } from "react-redux";
 import { AddCatalog } from "../../../../redux/actions/catalog/catalogActions";
-
+import { toast, ToastContainer } from "react-toastify";
+import * as Yup from "yup"; // Yup import edildi
 
 export default function AdminAddCatalog() {
   const dispatch = useDispatch();
@@ -31,18 +31,33 @@ export default function AdminAddCatalog() {
     },
   ];
 
+  // Yup doğrulama şeması
+  const validationsSchema = Yup.object({
+    name: Yup.string().required("Katalog Adı boş olamaz"),
+    description: Yup.string().required("Katalog Açıklaması boş olamaz"),
+    file: Yup.mixed().required("Katalog Dosyası boş olamaz"),
+  });
 
-  const handleSubmit = (values) => {
+  const handleSubmit = async (values) => {
     console.log(values);
-    try{
+    try {
       const catalogRequest = new FormData();
-      catalogRequest.append('data', JSON.stringify(values));
-      dispatch(AddCatalog(0,values))
-    }
-    catch{
+      const catalogData = {
+        title: values.name,
+        description: values.description,
+      };
+      catalogRequest.append("data", JSON.stringify(catalogData));
+      catalogRequest.append("file", values.file);
+
+      try {
+        await dispatch(AddCatalog(catalogRequest));
+        toast.success("Katalog başarıyla eklendi!");
+      } catch (error) {
+        toast.error("Katalog ekleme işlemi başarısız");
+      }
+    } catch (error) {
       alert("Katalog ekleme işlemi başarısız oldu.");
     }
-    
   };
 
   return (
@@ -51,7 +66,9 @@ export default function AdminAddCatalog() {
         fields={formFields}
         onSubmit={handleSubmit}
         header="Katalog Ekle"
+        validationsSchema={validationsSchema} // Validation şeması gönderiliyor
       />
+      <ToastContainer />
     </div>
   );
 }

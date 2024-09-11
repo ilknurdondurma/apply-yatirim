@@ -6,9 +6,11 @@ import { contactData } from '../../../dummy-data/contact';
 import DynamicForm from '../../../components/form';
 import { validationSchema } from '../../../validations/admin/contact';
 import { useDispatch, useSelector } from 'react-redux';
-import {GetContacts} from "../../../redux/actions/contact/contactActions"
-
-
+import {GetContacts, UpdateContact} from "../../../redux/actions/contact/contactActions"
+import { FaYoutube } from "react-icons/fa";
+import { FaInstagram } from "react-icons/fa";
+import { FaTwitter } from "react-icons/fa";
+import { FaFacebook } from "react-icons/fa";
 export default function AdminContact() {
   const dispatch=useDispatch();
   const {contacts , loading ,error}= useSelector((state)=>state.contact);
@@ -30,12 +32,22 @@ export default function AdminContact() {
 
   const formField = [
     { name: "email", label: "Email", type: "text", icon: <AiOutlineMail /> },
+    { name: "email2", label: "Email", type: "text", icon: <AiOutlineMail /> },
     { name: "phone", label: "Telefon Numarası", type: "text", icon: <MdOutlinePhoneAndroid /> },
+    { name: "phone2", label: "Telefon Numarası", type: "text", icon: <MdOutlinePhoneAndroid /> },
     { name: "address", label: "Adres", type: "text", icon: <IoLocationSharp /> },
+    { name: "youtube", label: "Adres", type: "text", icon: <FaYoutube /> },
+    { name: "instagram", label: "Adres", type: "text", icon: <FaInstagram /> },
+    { name: "twitter", label: "Adres", type: "text", icon: <FaTwitter /> },
+    { name: "facebook", label: "Adres", type: "text", icon:<FaFacebook />},
   ];
 
-  const handleFormSubmit = (values) => {
-    console.log(values);
+  const handleFormSubmit = async (values) => {
+    var id =contacts[0].id;
+    console.log(id);
+    await dispatch(UpdateContact(id ,values));
+    dispatch(GetContacts());
+
   };
 
   return (

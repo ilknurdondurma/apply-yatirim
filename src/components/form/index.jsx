@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useSelector } from "react-redux";
@@ -21,12 +21,16 @@ const DynamicForm = ({
     }
     return acc;
   }, {});
-
+  const fileInputRef = useRef(null);
   const formik = useFormik({
     initialValues,
     validationSchema: validationsSchema,
-    onSubmit: (values) => {
+    onSubmit: (values, { resetForm }) => {
       onSubmit(values);
+      resetForm();
+      if (fileInputRef.current) {
+        fileInputRef.current.value = null;
+      }
     },
   });
 
@@ -101,6 +105,7 @@ const DynamicForm = ({
           ) : field.type === "file" ? (
             <input
               type="file"
+              ref={fileInputRef}
               name={field.name}
               onChange={(event) => {
                 formik.setFieldValue(field.name, event.currentTarget.files[0]);
