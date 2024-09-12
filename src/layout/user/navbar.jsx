@@ -3,11 +3,9 @@ import { FaEnvelope, FaWhatsapp, FaPhone } from "react-icons/fa";
 import { useLocation } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import logoDark from "../../assets/logo-dark.png";
-import { contactData } from "../../dummy-data/contact";
 import { AnimateContainer } from "react-animate-container";
 import { useDispatch, useSelector } from "react-redux";
 import { darkTheme, lightTheme } from "../../redux/reducers/theme/themeReducers";
-import backgroundImage from '../../assets/backgroundImage.jpg'
 import {GetContacts} from "../../redux/actions/contact/contactActions"
 function Navbar() {
   

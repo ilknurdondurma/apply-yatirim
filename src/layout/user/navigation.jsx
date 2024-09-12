@@ -3,12 +3,8 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { FaUser } from "react-icons/fa";
 import { NavLink, useLocation } from "react-router-dom";
 import { navbarElements } from "../../dummy-data/navbarElements";
-import { AnimateContainer } from "react-animate-container";
-import { FaWhatsapp } from "react-icons/fa";
 import { useSelector } from "react-redux";
-
 import { darkTheme, lightTheme } from "../../redux/reducers/theme/themeReducers";
-import { contactData } from "../../dummy-data/contact";
 import { FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
 import { AiFillYoutube } from "react-icons/ai";
 import SearchBar from "../../components/searchBar";
@@ -93,7 +89,7 @@ function Navigation() {
              
               {contacts.map((contact)=>(
                 <>
-                <a href={contact.facebook}>
+                <a href={contact.facebook} >
                 <FaFacebook size={15} />
                 </a>
                 <a href={contact.twitter}>

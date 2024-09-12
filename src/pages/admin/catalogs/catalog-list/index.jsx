@@ -32,8 +32,9 @@ const AdminCatalogList = () => {
   };
 
   const handleEdit = (catalog) => {
-    setSelectedCatalogId(catalog.id);
+    console.log("Editing catalog ID:", catalog.id); // Konsolda ID'yi kontrol edin
     setEditedCatalog(catalog);
+    setSelectedCatalogId(catalog.id);
     setShowModal(true);
   };
 
@@ -57,8 +58,10 @@ const AdminCatalogList = () => {
   const handleEditSubmit = async (e) => {
     e.preventDefault();
     if (editedCatalog) {
+      console.log("Submitting catalog ID:", selectedCatalogId);
       const catalogRequest = new FormData();
       const catalogData = {
+        id:editedCatalog.id,
         title: editedCatalog.title,
         description: editedCatalog.description,
       };
@@ -69,18 +72,16 @@ const AdminCatalogList = () => {
       console.log(catalogData);
       console.log(selectedFile);
       console.log(catalogRequest)
+      console.log(selectedCatalogId)
 
-
-      try {
-        await dispatch(UpdateCatalog(selectedCatalogId, catalogRequest));
-        await dispatch(GetCatalogs());
-        setSelectedCatalogId(null);
-        setEditedCatalog(initialCatalogState);
-        setSelectedFile(null);
-        setShowModal(false);
-      } catch (error) {
-        console.error("Ürün güncellenirken bir hata oluştu:", error);
-      }
+      await dispatch(UpdateCatalog(selectedCatalogId, catalogRequest));
+      await dispatch(GetCatalogs());
+      setSelectedCatalogId(null);
+      setEditedCatalog(initialCatalogState);
+      setSelectedFile(null);
+      setShowModal(false);
+      
+    
     }
   };
 

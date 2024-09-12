@@ -4,8 +4,9 @@ import { IoIosPricetags } from "react-icons/io";
 import { MdOutlineWbIncandescent } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { AddCatalog } from "../../../../redux/actions/catalog/catalogActions";
+import {validationSchema } from "../../../../validations/admin/catalog";
 import { toast, ToastContainer } from "react-toastify";
-import * as Yup from "yup"; // Yup import edildi
+
 
 export default function AdminAddCatalog() {
   const dispatch = useDispatch();
@@ -31,12 +32,6 @@ export default function AdminAddCatalog() {
     },
   ];
 
-  // Yup doğrulama şeması
-  const validationsSchema = Yup.object({
-    name: Yup.string().required("Katalog Adı boş olamaz"),
-    description: Yup.string().required("Katalog Açıklaması boş olamaz"),
-    file: Yup.mixed().required("Katalog Dosyası boş olamaz"),
-  });
 
   const handleSubmit = async (values) => {
     console.log(values);
@@ -66,7 +61,7 @@ export default function AdminAddCatalog() {
         fields={formFields}
         onSubmit={handleSubmit}
         header="Katalog Ekle"
-        validationsSchema={validationsSchema} // Validation şeması gönderiliyor
+        validationsSchema={validationSchema} // Validation şeması gönderiliyor
       />
       <ToastContainer />
     </div>

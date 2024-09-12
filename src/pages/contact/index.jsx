@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { contactData } from '../../dummy-data/contact';
 import { FaEnvelope, FaAddressCard, FaPhone } from 'react-icons/fa';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import L from 'leaflet';  // Import leaflet
@@ -10,7 +9,6 @@ import { AnimateContainer } from 'react-animate-container';
 import { useDispatch, useSelector } from 'react-redux';
 import { lightTheme, grayDarkTheme, grayLightTheme } from "../../redux/reducers/theme/themeReducers";
 import { GetContacts } from '../../redux/actions/contact/contactActions';
-import { FiMapPin } from "react-icons/fi";
 import { ToastContainer } from 'react-toastify';
 
 // npm install react-leaflet leaflet leaflet-gesture-handling

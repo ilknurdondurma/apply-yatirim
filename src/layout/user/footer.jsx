@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { FaFacebook, FaTwitter, FaInstagram, FaEnvelope, FaMapMarkerAlt, FaPhone } from "react-icons/fa";
 import { AiFillYoutube } from "react-icons/ai";
 import { NavLink } from "react-router-dom";
-import { contactData } from "../../dummy-data/contact";
 import { navbarElements } from "../../dummy-data/navbarElements";
 import DynamicForm from "../../components/form";
 import { messageSchema } from "../../validations/messageMe";

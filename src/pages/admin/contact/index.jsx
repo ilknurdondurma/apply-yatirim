@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { IoLocationSharp } from "react-icons/io5";
 import { AiOutlineMail } from "react-icons/ai";
 import { MdOutlinePhoneAndroid } from "react-icons/md";
-import { contactData } from '../../../dummy-data/contact';
 import DynamicForm from '../../../components/form';
 import { validationSchema } from '../../../validations/admin/contact';
 import { useDispatch, useSelector } from 'react-redux';
