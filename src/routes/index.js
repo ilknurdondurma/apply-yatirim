@@ -30,6 +30,7 @@ import AdminComments from "../pages/admin/manager/comments";
 import AdminProperties from "../pages/admin/manager/properties";
 import AdminModels from "../pages/admin/manager/brand-model";
 import { ScrollToTop } from "./scroll";
+import SplashPage from "../pages/splash";
 
 
 const routes = createBrowserRouter([
@@ -45,6 +46,10 @@ const routes = createBrowserRouter([
       {
         index: true,
         element: <Home />,
+      },
+      {
+        path: "/splash",
+        element: <SplashPage />,
       },
       {
         path: "/login",

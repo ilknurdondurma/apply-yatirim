@@ -1,5 +1,5 @@
-import React, { useMemo } from "react";
-import { Outlet } from "react-router-dom";
+import React, { useEffect, useMemo } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
 import Navbar from "./user/navbar";
 import Footer from "./user/footer";
 import Navigation from "./user/navigation";
@@ -9,6 +9,7 @@ import NavigationAdmin from "./admin/navigation";
 import { toggleSidebar } from "../redux/actions/sidebar/sidebarActions";
 
 export function Layout({ children }) {
+  
   const bellekteTutulanNavbar = useMemo(() => <Navbar />, []);
   const bellekteTutulanFooter = useMemo(() => <Footer />, []);
   const theme = useSelector((state) => state.theme.theme);

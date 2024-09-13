@@ -4,7 +4,7 @@ import { IoIosPricetags } from "react-icons/io";
 import { MdOutlineWbIncandescent } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { AddCatalog } from "../../../../redux/actions/catalog/catalogActions";
-import {validationSchema } from "../../../../validations/admin/catalog";
+import {validationSchema} from "../../../../validations/admin/catalog";
 import { toast, ToastContainer } from "react-toastify";
 
 
@@ -61,7 +61,7 @@ export default function AdminAddCatalog() {
         fields={formFields}
         onSubmit={handleSubmit}
         header="Katalog Ekle"
-        validationsSchema={validationSchema} // Validation şeması gönderiliyor
+        validationsSchema={validationSchema}
       />
       <ToastContainer />
     </div>

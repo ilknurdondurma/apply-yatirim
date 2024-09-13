@@ -14,6 +14,7 @@ import * as propertyActions from "./property/propertyActions";
 import * as brandActions from "./brand/brandActions";
 import * as modelActions from "./model/modelActions";
 import * as compatibleModelActions from "./compatibleModel/compatibleModelAction";
+import * as sectorActions from "./sector/sectorActions";
 
 
 
@@ -34,7 +35,8 @@ const Actions =
                  propertyActions,
                   brandActions,
                    modelActions,
-                   compatibleModelActions
+                   compatibleModelActions,
+                    sectorActions
                   
         
         

@@ -11,6 +11,38 @@ function getTokenFromCookie() {
 
     return cookies.authToken;
 }
+function getSectorIdFromCookie() {
+    const cookieString = document.cookie;
+    const cookies = cookieString.split('; ').reduce((acc, cookie) => {
+        const [name, value] = cookie.split('=');
+        acc[name] = value;
+        return acc;
+    }, {});
+
+    return cookies.sectorId; // sectorId'yi cookie'den çek
+}
+
+API.interceptors.request.use(
+    (config) => {
+      //const token = getTokenFromCookie();
+      const sectorId = getSectorIdFromCookie();
+  
+    //   if (token) {
+    //     config.headers.Authorization = `${token}`;
+    //   }
+  
+      // Sadece GET istekleri için sectorId ekle
+      if (config.method === 'get' && sectorId) {
+        config.params = { ...config.params, sectorId }; // Query parametresine sectorId ekle
+      }
+  
+      return config;
+    },
+    (error) => {
+      return Promise.reject(error);
+    }
+  );
+
 
 // const token = getTokenFromCookie();
 // API.interceptors.request.use(
@@ -109,6 +141,13 @@ export const getAllCatalogs = () => API.get(`/Catalog`)//OK
 export const downloadCatalog = (id) => API.get(`/Catalog/download/${id}`,{responseType: 'blob'})//ok
 /**/export const updateCatalog = (id ,updatedCatalog) => API.put(`/Catalog/update/${id}`,updatedCatalog,{headers: {'Content-Type':'multipart/form-data'}})
 export const deleteCatalog = (id) => API.delete(`/Catalog/${id}`)//ok
+
+//sectors
+export const getSectors = () => API.get(`/Sector`)//ok
+export const getSectorById = (id) => API.get(`/Sector/${id}`)//ok
+/**/export const addSector  = (sector ) => API.post(`/Sector `,sector,{headers: {'Content-Type':'multipart/form-data'}})
+/**/export const updateSector  = (id ,updatedSector ) => API.put(`/Sector /update`,updatedSector ,{headers: {'Content-Type':'multipart/form-data'}})//ok
+export const deleteSector  = (id) => API.delete(`/Sector /${id}`)
 
 
 //users

@@ -3,7 +3,7 @@ import ProductCard from "../../components/card";
 import Banner from "../../components/banner";
 import Slider from "../../components/slider";
 import { AnimateContainer } from "react-animate-container";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { GetAllProducts } from "../../redux/actions/product/productActions";
 import { useDispatch, useSelector } from "react-redux";
 import { GetServices } from "../../redux/actions/service/serviceActions";
@@ -13,20 +13,42 @@ import { GrServices } from "react-icons/gr";
 import MySlider from "../../components/slider/slider";
 import backgroundImage from '../../assets/image1-removebg.png'
 import { GetComments } from "../../redux/actions/comment/commentActions";
+import { GetSectors } from "../../redux/actions/sector/sectorActions";
+import Cookies from 'js-cookie';
+import { getSectorById } from "../../api";
 
 function Home() {
   const dispatch=useDispatch();
-  const [banner1, setBanner1] = useState(bannerData);
   const {products , loading ,error}= useSelector((state)=>state.product);
+  const {sectors}= useSelector((state)=>state.sector);
+  const navigate = useNavigate();
+  const [sectorId, setSectorId] = useState(Cookies.get('sectorId'));
+  const [banner, setBanner] = useState(null);
   const { comments, } = useSelector((state) => state.comment);
   const {services }= useSelector((state)=>state.service);
 
-  useEffect(()=>{
-    dispatch(GetAllProducts());
-    dispatch(GetServices());
-    dispatch(GetComments());
+  useEffect(() => {
+    console.log(sectorId);
+    if (sectorId) {
+      dispatch(GetAllProducts()); // Ürünleri sectorId'ye göre getir
+      dispatch(GetServices());    // Hizmetleri sectorId'ye göre getir
+      dispatch(GetComments()); 
+      getSectorById(sectorId)
+      .then((result)=>{
+        console.log(result?.data);
+        setBanner(result?.data);
+      })
+      .catch((error)=>{
+        console.log("Bilinmeyen bir hata oluştu.")
+      })
+    }
+     else {
+      navigate('/splash');
+    }
+  }, [dispatch , navigate, sectorId]);
+  
+  
 
-  },[dispatch]);
 
   if (loading) return <div className="text-center text-lg font-semibold py-10">Yükleniyor...</div>;
   if (error) return (
@@ -37,12 +59,11 @@ function Home() {
       </div>
     </div>
   );
-
   return (
     <div>
       
       <section>
-        <Banner banner={banner1} backgroundImage={imageBanner} />
+        <Banner banner={banner} backgroundImage={imageBanner} />
       </section>
 
         {/* Ürünler Bölümü */}

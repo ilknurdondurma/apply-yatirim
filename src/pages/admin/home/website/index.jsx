@@ -12,7 +12,14 @@ import 'react-toastify/dist/ReactToastify.css';
 export default function AdminWebsite() {
   const dispatch=useDispatch();
   const {contacts , loading ,error}= useSelector((state)=>state.contact);
+  function deleteCookie(name) {
+    document.cookie = name + '=; Max-Age=-99999999; path=/';
+  }
+  useEffect(() => {
+    deleteCookie('sectorId');
+  },)
 
+  
   useEffect(()=>{
     dispatch(GetContacts());
   },[dispatch]);
