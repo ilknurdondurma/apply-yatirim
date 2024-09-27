@@ -27,8 +27,8 @@ function Navbar() {
 
   return (
     <div
-      className={`h-auto flex flex-col justify-center mt-16 md:mt-20 sm:mt-28 sm:p-10  rounded-xl ${
-        location.pathname !== "/" ? "hidden" : "block"
+      className={`h-auto flex flex-col justify-center mt-16 md:mt-20 sm:mt-28 sm:p-10  rounded-xl  ${
+        location.pathname !== "/splash" ? "hidden" : "block"
       }`}
       style={{
         ...theme,

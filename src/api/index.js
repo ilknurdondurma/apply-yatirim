@@ -139,15 +139,15 @@ export const deleteProduct = (id) => API.delete(`/Product/${id}`) //ok
 export const getAllCatalogs = () => API.get(`/Catalog`)//OK
 /**/export const addCatalog = (catalog) => API.post(`/Catalog/upload`,catalog,{headers: {'Content-Type':'multipart/form-data'}})//ok
 export const downloadCatalog = (id) => API.get(`/Catalog/download/${id}`,{responseType: 'blob'})//ok
-/**/export const updateCatalog = (id ,updatedCatalog) => API.put(`/Catalog/update/${id}`,updatedCatalog,{headers: {'Content-Type':'multipart/form-data'}})
+/**/export const updateCatalog = (id ,updatedCatalog) => API.put(`/Catalog/update/${id}`,updatedCatalog,{headers: {'Content-Type':'multipart/form-data'}})//ok
 export const deleteCatalog = (id) => API.delete(`/Catalog/${id}`)//ok
 
 //sectors
 export const getSectors = () => API.get(`/Sector`)//ok
 export const getSectorById = (id) => API.get(`/Sector/${id}`)//ok
-/**/export const addSector  = (sector ) => API.post(`/Sector `,sector,{headers: {'Content-Type':'multipart/form-data'}})
-/**/export const updateSector  = (id ,updatedSector ) => API.put(`/Sector /update`,updatedSector ,{headers: {'Content-Type':'multipart/form-data'}})//ok
-export const deleteSector  = (id) => API.delete(`/Sector /${id}`)
+/**/export const addSector  = (sector ) => API.post(`/Sector/add`,sector,{headers: {'Content-Type':'multipart/form-data'}})//ok
+/**/export const updateSector  = (id ,updatedSector ) => API.put(`/Sector/update`,updatedSector ,{headers: {'Content-Type':'multipart/form-data'}})//ok
+export const deleteSector  = (id) => API.delete(`/Sector/${id}`)//ok
 
 
 //users

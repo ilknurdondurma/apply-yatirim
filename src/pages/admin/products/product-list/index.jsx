@@ -25,15 +25,20 @@ const AdminProductList = () => {
   const [editedProduct, setEditedProduct] = useState(initialProductState);
   const [showModal, setShowModal] = useState(false); // Modal visibility state
   const [selectedFiles, setSelectedFiles] = useState({ imageUrl1: null, imageUrl2: null, imageUrl3: null });
-
+  function deleteCookie(name) {
+    document.cookie = name + '=; Max-Age=-99999999; path=/';
+  }
+  useEffect(() => {
+    deleteCookie('sectorId');
+  },)
   useEffect(() => {
     dispatch(GetAllProducts());
   }, [dispatch]);
 
-  const handleDelete = async (productName) => {
+  const handleDelete = async (productName ,id) => {
     if (window.confirm(`${productName} silinecektir ve işlem geri alınamayacaktır. Devam etmek istiyor musunuz?`)) {
       try {
-        await dispatch(DeleteProduct(selectedProductId));
+        await dispatch(DeleteProduct(id));
         dispatch(GetAllProducts());
       } catch (error) {
         console.error('Ürün silinemedi:', error);
@@ -65,6 +70,7 @@ const AdminProductList = () => {
     if (editedProduct) {
       const productRequest = new FormData();
       productRequest.append('data', JSON.stringify(editedProduct));
+      
       if (selectedFiles.imageUrl1) {
         productRequest.append('imageUrl1', selectedFiles.imageUrl1);
       }
@@ -118,7 +124,7 @@ const AdminProductList = () => {
                     <ProductCard product={product} />
                   </AnimateContainer.fadeIn>
                   <div className="flex justify-start m-1 gap-5 ">
-                    <MdDelete size={25} onClick={() => { setSelectedProductId(product.id); handleDelete(product.title); }} />
+                    <MdDelete size={25} onClick={() => { setSelectedProductId(product.id); handleDelete(product.title , product.id); }} />
                     <MdEdit size={25} onClick={() => handleEdit(product)} />
                   </div>
                 </div>

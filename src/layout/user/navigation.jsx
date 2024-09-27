@@ -111,7 +111,7 @@ function setCookie(name, value, days) {
         </div>
       </div>
 
-      <div className="col-span-1 md:col-span-2 sm:col-span-2 flex justify-between sm:justify-end items-center">
+      <div className="col-span-1 md:col-span-2 sm:col-span-2 flex justify-between sm:justify-end items-center"  onMouseLeave={toggleMenu}>
         <div className="flex justify-center items-center">
           <SearchBar placeholder="Search..." />
           <NavLink to={"/login"} className="sm:hidden md:hidden flex items-center">
@@ -125,27 +125,28 @@ function setCookie(name, value, days) {
             size={50}
             className="cursor-pointer m-2 transform transition-transform hover:rotate-45"
             onMouseEnter={toggleMenu} // Tıklama olayını burada yakalıyoruz
+            // Tıklama olayını burada yakalıyoruz
           />
         </div>
 
         {/* Menü açıldığında burası gösterilecek */}
         {isMenuOpen && (
-        <div className="absolute top-14 right-20 bg-white shadow-lg rounded-md p-4 z-50">
-          <ul>
+        <div className="absolute top-14 right-20  shadow-lg rounded-md p-4 z-50" style={theme}>
+          
             {sectors.length > 0 ? (
               sectors.map((sector) => (
-                <li 
+                <ul 
                   key={sector.id} 
-                  className="p-2 hover:bg-gray-100 cursor-pointer"
+                  className="p-2 hover:bg-gray-400 cursor-pointer"
                   onClick={()=>handleChangeSector(sector.id)}
                   >
                     {sector.title}
-                </li>
+                </ul>
               ))
             ) : (
               <li>Sektör bulunamadı</li>
             )}
-          </ul>
+          
         </div>
       )}
 

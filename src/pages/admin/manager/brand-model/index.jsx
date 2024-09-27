@@ -30,7 +30,12 @@ export default function AdminModels() {
   const [editingBrandId, setEditingBrandId] = useState(null);
   const [editingModel, setEditingModel] = useState(initialModelState);
   const [editingModelId, setEditingModelId] = useState(null);
-
+  function deleteCookie(name) {
+    document.cookie = name + '=; Max-Age=-99999999; path=/';
+  }
+  useEffect(() => {
+    deleteCookie('sectorId');
+  },)
   useEffect(() => {
     dispatch(GetBrands());
     dispatch(GetModels());
@@ -50,12 +55,19 @@ export default function AdminModels() {
 
   };
   const handleDeleteBrand = async (brandId) => {
-    await dispatch(DeleteBrand(brandId));
-    dispatch(GetBrands());
+    const isConfirmed = window.confirm("Bu markayı silmek istediğinizden emin misiniz?");
+    if (isConfirmed) {
+      await dispatch(DeleteBrand(brandId));
+      dispatch(GetBrands());
+    }
   };
   const handleDeleteModel = async (modelId) => {
-    await dispatch(DeleteModel(modelId));
-    dispatch(GetModels());
+    
+    const isConfirmed = window.confirm("Bu modeli silmek istediğinizden emin misiniz?");
+    if (isConfirmed) {
+      await dispatch(DeleteModel(modelId));
+      dispatch(GetModels());
+    }
   };
   const handleUpdateBrand = async() => {
     await dispatch(UpdateBrand(editingBrandId , JSON.stringify(editingBrand)));

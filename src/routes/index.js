@@ -31,6 +31,7 @@ import AdminProperties from "../pages/admin/manager/properties";
 import AdminModels from "../pages/admin/manager/brand-model";
 import { ScrollToTop } from "./scroll";
 import SplashPage from "../pages/splash";
+import AdminSectors from "../pages/admin/manager/sectors";
 
 
 const routes = createBrowserRouter([
@@ -114,48 +115,52 @@ const routes = createBrowserRouter([
       {
         index: true,
         path: "website",
-        element: <PrivateRoute> <AdminWebsite /></PrivateRoute>,
+        element: <PrivateRoute> <AdminWebsite/></PrivateRoute>,
       },
       {
         path: "hizmetler",
-        element: <PrivateRoute><AdminServices /></PrivateRoute> ,
+        element: <PrivateRoute><AdminServices/></PrivateRoute> ,
       },
       {
         path: "ekibimiz",
-        element: <PrivateRoute> <AdminTeams /></PrivateRoute> ,
+        element: <PrivateRoute> <AdminTeams/></PrivateRoute> ,
+      },
+      {
+        path: "sektorler",
+        element: <PrivateRoute> <AdminSectors/></PrivateRoute>,
       },
       {
         path: "kategoriler",
-        element: <PrivateRoute> <AdminCategories /></PrivateRoute>,
+        element: <PrivateRoute> <AdminCategories/></PrivateRoute>,
       },
       {
         path: "kullanicilar",
-        element: <PrivateRoute> <AdminUsers /></PrivateRoute>,
+        element: <PrivateRoute> <AdminUsers/></PrivateRoute>,
       },
       {
         path: "yorumlar",
-        element: <PrivateRoute> <AdminComments /></PrivateRoute>,
+        element: <PrivateRoute> <AdminComments/></PrivateRoute>,
       },
       {
         path: "ozellikler",
-        element: <PrivateRoute> <AdminProperties /></PrivateRoute>,
+        element: <PrivateRoute> <AdminProperties/></PrivateRoute>,
       },
       {
         path: "modeller",
-        element: <PrivateRoute> <AdminModels /></PrivateRoute>,
+        element: <PrivateRoute> <AdminModels/></PrivateRoute>,
       },
 
       {
         path: "hakkimizda",
-        element: <PrivateRoute> <AdminAbout /></PrivateRoute>,
+        element: <PrivateRoute> <AdminAbout/></PrivateRoute>,
       },
       {
         path: "kalite",
-        element: <PrivateRoute> <AdminQuality /></PrivateRoute>,
+        element: <PrivateRoute> <AdminQuality/></PrivateRoute>,
       },
       {
         path: "urun-listesi",
-        element: <PrivateRoute> <AdminProductList /></PrivateRoute>,
+        element: <PrivateRoute> <AdminProductList/></PrivateRoute>,
       },
       {
         path: "urun-ekle",
@@ -163,7 +168,7 @@ const routes = createBrowserRouter([
       },
       {
         path: "katalog-listesi",
-        element: <PrivateRoute> <AdminCatalogList /></PrivateRoute>,
+        element: <PrivateRoute> <AdminCatalogList/></PrivateRoute>,
       },
       {
         path: "katalog-ekle",
@@ -171,7 +176,7 @@ const routes = createBrowserRouter([
       },
       {
         path: "iletisim",
-        element: <PrivateRoute> <AdminContact /></PrivateRoute>,
+        element: <PrivateRoute> <AdminContact/></PrivateRoute>,
       },
       {
         path:'*',

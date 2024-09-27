@@ -3,6 +3,7 @@ import book from "../../assets/book.jpg";
 import { useSelector } from "react-redux";
 import { lightTheme, grayLightTheme, grayDarkTheme } from "../../redux/reducers/theme/themeReducers";
 import { downloadCatalog } from "../../api";
+import { FaArrowAltCircleDown } from "react-icons/fa";
 
 function CatalogItem({ catalog }) {
   const theme = useSelector((state) => state.theme.theme);
@@ -52,9 +53,9 @@ function CatalogItem({ catalog }) {
         <div className=" flex items-center justify-center w-full col-span-2 ">
         <button
           onClick={() => handleDownload(catalog.id,catalog.fileName)}
-          className="px-4 py-2 bg-primary text-white rounded-lg"
+          className="px-4 py-2 bg-primary text-white rounded-lg flex justify-center items-center gap-2"
         >
-          Hemen İncele
+          Hemen İncele  <FaArrowAltCircleDown />
         </button>
         </div>
     </div>

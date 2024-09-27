@@ -15,7 +15,12 @@ const AdminTeams = () => {
   const [editingTeamId, setEditingTeamId] = useState(null);
   const [editableTeam, setEditableTeam] = useState(initialTeamState);
   const theme = useSelector((state) => state.theme.theme);
-
+  function deleteCookie(name) {
+    document.cookie = name + '=; Max-Age=-99999999; path=/';
+  }
+  useEffect(() => {
+    deleteCookie('sectorId');
+  },)
   useEffect(() => {
     dispatch(GetTeams());
   }, [dispatch]);
@@ -53,8 +58,11 @@ const AdminTeams = () => {
   };
 
   const handleDelete = async (id) => {
-    await dispatch(DeleteTeam(id));
-    dispatch(GetTeams());
+    const isConfirmed = window.confirm("Bu üyeyi silmek istediğinizden emin misiniz?");
+    if (isConfirmed) {
+      await dispatch(DeleteTeam(id));
+      dispatch(GetTeams());
+    }
   };
 
   const handleCancel = () => {

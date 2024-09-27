@@ -6,19 +6,29 @@ import { DeleteCatalog, GetCatalogs, UpdateCatalog } from "../../../../redux/act
 import { MdDelete, MdEdit } from "react-icons/md";
 import { toast, ToastContainer } from "react-toastify";
 import { downloadCatalog } from "../../../../api";
+import { GetSectors } from "../../../../redux/actions/sector/sectorActions";
 
 const AdminCatalogList = () => {
   const dispatch = useDispatch();
   const { catalogs, loading, error } = useSelector((state) => state.catalog);
+  const { sectors} = useSelector((state) => state.sector);
   const [selectedCatalogId, setSelectedCatalogId] = useState(null);
-  const initialCatalogState = { id: null, title: "", description: "", file: null };
+  const initialCatalogState = { id: null, title: "", description: "",sectorId:null, file: null };
   const [editedCatalog, setEditedCatalog] = useState(initialCatalogState);
   const [selectedFile, setSelectedFile] = useState(null);
   const [showModal, setShowModal] = useState(false);
-
+  function deleteCookie(name) {
+    document.cookie = name + '=; Max-Age=-99999999; path=/';
+  }
+  useEffect(() => {
+    deleteCookie('sectorId');
+  },)
   useEffect(() => {
     dispatch(GetCatalogs());
+    dispatch(GetSectors());
+
   }, [dispatch]);
+
 
   const handleDelete = async (id, catalogName) => {
     if (window.confirm(`${catalogName} silinecektir ve işlem geri alınamayacaktır. Devam etmek istiyor musunuz?`)) {
@@ -63,6 +73,7 @@ const AdminCatalogList = () => {
       const catalogData = {
         id:editedCatalog.id,
         title: editedCatalog.title,
+        sectorId:editedCatalog.sectorId,
         description: editedCatalog.description,
       };
       catalogRequest.append("data", JSON.stringify(catalogData));
@@ -152,6 +163,22 @@ const AdminCatalogList = () => {
                   className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
                 />
               </div>   
+              <select
+              value={editedCatalog.sectorId}
+              onChange={(e) => setEditedCatalog({ ...editedCatalog, sectorId: e.target.value })}
+              className="mb-4 border border-gray-300 rounded-lg p-2 w-1/2"
+              required
+            >
+              <option value="">Sektör Seçin</option>
+              {sectors.map((type) => (
+                <option 
+                  key={type.id} 
+                  value={type.id} 
+                  >
+                    {type.title}
+                </option>
+              ))}
+            </select>
               <div className="mb-4">
                 <label className="block text-gray-700">Katalog</label>
                 <input type="file" onChange={handleFileChange} />

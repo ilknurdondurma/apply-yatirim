@@ -7,7 +7,12 @@ export default function AdminComments() {
   const dispatch = useDispatch();
   const { comments, loading, error } = useSelector((state) => state.comment);
   const theme=useSelector((state)=>state.theme.theme)
-
+  function deleteCookie(name) {
+    document.cookie = name + '=; Max-Age=-99999999; path=/';
+  }
+  useEffect(() => {
+    deleteCookie('sectorId');
+  },)
   useEffect(() => {
     dispatch(GetComments());
   }, [dispatch]);

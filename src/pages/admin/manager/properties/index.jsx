@@ -19,7 +19,12 @@ export default function AdminProperties() {
   const [newPropertyType, setNewPropertyType] = useState(initialStatePropertyType);
   const [editingPropertyTypeId, setEditingPropertyTypeId] = useState(null);
   const [editedPropertyType, setEditedPropertyType] = useState(initialStatePropertyType);
-
+  function deleteCookie(name) {
+    document.cookie = name + '=; Max-Age=-99999999; path=/';
+  }
+  useEffect(() => {
+    deleteCookie('sectorId');
+  },)
   useEffect(() => {
     dispatch(GetPropertyTypes());
     dispatch(GetAllProducts());
@@ -50,9 +55,13 @@ export default function AdminProperties() {
 
 
   const handleDeleteProperty = async (id) => {
-   console.log(id); 
-   await dispatch(DeletePropertyType(id));
-   dispatch(GetPropertyTypes());
+   
+   const isConfirmed = window.confirm("Bu özelliği silmek istediğinizden emin misiniz?");
+   if (isConfirmed) {
+    console.log(id); 
+    await dispatch(DeletePropertyType(id));
+    dispatch(GetPropertyTypes());
+   }
 
   };
 

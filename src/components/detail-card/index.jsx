@@ -71,7 +71,7 @@ export default function DetailCard({ products: product }) {
             </div>
             <div>
               <div className="text-lg mb-2">Stok Durumu: {product.stock}</div>
-              <div className="text-lg text-primary font-semibold mb-2">Fiyat: ${product.price}</div>
+              {/* <div className="text-lg text-primary font-semibold mb-2">Fiyat: ${product.price}</div> */}
               <NavLink to={"/iletisim"}>
                 <button className="px-4 py-2 w-full bg-primary text-white rounded-lg">
                   İletişime Geç

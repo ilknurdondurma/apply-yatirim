@@ -15,7 +15,7 @@ function Banner({ banner }) {
       className="relative flex items-center justify-center h-96"
       style={{
         backgroundImage: `url(data:image/jpeg;base64,${bannerData.imageUrl1})`,
-        backgroundSize: "cover",
+        backgroundSize: "contain",
         backgroundPosition: "center",
       }}
     >
